@@ -20,20 +20,54 @@ import java.util.logging.Logger;
  * @author Dahian
  */
 public class Conexion {
-    Connection conn1 = null;
-    String dbURL2 = "jdbc:oracle:thin:@localhost:1521:darenas";
-    String username = "admin";
-    String password = "123456789";
-    
-    public Conexion(){
-        try{
-            conn1 = DriverManager.getConnection(dbURL2, username, password);
-        } catch(Exception ex){
-            Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
-        }
+
+    Connection con;
+    String url = "jdbc:mysql://localhost:3306/turnero";
+    String Driver = "com.mysql.jdbc.Driver";
+    String user = "root";
+    String clave = "";
+
+    PreparedStatement ps;
+    ResultSet rs;
+
+    public Connection getCon() {
+        return con;
     }
 
-    public Connection getConexion(){
-        return conn1;
+    public PreparedStatement getPs() {
+        return ps;
     }
+
+    public ResultSet getRs() {
+        return rs;
+    }
+
+    public Connection getConexion() {
+        return con;
+    }
+
+    public void Conectar() throws SQLException {
+        try {
+            Class.forName(Driver);
+            con = DriverManager.getConnection(url, user, clave);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+
+    public ResultSet realizarConsulta(String query) throws SQLException {
+        ps = con.prepareStatement(query);
+        rs = ps.executeQuery();
+        
+        return rs;
+    }
+    public void cierraConexion() {
+    try {
+        con.close();
+    } catch (SQLException sqle) {
+        
+        Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, sqle);
+    }
+}
 }
