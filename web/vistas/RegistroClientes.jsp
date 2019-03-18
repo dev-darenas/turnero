@@ -30,10 +30,13 @@
 
 
 
-
+ 
         <h1>REGISTRO DE CLIENTES</h1>
-
-        <table>
+        
+        <a href="agregarCliente.jsp">Agregar Cliente</a>
+        <br><br><br>
+        <center>
+        <table width="80%">
             <tr>
                 <th>ID</th>
                 <th>NOMBRE</th>
@@ -47,10 +50,12 @@
                 <td><%=rs.getString("nombre")%></td>
                 <td><%=rs.getString("producto")%></td>
                 <td><%=rs.getString("ciudad")%></td>
-                <td> <a href="#">Editar</a>  <a href="#">Eliminar</a> </td>
+                <td> <a href="editarCliente.jsp?id=<%=rs.getInt("id")%>&ac=r">Editar</a>  <button><a href="#">Eliminar</a></button> </td>
 
             </tr>
             <%} con1.cierraConexion(); %>
         </table>
+        
+        </center>
     </body>
 </html>

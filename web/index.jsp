@@ -36,6 +36,6 @@
             <input type="submit" value="Enviar">
         </form>
         <a href=pagina3.jsp > pagina 3</a>
-        <a href=RegistroClientes.jsp > Registro de clientes</a>
+        <a href=vistas/RegistroClientes.jsp > Registro de clientes</a>
     </body>
 </html>

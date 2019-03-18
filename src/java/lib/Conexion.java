@@ -14,6 +14,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.sql.*;
 
 /**
  *
@@ -62,6 +63,12 @@ public class Conexion {
         
         return rs;
     }
+    public void ingresarCLiente(int id,String nombre,String producto, String ciudad) throws SQLException{
+        
+        ps=con.prepareStatement("insert into clientes (id,nombre,producto,ciudad ) values("+id+",'"+nombre+"','"+producto+"','"+ciudad+"')");
+        ps.executeUpdate();
+        
+    }
     public void cierraConexion() {
     try {
         con.close();
@@ -70,4 +77,23 @@ public class Conexion {
         Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, sqle);
     }
 }
+    
+    public PreparedStatement actualizarCliente(int id,String nom,String produ,String ciudad){
+        PreparedStatement pstm = null;
+         try {
+             pstm = con.prepareStatement("update clientes "
+                    + "set id= "+id+" ,  "
+                    + "nombre= '"+nom+"' , "
+                    + "producto= '"+produ+"' , "
+                    + "ciudad= '"+ciudad+"' "
+                    + "where id= " + id );
+            
+           
+          pstm.executeUpdate();
+ 
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+       return pstm;
+    }
 }
