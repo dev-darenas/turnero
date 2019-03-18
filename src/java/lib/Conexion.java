@@ -21,7 +21,7 @@ public class Conexion {
     private String HOST = "localhost";
     private String PORT = "3306";
     private String DB = "turnero";
-    private String CLASSNAME = "com.mysql.jdbc.driver";
+    private String CLASSNAME = "com.mysql.jdbc.Driver";
     private String URL = "jdbc:mysql://"+HOST+":"+PORT+"/"+DB;
 
     public Conexion(){
