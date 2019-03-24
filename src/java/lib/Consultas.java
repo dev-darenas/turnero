@@ -16,14 +16,14 @@ import java.util.logging.Logger;
  */
 public class Consultas extends Conexion {
     
-    public boolean autenticacion(String usuario, String contrasena){
+    public boolean autenticacion(String email, String contrasena){
         PreparedStatement pstm = null;
         ResultSet rs = null;
 
         try{
-            String consulta = "";
+            String consulta = "SELECT * FROM usuarios WHERE email = ? AND password = ?";
             pstm = getConexion().prepareCall(consulta);
-            pstm.setString(1, usuario);
+            pstm.setString(1, email);
             pstm.setString(2, contrasena);
             
             rs = pstm.executeQuery();
@@ -33,7 +33,7 @@ public class Consultas extends Conexion {
             }
         } catch(Exception ex){
              Logger.getLogger(Consultas.class.getName()).log(Level.SEVERE, null, ex);
-        }finally{
+        } finally {
             try {
                 if(getConexion() != null) getConexion().close();
                 if(pstm != null ) pstm.close();
@@ -46,7 +46,10 @@ public class Consultas extends Conexion {
         return false;
     }
     
-    public boolean registrar(){
-        return true;
+    // se corre este archivo para probar la conexion a la bd
+    public static void main(String[] args) {
+        Consultas c = new Consultas();
+        System.out.println("lib.Consultas.main()");
+        c.autenticacion("darenas@gmail.com", "123456789");
     }
 }
