@@ -46,6 +46,7 @@ public class Consultas extends Conexion {
         return false;
     }
     
+    // se corre este archivo para probar la conexion a la bd
     public static void main(String[] args) {
         Consultas c = new Consultas();
         System.out.println("lib.Consultas.main()");

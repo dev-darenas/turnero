@@ -22,7 +22,7 @@ public class Conexion {
     private String PORT = "3306";
     private String DB = "turnero";
     private String CLASSNAME = "com.mysql.jdbc.Driver";
-    private String URL = "jdbc:mysql://"+HOST+":"+PORT+"/"+DB;
+    private String URL = "jdbc:mysql://"+HOST+":"+PORT+"/"+DB+"?useSSL=false";
 
     public Conexion(){
         try{
