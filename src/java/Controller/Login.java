@@ -34,14 +34,13 @@ public class Login extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             
-            Usuario usuario = new Usuario(request.getParameter("nombre"), request.getParameter("pass"));
+            Usuario usuario = new Usuario(request.getParameter("email"), request.getParameter("pass"));
+            System.out.println("Controller.Login.processRequest()");
             
             if(usuario.hacer_login()){
-                request.setAttribute("usuario", usuario);
-                request.getRequestDispatcher("/dashboard.jsp").forward(request, response);              
+                response.sendRedirect("dashboard.jsp");        
             }else{
-                request.setAttribute("error", "USUARIO NO VALIDO");
-                request.getRequestDispatcher("/index.jsp").forward(request, response); 
+                response.sendRedirect("index.jsp?error_login=true");
             }
         }
     }
