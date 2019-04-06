@@ -4,18 +4,19 @@
  * and open the template in the editor.
  */
 package Modelos;
-
+import lib.Consultas;
+        
 public class Usuario {
-    String nombre;
+    String email;
     String password;
 
-    public Usuario(String nombre, String password) {
-        this.nombre = nombre;
+    public Usuario(String email, String password) {
+        this.email = email;
         this.password = password;
     }
     
     public boolean hacer_login(){
-        //Aqui es donde nos deberiamos comunicar con la bd para verificas que el ususrio exista
-        return true;
+        Consultas co = new Consultas();
+        return co.autenticacion(email, password);
     }
 }
