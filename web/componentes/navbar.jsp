@@ -8,7 +8,7 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item active">
-            <a class="nav-link" href="#">Clientes</a>
+            <a class="nav-link" href="vistas/RegistroClientes.jsp">Clientes</a>
           </li>
         </ul>
       </div>

@@ -8,7 +8,7 @@
 <%@page import="java.sql.PreparedStatement"%>
 <%@page import="java.sql.DriverManager"%>
 <%@page import="java.sql.Connection"%>
-<%@page import="lib.Conexion" %>
+<%@page import="lib.ConsultaClientes" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -19,9 +19,9 @@
     <body>
 
         <%
-            Conexion con1 = new Conexion();
+            ConsultaClientes con1 = new ConsultaClientes();
 
-            con1.Conectar();
+            
             ResultSet rs = con1.realizarConsulta("select * from clientes");
 
         //listar los datos
@@ -36,21 +36,41 @@
         <a href="agregarCliente.jsp">Agregar Cliente</a>
         <br><br><br>
         <center>
-        <table width="80%">
+        <table width="100%" border="1">
             <tr>
-                <th>ID</th>
+                <th>CC</th>
                 <th>NOMBRE</th>
-                <th>PRODUCTO</th>
+                <th>APELLIDO</th>
+                <th>EMAIL</th>
+                <th>CELULAR</th>
+                <th>PAIS</th>
+                <th>DEPARTAMENTO</th>
                 <th>CIUDAD</th>
+                <th>DIRECCIÓN</th>
+                <th>ID</th>
+                <th>ESTADO</th>
+                <th>N_EMAIL</th>
+                <th>N_SMS</th>
                 <th>ACCIÓN</th>
             </tr>
             <% while (rs.next()) {%>
             <tr>
-                <td><%=rs.getInt("id")%></td>
-                <td><%=rs.getString("nombre")%></td>
-                <td><%=rs.getString("producto")%></td>
-                <td><%=rs.getString("ciudad")%></td>
-                <td> <a href="editarCliente.jsp?id=<%=rs.getInt("id")%>&ac=r">Editar</a>  <button><a href="#">Eliminar</a></button> </td>
+                <td><%=rs.getInt("Cc")%></td>
+                <td><%=rs.getString("Nombre")%></td>
+                <td><%=rs.getString("Apellido")%></td>
+                <td><%=rs.getString("Email")%></td>
+                
+                <td><%=rs.getString("Cel")%></td>
+                <td><%=rs.getString("Pais")%></td>
+                <td><%=rs.getString("Departamento")%></td>
+                <td><%=rs.getString("Ciudad")%></td>
+                <td><%=rs.getString("Direccion")%></td>
+                <td><%=rs.getString("Id")%></td>
+                <td><%=rs.getString("Estado")%></td>
+                <td><%=rs.getString("Notificar_email")%></td>
+                <td><%=rs.getString("Notificar_sms")%></td>
+       
+                <td> <a href="editarCliente.jsp?id=<%=rs.getInt("Cc")%>&accion=EDITAR&estado=">Editar</a>  <a href="editarCliente.jsp?id=<%=rs.getInt("Cc")%>&accion=ELIMINAR&estado=readonly">Eliminar</a> </td>
 
             </tr>
             <%} con1.cierraConexion(); %>
