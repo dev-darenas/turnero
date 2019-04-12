@@ -27,7 +27,6 @@
                               email o contraseña erroneas, por favor vuelva a intentarlo.
                             </div>
                         <% } %>
-                        <a href="vistas/modulo/list.jsp">Listar Modulo</a>
                         
                         <div class="wrap-input100 validate-input" data-validate = " email: example@b.c">
                             <input class="input100" type="text" name="email">
