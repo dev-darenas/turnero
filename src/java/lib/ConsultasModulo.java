@@ -17,9 +17,6 @@ public class ConsultasModulo extends Conexion {
     Connection con=null;
     Statement pstm = null;
     ResultSet rs = null;
-    private int cod_modulo=0;
-     private String nombre="";
-     private String descripcion="";
     
         
     public ResultSet obtenerModulos(){
@@ -35,26 +32,34 @@ public class ConsultasModulo extends Conexion {
         return rs;
     }
     
-    public void guardar_modulo ( int cod_modulo, String nombre,
+    public boolean registrar(int cod_modulo,String nombre,
             String descripcion){
-        // va el codito para guardar el Modulo
-        this.cod_modulo=cod_modulo;
-        this.nombre=nombre;
-        this.descripcion=descripcion;
+        int resultUpdate=0;
         
-                
-                          
-                 Statement st=null;
-                  ResultSet rs=null;
-                 try{ 
-                 con=getConexion();
-                  pstm.executeUpdate("insert into modulo values (" + cod_modulo + ",'"+nombre+"','"+descripcion+"');");
-               
-                  
-               }catch(Exception e){}
-                 
-                
-             }
+        try{
+            con=getConexion();
+            pstm= con.createStatement();
+       
+        resultUpdate=
+                pstm.executeUpdate("insert into modulo values("
+         +cod_modulo+",'"
+         +nombre+"','" + descripcion +"');");
+        
+        if(resultUpdate !=0){
+            pstm.close();
+            return true;
+        }else{
+            pstm.close();
+            return false;
+        }
+        
+    }catch (Exception ex){
+        System.out.println("Error en la base de datos.");
+        ex.printStackTrace();
+        return false;
+    }
+        
+    }
     
     public void editar_modulo(){
         
@@ -74,11 +79,11 @@ public class ConsultasModulo extends Conexion {
         }     
     }
     
-    public static void main (String[] args) throws SQLException{
+    
+    public static void main(String args[]){
         System.out.println("lib.ConsultasModulo.main()");
-        ConsultasModulo conM = new ConsultasModulo();
-        
-            System.out.println(("NOMBRE"));
-        }
-    }  
+        ConsultasModulo co=new ConsultasModulo();
+        co.registrar(500, "TEst1","DEscrip");
+    }
+}  
 
