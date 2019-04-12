@@ -10,6 +10,9 @@
           <li class="nav-item active">
             <a class="nav-link" href="#">Clientes</a>
           </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="vistas/modulo/list.jsp">Modulo</a>
+          </li>
         </ul>
       </div>
     </nav>
