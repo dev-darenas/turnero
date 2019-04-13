@@ -37,7 +37,7 @@
             <% } %>
             <% modulos.close(); %>
         </table>
-        <a href="../../index.jsp">Regresar</a>
+        <a href="../../dashboard.jsp">Regresar</a>
         
         
     </body>
