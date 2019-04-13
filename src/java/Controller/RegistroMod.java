@@ -36,13 +36,12 @@ public class RegistroMod extends HttpServlet {
         PrintWriter out = response.getWriter();
              
         try {
-            int cod_modulo=Integer.parseInt(request.getParameter("cod"));
             //CAPTURAR CAMPOS
              String nombre=request.getParameter("nom");
              String descripcion=request.getParameter("des");
             ConsultasModulo co=new ConsultasModulo();
             
-            if(co.registrar(cod_modulo, nombre,descripcion)){
+            if(co.registrar(nombre,descripcion)){
                 request.getRequestDispatcher("vistas/modulo/GuardadoExitoso.jsp")
                                          .forward(request,response);
             }else{
