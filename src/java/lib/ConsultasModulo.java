@@ -15,14 +15,14 @@ import java.sql.*;
  */
 public class ConsultasModulo extends Conexion {
     Connection con=null;
-    Statement pstm = null;
+    PreparedStatement pstm = null;
     ResultSet rs = null;
-    
+    private ResultSet consulta;
         
     public ResultSet obtenerModulos(){
         try{
             String consulta = "SELECT * FROM modulo";
-            pstm = getConexion().createStatement();
+            pstm = getConexion().prepareStatement(consulta);
             
             rs = pstm.executeQuery(consulta);
         } catch(Exception ex){
@@ -32,18 +32,19 @@ public class ConsultasModulo extends Conexion {
         return rs;
     }
     
-    public boolean registrar(int cod_modulo,String nombre,
+    public boolean registrar(String nombre,
             String descripcion){
         int resultUpdate=0;
         
         try{
-            con=getConexion();
-            pstm= con.createStatement();
-       
-        resultUpdate=
-                pstm.executeUpdate("insert into modulo values("
-         +cod_modulo+",'"
-         +nombre+"','" + descripcion +"');");
+            con = getConexion();
+            String sql = "INSERT INTO `turnero`.`modulo` (`nombre`, `descripcion`) VALUES (?, ?)"; 
+            pstm= con.prepareStatement(sql);
+            
+            pstm.setString(1, nombre);
+            pstm.setString(2, descripcion);
+            
+            resultUpdate= pstm.executeUpdate();
         
         if(resultUpdate !=0){
             pstm.close();
@@ -60,11 +61,43 @@ public class ConsultasModulo extends Conexion {
     }
         
     }
-    
-    public void editar_modulo(){
-        
+    public ResultSet buscar(int cod_modulo) {   
+        try {
+
+             String sql = "select * from modulo where cod_modulo= ?";
+
+             pstm = getConexion().prepareStatement(sql);
+            pstm.setInt(1, cod_modulo);
+            consulta = pstm.executeQuery();
+
+         } catch (SQLException e) {
+            System.out.println("ERROR EN CONSULTA " + e);
+        }
+
+         return consulta;
     }
+
     
+    public boolean editar_modulo (String nombre, String descripcion,int cod_modulo) {   
+        try {
+
+             String sql = "update modulo set nombre = ?, descripcion = ? where cod_modulo = ?";
+
+             pstm = getConexion().prepareStatement(sql);
+            pstm.setString(1, nombre);
+            pstm.setString(2, descripcion);
+            pstm.setInt(3, cod_modulo);
+            pstm.executeUpdate();
+
+             return true;
+
+         } catch (SQLException e) {
+            System.out.println("ERROR EN CONSULTA " + e);
+        }
+
+         return false;
+    }
+
     public ResultSet obtener_modulo(int id){
         return null;
     }
@@ -83,7 +116,7 @@ public class ConsultasModulo extends Conexion {
     public static void main(String args[]){
         System.out.println("lib.ConsultasModulo.main()");
         ConsultasModulo co=new ConsultasModulo();
-        co.registrar(500, "TEst1","DEscrip");
+        co.registrar("TEst1","DEscrip");
     }
 }  
 
