@@ -12,6 +12,6 @@
             
 <h1>El Modulo se Registro con éxito</h1>
 
- <a href=crear.jsp >  Regresar </a>
+ <a href="vistas/modulo/crear.jsp ">  Regresar </a>
 </body> 
 </html>   
