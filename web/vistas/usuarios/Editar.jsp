@@ -66,21 +66,33 @@
                 <td> <input type= "text" name= "password" value = "<%= resultado.getString("password")%>" </td> 
              </tr>
             <tr>
-                <td bgcolor ="FF8E8E"> <b> Estado </b> </td> 
-                <td> <input type= "text" name= "estado" value = "<%= resultado.getString("estado")%>" </td>
+             <%  
+                 if(resultado.getString("estado").equalsIgnoreCase("Activo")) {
+             %>    
+               <td bgcolor ="FF8E8E"> <b> Estado </b> </td>  
+               <td> <input type= "radio" name= "estado" value = "Activo" checked> Activo 
+                    <input type= "radio" name= "estado" value = "Inactivo"> Inactivo </td> 
             </tr>   
-    
-             </table> <br><br>
-    <%}        
-        
-        %>
-        
-        
+            </table> <br><br>
+                
+         <% }%>
+         
+            <%  
+                if(resultado.getString("estado").equalsIgnoreCase("Inactivo")) {
+            %>    
+               <td bgcolor ="FF8E8E"> <b> Estado </b> </td>  
+                <td> <input type= "radio" name= "estado" value = "Activo"> Activo 
+                     <input type= "radio" name= "estado" value = "Inactivo" checked> Inactivo </td> 
+            </tr>   
+            </table> <br><br>
+                
+         <% }%>         
+         
+    <%}%>        
              <input type ="submit" value ="Guardar"> <br><br>
-    
+             
              </form>
-        
-        
+
              <a href="Consulta.jsp"> Volver </a>
     </body>
 </html>
