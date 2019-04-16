@@ -22,10 +22,7 @@
         
         
                  <table border="1" >
-            <tr>
-                <th><a href="crear.jsp" > Registrar Modulo </a></th>
-                 
-            </tr>
+            
 
             <% while (modulos.next()) { %>
             
@@ -34,9 +31,14 @@
                     <th><%= modulos.getString(2) %></th>
                     <th><%= modulos.getString(3) %></th>
                 </tr>
+                <right><th><a href="editar.jsp?cod_modulo=<%= modulos.getInt(1)%>">EDITAR MODULO</a></th></right>
+    
             <% } %>
             <% modulos.close(); %>
         </table>
+        
+        <a href="crear.jsp" > Registrar Modulo </a>
+        <br> <br>
         <a href="../../dashboard.jsp">Regresar</a>
         
         
