@@ -11,6 +11,9 @@
             <a class="nav-link" href="#">Clientes</a>
             <a class="nav-link" href="vistas/usuarios/Registro.jsp">Usuarios</a>
           </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="vistas/producto/list.jsp">Producto</a>
+          </li>
         </ul>
       </div>
     </nav>

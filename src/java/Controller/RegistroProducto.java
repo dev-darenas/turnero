@@ -5,19 +5,21 @@
  */
 package Controller;
 
-import Modelos.Usuario;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import lib.ConsultasProducto;
 
 /**
  *
- * @author Dahian
+ * @author albor
  */
-public class Login extends HttpServlet {
+@WebServlet(name = "RegistroProducto", urlPatterns = {"/RegistroProducto"})
+public class RegistroProducto extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -28,20 +30,26 @@ public class Login extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
+        PrintWriter out = response.getWriter();
+             
+        try {
+            //CAPTURAR CAMPOS
+             String nombre=request.getParameter("nom");
+             String descripcion=request.getParameter("des");
+            ConsultasProducto co=new ConsultasProducto();
             
-            Usuario usuario = new Usuario(request.getParameter("email"), request.getParameter("pass"));
-            System.out.println("Controller.Login.processRequest()");
-            
-            if(usuario.hacer_login()){
-                response.sendRedirect("dashboard.jsp");        
+            if(co.Registrar_Producto(nombre,descripcion)){
+                request.getRequestDispatcher("vistas/producto/GuardadoExitoso.jsp")
+                                         .forward(request,response);
             }else{
-                response.sendRedirect("index.jsp?error_login=true");
+                request.getRequestDispatcher("vistas/producto/crear.jsp")
+                                            .forward(request,response);
             }
+        } finally{
+            out.close();
         }
     }
 // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -84,3 +92,5 @@ protected void processRequest(HttpServletRequest request, HttpServletResponse re
     }// </editor-fold>
 
 }
+   
+    
