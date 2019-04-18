@@ -8,6 +8,6 @@
 <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-daterangepicker/3.0.3/daterangepicker.css" rel="stylesheet" />
 
 <!-- main css-->
-<link href="https://drive.google.com/uc?id=1SxTYZSNOzyow3T_Vhp_OCFXjjESHIYAQ" rel="stylesheet" />
-<link href="https://drive.google.com/uc?id=1AhqNttr8yWzL7fGnWTfRI8__9sQm82pi" rel="stylesheet" />
+<%@include file="main.jsp" %>
+<%@include file="util.jsp" %>
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">

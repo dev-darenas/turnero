@@ -21,34 +21,26 @@ public class ConexionUsuario extends Conexion {
     public ResultSet consultarTabla() {
 
         try {
-            String sql = "select * from usuarios";
-
+            String sql = "SELECT * FROM usuarios";
             pst = getConexion().prepareStatement(sql);
             consulta = pst.executeQuery();
-
         } catch (SQLException e) {
             System.out.println("ERROR EN CONSULTA " + e);
         }
-
         return consulta;
     }
 
-    
 // Metodo para buscar por cedula en la tabla
     
     public ResultSet buscar(String cedula) {   
         try {
-
-            String sql = "select * from usuarios where cedula= ?";
-
+            String sql = "SELECT * FROM usuarios WHERE cedula= ?";
             pst = getConexion().prepareStatement(sql);
             pst.setString(1, cedula);
             consulta = pst.executeQuery();
-
         } catch (SQLException e) {
             System.out.println("ERROR EN CONSULTA " + e);
         }
-        
         return consulta;
     }
    

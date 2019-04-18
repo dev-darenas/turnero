@@ -10,8 +10,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/countdown/2.6.0/countdown.min.js"></script>
 
-<script src="https://drive.google.com/uc?id=1jj_QJBJQP6DW-rWV3Mz3X2Kosh5wR2iZ"></script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 <!-- charts -->
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<%@include file="main.jsp" %>
