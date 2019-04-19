@@ -41,12 +41,11 @@
             {%>
 
             <tr>
-                <td> <%= resultado.getInt("id")%> </td>
                 <td> <%= resultado.getString("nombre")%> </td>
                 <td> <%= resultado.getString("apellido")%> </td>
                 <td> <%= resultado.getString("cedula")%> </td>
                 <td> <%= resultado.getString("telefono")%> </td>
-                <td> <%= resultado.getString("cargo")%> </td>
+                <td> <%= resultado.getString("rol_id")%> </td>
                 <td> <%= resultado.getString("email")%> </td>
                 <td> <%= resultado.getString("estado")%> </td>
                 <td> <a href="Editar.jsp?cedula=<%= resultado.getString("cedula")%>"> Editar </a> </td>

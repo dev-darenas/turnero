@@ -47,24 +47,27 @@ public class ConexionUsuario extends Conexion {
     
     //Metodo para registrar Usuarios
             
-    public boolean registro (int codigo, String nombre, String apellido, String cedula, String telefono, 
+    public boolean registro (String nombre, String apellido, String cedula, String telefono, 
                               String cargo, String email, String password, String estado) {   
         try {
-
-            String sql = "insert into usuarios (codigo, nombre, apellido, cedula, telefono, "
-                         + "cargo, email, password, estado)"
-                         + "values (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            
+            System.out.println("Entra a registrar el usuario!!");
+            
+            String sql = "INSERT INTO usuarios (nombre, apellido, cedula, telefono, "
+                         + "rol_id, email, password, estado)"
+                         + "values (?, ?, ?, ?, ?, ?, ?, ?)";
 
             pst = getConexion().prepareStatement(sql);
-            pst.setInt(1, codigo);
-            pst.setString(2, nombre);
-            pst.setString(3, apellido);
-            pst.setString(4, cedula);
-            pst.setString(5, telefono);
-            pst.setString(6, cargo);
-            pst.setString(7, email);
-            pst.setString(8, password);
-            pst.setString(9, estado);
+            pst.setString(1, nombre);
+            pst.setString(2, apellido);
+            pst.setString(3, cedula);
+            pst.setString(4, telefono);
+            pst.setString(5, cargo);
+            pst.setString(6, email);
+            pst.setString(7, password);
+            pst.setString(8, estado);
+            
+            System.out.println("ejecuta comando");
             pst.executeUpdate();
                        
             return true;
