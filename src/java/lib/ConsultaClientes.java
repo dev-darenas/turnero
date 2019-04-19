@@ -79,6 +79,15 @@ public class ConsultaClientes extends Conexion{
         ps.executeUpdate();
         
     }
+    public void ingresarProducto(int cliente,int producto) throws SQLException{
+        
+        ps=con.prepareStatement("insert into cliente_producto (id_cliente,id_producto ) values(?,? )");
+        ps.setInt(1, cliente);
+        ps.setInt(2, producto);
+       
+        ps.executeUpdate();
+        
+    }
     public void cierraConexion() {
     try {
         con.close();

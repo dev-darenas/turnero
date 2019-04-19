@@ -4,6 +4,7 @@
     Author     : usuario
 --%>
 
+<%@page import="java.sql.ResultSet"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="lib.ConsultaClientes" %>
 
@@ -14,6 +15,13 @@
         <title>Agregar cliente</title>
     </head>
     <body>
+        <%
+            ConsultaClientes con1 = new ConsultaClientes();
+
+            ResultSet rs = con1.realizarConsulta("select nombre_producto from producto");
+
+            //listar los datos
+        %>
         <h1>Agregar Cliente</h1>
         <hr>
     <center>
@@ -42,29 +50,82 @@
             <input type="text" name="txt_estado"><br><br>
             Notificar Email:
             <input type="radio" name="txt_notificar_email"><br><br>
-          
+
             Notificar Sms:
             <input type="radio" name="txt_notificar_sms"><br><br>
-            
+
 
             <br>
-            <hr>
-            <a href="RegistroClientes.jsp">Regresar</a>
+            <h3>REGISTRAR PRODUCTO CON EL CLIENTE</h3>
+            <div id="addd">
+                <select name="product" id="product">
 
-            <input type="submit" name="accion" value="Registrar">
+                    <%while (rs.next()) {%>
+                    <option name="produ" value="<%=rs.getString("nombre_producto")%>"><%=rs.getString("nombre_producto")%></option>
+                    <%}%>
+                </select>
+            </div>
+            <br><br>
 
-        </form>
-    </center>
+            
+
+
+
+            
+<%! int cont=0; %>
     <%
+
         String accion = "";
         if (request.getParameter("accion") != null) {
             accion = request.getParameter("accion");
         }
-        int cc = 0;
+       
+        
+        if (accion.equals("adicionar")) { 
+    
+    
+    cont+=1;
+    out.print("+ "+cont);
+    accion="";
+    for(int i=1;i<=cont;i++){
+    rs = con1.realizarConsulta("select nombre_producto from producto");    
+    
+    %>
+    <div >
+        <select name="product" id="product">
+
+            <%while (rs.next()) {%>
+            <option name="produ" value="<%=rs.getString("nombre_producto")%>"><%=rs.getString("nombre_producto")%></option>
+            <%}%>
+        </select>
+        
+    </div>
+       <br><br>
+    <%}}%>
+    <input  type="submit" name="accion"  value="adicionar">
+    <br><br>
+    
+   
+   
+            <br><br>
+     <hr>
+            <a href="RegistroClientes.jsp">Regresar</a>
+
+            <input type="submit"  name="accion" value="Registrar">
+        </form>
+    </center>
+    
+    
+    
+    
+    <%
+        
+
+        if (accion.equals("Registrar")) {
+             int cc = 0;
         if (request.getParameter("txt_cc") != null) {
             cc = Integer.parseInt(request.getParameter("txt_cc"));
-        }
-        if (accion.equals("Registrar")) {
+        
 
             String nombre = request.getParameter("txt_nombre");
             String apellido = request.getParameter("txt_apellido");
@@ -78,20 +139,25 @@
             String estado = request.getParameter("txt_estado");
             String notificar_email = request.getParameter("txt_notificar_email");
             String notificar_sms = request.getParameter("txt_notificar_sms");
-            
-            
+
             ConsultaClientes con = new ConsultaClientes();
-            
-            
+
             con.ingresarCLiente(cc, nombre, apellido, email, cel, pais, departamento, ciudad, direccion, id, estado, notificar_email, notificar_sms);
-         response.sendRedirect("RegistroClientes.jsp");
+
+            rs = con.realizarConsulta("select id_producto from producto where nombre_producto='" + request.getParameter("product") + "'");
+
+            if (rs.next()) {
+                out.print("\n-ñ-" + rs.getInt("id_producto"));
+                con.ingresarProducto(cc, rs.getInt("id_producto"));
+            }
+
+        response.sendRedirect("RegistroClientes.jsp");
             con.cierraConexion();
-        
-        } 
- 
+        }
+        }
 
     %>
-
+    
 
 </body>
 </html>
