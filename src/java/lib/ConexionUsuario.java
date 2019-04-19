@@ -44,6 +44,17 @@ public class ConexionUsuario extends Conexion {
         return consulta;
     }
    
+     public ResultSet buscar(int id) {   
+        try {
+            String sql = "SELECT * FROM usuarios WHERE id= ?";
+            pst = getConexion().prepareStatement(sql);
+            pst.setInt(1, id);
+            consulta = pst.executeQuery();
+        } catch (SQLException e) {
+            System.out.println("ERROR EN CONSULTA " + e);
+        }
+        return consulta;
+    }
     
     //Metodo para registrar Usuarios
             
@@ -86,19 +97,18 @@ public class ConexionUsuario extends Conexion {
                               String cargo, String email, String password, String estado) {   
         try {
 
-            String sql = "update usuarios set codigo = ?, nombre = ?, apellido = ?, telefono = ?, "
-                         + "cargo = ?, email = ?, password = ?, estado = ? where cedula = ?";
+            String sql = "UPDATE USUARIO SET cedula = ?, nombre = ?, apellido = ?, telefono = ?, "
+                         + "rol_id = ?, email = ?, estado = ? WHERE id = ?";
 
             pst = getConexion().prepareStatement(sql);
-            pst.setInt(1, codigo);
+            pst.setString(1, cedula);
             pst.setString(2, nombre);
             pst.setString(3, apellido);
             pst.setString(4, telefono);
             pst.setString(5, cargo);
             pst.setString(6, email);
-            pst.setString(7, password);
-            pst.setString(8, estado);
-            pst.setString(9, cedula);
+            pst.setString(7, estado);
+            pst.setInt(8, codigo);
             pst.executeUpdate();
 
             return true;

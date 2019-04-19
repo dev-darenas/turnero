@@ -1,4 +1,7 @@
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page import= "lib.ConexionUsuario" %>
+<%@ page import= "java.sql.*"%>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -8,11 +11,11 @@
     </head>
     <body>
         <%@include file="/componentes/navbar.jsp" %>
-        
+           
         <div class="container">
             <div class="container-contact100">
 		<div class="wrap-contact100">
-                    <form class="contact100-form validate-form" action="/turnero/RegistrarUsuario" method="post" >
+                    <form class="contact100-form validate-form" action="/turnero/ActualizarUsuario" method="post" >
                         <span class="contact100-form-title">
                             Registrar Asesor
                         </span>
@@ -29,7 +32,7 @@
                         </div>
                         <div class="wrap-input100 validate-input bg1" data-validate="Campo obligatorio">
                             <span class="label-input100">No. del documento</span>
-                            <input class="input100" type="text" name="cedula" placeholder="No. del documento">
+                            <input class="input100" type="text" name="cedula" placeholder="No. del documento" >
                         </div>
                         <div class="wrap-input100 validate-input bg1 rs1-wrap-input100" data-validate="Campo obligatorio">
                             <span class="label-input100">Nombre(s)</span>

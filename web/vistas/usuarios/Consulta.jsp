@@ -56,7 +56,7 @@
                     <% } %>
                 </td>
                 <td> 
-                    <a href="Editar.jsp?cedula=<%= resultado.getString("cedula")%>" class="btn btn-primary btn-sm" >
+                    <a href="Editar.jsp?id=<%= resultado.getString("id")%>" class="btn btn-primary btn-sm" >
                         <i class="fas fa-pencil-alt"></i>
                     </a> 
                 </td>

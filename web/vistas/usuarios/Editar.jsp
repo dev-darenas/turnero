@@ -1,126 +1,136 @@
+<%@ page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page import= "lib.ConexionUsuario" %>
+<%@ page import= "java.sql.*"%>
 
-  <%@ page import= "lib.ConexionUsuario" %>
-  <%@ page import= "java.sql.*"%>
-
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Editar Usuarios</title>
+        <title> Registro </title>
+        <%@include file="/source/styles/styleslib.jsp" %>
     </head>
     <body>
-        
+        <%@include file="/componentes/navbar.jsp" %>
         
         <%
-
-            ResultSet resultado;
+            ResultSet resultado = null;
             
-            String cedula = request.getParameter("cedula");           
+            String id = request.getParameter("id");           
             ConexionUsuario conexion = new ConexionUsuario();
-           
-            resultado = conexion.buscar(cedula);
+            if(!id.isEmpty()){
+                resultado = conexion.buscar(Integer.parseInt(id));
+                resultado.next();                
+            }
+        %>   
+        <div class="container">
+            <div class="container-contact100">
+		<div class="wrap-contact100">
+                    <form class="contact100-form validate-form" action="/turnero/RegistrarUsuario" method="post" >
+                        <input type="hidden" name="id" value="<%= resultado.getString("id") %>">
+                        <span class="contact100-form-title">
+                            Registrar Asesor
+                        </span>
+                        <div class="wrap-input100 input100-select bg1">
+                            <span class="label-input100">Tipo de documento</span>
+                            <div>
+                                <select class="js-select2" name="tipo_documento_id">
+                                    <option>Cedula de ciudadania</option>
+                                    <option>NIT</option>
+                                    <option>Pasaporte</option>
+                                </select>
+                                <div class="dropDownSelect2"></div>
+                            </div>
+                        </div>
+                        <div class="wrap-input100 validate-input bg1" data-validate="Campo obligatorio">
+                            <span class="label-input100">No. del documento</span>
+                            <input class="input100" type="text" name="cedula" placeholder="No. del documento" value="<%= resultado.getString("cedula") %>">
+                        </div>
+                        <div class="wrap-input100 validate-input bg1 rs1-wrap-input100" data-validate="Campo obligatorio">
+                            <span class="label-input100">Nombre(s)</span>
+                            <input class="input100" type="text" name="nombre" placeholder="Nombre" value="<%= resultado.getString("nombre") %>">
+                        </div>
 
-            while (resultado.next())
-        {%> 
-        
-        
-                
-        <h1> Editar Usuarios </h1>
-           
-        <form action ="" method="post">
-             <table border ="1"  cellpadding="5" cellspacing="2">
-            
-            <tr>
-                <td bgcolor ="FF8E8E"> <b> Codigo </b> </td>
-                <td> <input type= "text" name= "codigo" value = "<%= resultado.getInt("codigo")%>" </td>
-            </tr>
-             <tr>
-                <td bgcolor ="FF8E8E"> <b> Nombre </b> </td>
-                <td> <input type= "text" name= "nombre" value = "<%= resultado.getString("nombre")%>" </td>
-             <tr>
-                <td bgcolor ="FF8E8E"> <b> Apellido </b> </td> 
-                <td> <input type= "text" name= "apellido" value = "<%= resultado.getString("apellido")%>" </td> 
-             </tr>   
-             <tr>
-                <td bgcolor ="FF8E8E"> <b> Cedula </b> </td> 
-                <td> <%= resultado.getString("cedula")%> </td>  
-             </tr>  
-             <tr>
-                <td bgcolor ="FF8E8E"> <b> Telefono </b> </td> 
-          <td> <input type= "text" name= "telefono" value = "<%= resultado.getString("telefono")%>" </td>         
-                 
-             </tr>
-             <tr>
-                <td bgcolor ="FF8E8E"> <b> Cargo </b> </td>  
-                <td> <input type= "text" name= "cargo" value= "<%= resultado.getString("cargo")%>" </td> 
-             </tr>
-             
-             <tr>
-                <td bgcolor ="FF8E8E"> <b> Email </b> </td>
-                <td> <input type= "text" name= "email" value = "<%= resultado.getString("email")%>" </td>
-             </tr>
-                
-             <tr>
-                <td bgcolor ="FF8E8E"> <b> Password </b> </td> 
-                <td> <input type= "text" name= "password" value = "<%= resultado.getString("password")%>" </td> 
-             </tr>
-            <tr>
-             <%  
-                 if(resultado.getString("estado").equalsIgnoreCase("Activo")) {
-             %>    
-               <td bgcolor ="FF8E8E"> <b> Estado </b> </td>  
-               <td> <input type= "radio" name= "estado" value = "Activo" checked> Activo 
-                    <input type= "radio" name= "estado" value = "Inactivo"> Inactivo </td> 
-            </tr>   
-            </table> <br><br>
-                
-         <% }%>
-         
-            <%  
-                if(resultado.getString("estado").equalsIgnoreCase("Inactivo")) {
-            %>    
-               <td bgcolor ="FF8E8E"> <b> Estado </b> </td>  
-                <td> <input type= "radio" name= "estado" value = "Activo"> Activo 
-                     <input type= "radio" name= "estado" value = "Inactivo" checked> Inactivo </td> 
-            </tr>   
-            </table> <br><br>
-                
-         <% }%>         
-         
-    <%}%>        
-             <input type ="submit" value ="Guardar"> <br><br>
-             
-             </form>
+                        <div class="wrap-input100 validate-input bg1 rs1-wrap-input100" data-validate = "Campo obligatorio)">
+                            <span class="label-input100">Apellido(s)</span>
+                            <input class="input100" type="text" name="apellido" placeholder="Apellido" value="<%= resultado.getString("apellido") %>">
+                        </div>
 
-             <a href="Consulta.jsp"> Volver </a>
+                        <div class="wrap-input100 bg1 rs1-wrap-input100" data-validate="Campo obligatorio">
+                            <span class="label-input100">Telefono</span>
+                            <input class="input100" type="text" name="telefono" placeholder="Celular" value="<%= resultado.getString("telefono") %>">
+                        </div>
+                        <div class="wrap-input100 bg1 rs1-wrap-input100" data-validate="Campo obligatorio">
+                            <span class="label-input100">Correo electronico</span>
+                            <input class="input100" type="text" name="email" placeholder="E-mail" value="<%= resultado.getString("email") %>">
+                        </div>
+                        <div class="wrap-input100 bg1 rs1-wrap-input100">
+                            <span class="label-input100">ROL</span>
+                            <div>
+                                <select class="js-select2" name="rol_id">
+                                    <option value="1" >Administrativo</option>
+                                    <option value="2" >Asesor</option>
+                                    <option value="3" >Cajero</option>
+                                </select>
+                                <div class="dropDownSelect2"></div>
+                            </div>
+                        </div>
+                        <div class="wrap-input100 bg1 rs1-wrap-input100">
+                            <span class="label-input100">Estado</span>
+                            <div class="pretty p-switch">
+                                <input name="estado" type="checkbox" value="1" 
+                                       <% if(resultado.getString("estado").equalsIgnoreCase("1")){ %>
+                                        checked
+                                       <% } %>
+                                       />
+                                <div class="state">
+                                    <label>Activado?</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="wrap-input100 validate-input bg1 rs1-wrap-input100" data-validate="Campo obligatorio">
+                            <span class="label-input100">Password</span>
+                            <input class="input100" type="password" name="password" placeholder="Password">
+                        </div>
+                        <div class="wrap-input100 validate-input bg1 rs1-wrap-input100" data-validate="Campo obligatorio">
+                            <span class="label-input100">Confirmar Password</span>
+                            <input class="input100" type="password" name="password" placeholder="Password">
+                        </div>	
+                        <div class="container-contact100-form-btn">
+                            <button class="contact100-form-btn">
+                                <span>
+                                    Actualizar
+                                    <i class="fa fa-long-arrow-right m-l-7" aria-hidden="true"></i>
+                                </span>
+                            </button>
+                        </div>
+                    </form>
+		</div>
+            </div>
+        </div>
+    <%@include file="/source/javascript/javalib.jsp" %>
     </body>
+ 
+    <script>
+        $( document ).ready(function() {
+            $(".js-select2").each(function(){
+                $(this).select2({
+                    minimumResultsForSearch: 20,
+                    dropdownParent: $(this).next('.dropDownSelect2')
+                });
+
+                $(".js-select2").each(function(){
+                    $(this).on('select2:close', function (e){
+                        if($(this).val() == "Please chooses") {
+                            $('.js-show-service').slideUp();
+                        }
+                        else {
+                            $('.js-show-service').slideUp();
+                            $('.js-show-service').slideDown();
+                        }
+                    });
+                });
+            })
+        });
+    </script>
 </html>
-
-<% 
-   int codigo=0;  
-try {
-   codigo = Integer.parseInt(request.getParameter("codigo"));
-} catch(NumberFormatException e) {  
-} 
-
-
-String nombre = request.getParameter("nombre");
-String apellido = request.getParameter("apellido");
-String telefono = request.getParameter("telefono");
-String cargo = request.getParameter("cargo");
-String email = request.getParameter("email");
-String password = request.getParameter("password");
-String estado = request.getParameter("estado");
-
-
-
-    
-if (conexion.modificar(codigo, nombre, apellido, cedula, telefono, cargo, email, password, estado)){
-response.sendRedirect("Consulta.jsp");    
-}
-
-conexion.desconectar();
-
-
-%>
+   
