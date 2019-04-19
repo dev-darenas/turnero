@@ -23,6 +23,7 @@
                 </a>
                 Usuarios
             </h1>
+            <hr>
             <table class="table table-bordered table-hover table-sm">
                 <thead class="thead-dark">
                     <tr>
@@ -47,8 +48,18 @@
                 <td> <%= resultado.getString("telefono")%> </td>
                 <td> <%= resultado.getString("rol_id")%> </td>
                 <td> <%= resultado.getString("email")%> </td>
-                <td> <%= resultado.getString("estado")%> </td>
-                <td> <a href="Editar.jsp?cedula=<%= resultado.getString("cedula")%>"> Editar </a> </td>
+                <td> 
+                    <% if (resultado.getString("estado").equals("1") ){ %>
+                        Activo
+                    <% }else{ %>
+                        Inactivo
+                    <% } %>
+                </td>
+                <td> 
+                    <a href="Editar.jsp?cedula=<%= resultado.getString("cedula")%>" class="btn btn-primary btn-sm" >
+                        <i class="fas fa-pencil-alt"></i>
+                    </a> 
+                </td>
             </tr>
 
             <%}
