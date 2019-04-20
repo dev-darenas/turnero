@@ -91,7 +91,7 @@
     rs = con1.realizarConsulta("select nombre_producto from producto");    
     
     %>
-    <div >
+    <div>
         <select name="product" id="product">
 
             <%while (rs.next()) {%>
