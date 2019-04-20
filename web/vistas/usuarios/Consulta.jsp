@@ -1,6 +1,7 @@
 
   <%@ page import= "lib.ConexionUsuario" %>
   <%@ page import= "java.sql.*"%>
+  <%@ page import= "Modelos.Usuario" %>
   <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -46,7 +47,7 @@
                 <td> <%= resultado.getString("apellido")%> </td>
                 <td> <%= resultado.getString("cedula")%> </td>
                 <td> <%= resultado.getString("telefono")%> </td>
-                <td> <%= resultado.getString("rol_id")%> </td>
+                <td> <%= Usuario.rol_name(resultado.getString("rol_id")) %> </td>
                 <td> <%= resultado.getString("email")%> </td>
                 <td> 
                     <% if (resultado.getString("estado").equals("1") ){ %>
@@ -69,4 +70,12 @@
         </div>
         <%@include file="/source/javascript/javalib.jsp" %>
     </body>
+    
+    <% if(request.getParameter("succes") != null){ %>
+        <script>
+            $( document ).ready(function() {
+                swal("Turnero", "Usuario creado!!", "success");
+            });
+        </script>
+    <% } %>
 </html>

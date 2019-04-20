@@ -33,9 +33,6 @@ public class RegistrarUsuario extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            
-            System.out.println("entra al controller");
-            
             String nombre = request.getParameter("nombre");
             String apellido = request.getParameter("apellido");
             String cedula = request.getParameter("cedula");
@@ -48,7 +45,7 @@ public class RegistrarUsuario extends HttpServlet {
             ConexionUsuario conexion = new ConexionUsuario();
 
             if (conexion.registro(nombre, apellido, cedula, telefono, cargo, email, password, estado)) {
-                response.sendRedirect("vistas/usuarios/Registro.jsp?succes=true");
+                response.sendRedirect("vistas/usuarios/Consulta.jsp?succes=true");
             }else{
                 response.sendRedirect("vistas/usuarios/Registro.jsp?error=true");               
             }
