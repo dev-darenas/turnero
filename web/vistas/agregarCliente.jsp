@@ -47,7 +47,12 @@
             Id:
             <input type="text" name="txt_id"><br><br>
             Estado:
-            <input type="text" name="txt_estado"><br><br>
+            <select name="txt_estado">
+                <option>Selecctione</option>
+                <option>Activo</option>
+                <option>Inactivo</option>
+            </select>
+            <br><br>
             Notificar Email:
             <input type="radio" name="txt_notificar_email"><br><br>
 
