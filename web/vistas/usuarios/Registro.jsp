@@ -95,6 +95,14 @@
     <%@include file="/source/javascript/javalib.jsp" %>
     </body>
  
+    <% if(request.getParameter("error") != null){ %>
+        <script>
+            $( document ).ready(function() {
+                swal("Turnero", "Usuario no creado", "error");
+            });
+        </script>
+    <% } %>
+    
     <script>
         $( document ).ready(function() {
             $(".js-select2").each(function(){

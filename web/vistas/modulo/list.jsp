@@ -12,6 +12,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Modulos</title>
+        <%@include file="/source/styles/styleslib.jsp" %>
     </head>
     <body>
         
