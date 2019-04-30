@@ -80,14 +80,25 @@ public class ConsultaClientes extends Conexion{
         
     }
     public void ingresarProducto(int cliente,int producto) throws SQLException{
+        int siguiente=1;
+        ps=con.prepareStatement("insert into cliente_producto (id_cliente_producto,id_cliente,id_producto ) values(?,?,?)");
         
-        ps=con.prepareStatement("insert into cliente_producto (id_cliente,id_producto ) values(?,? )");
-        ps.setInt(1, cliente);
-        ps.setInt(2, producto);
+        ps.setInt(1,siguiente );
+        ps.setInt(2, cliente);
+        ps.setInt(3, producto);
        
         ps.executeUpdate();
         
     }
+    public int consultaCodigoProducto(String nombre) throws SQLException{
+        rs=realizarConsulta("select id_producto from producto where nombre_producto='"+nombre+"'");
+        int codigo=0;
+        if(rs.next()){
+        codigo=rs.getInt("id_producto");
+        }
+        return codigo;
+    }
+    
     public void cierraConexion() {
     try {
         con.close();
@@ -132,6 +143,20 @@ public class ConsultaClientes extends Conexion{
          try {
              pstm = con.prepareStatement("delete from clientes where"
                     + " Cc= "+cc);
+            
+           
+          pstm.executeUpdate();
+ 
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+       return pstm;
+    }
+    public PreparedStatement eliminarProducto(int id){
+        PreparedStatement pstm = null;
+         try {
+             pstm = con.prepareStatement("delete from cliente_producto where"
+                    + " id_cliente_producto= "+id);
             
            
           pstm.executeUpdate();
