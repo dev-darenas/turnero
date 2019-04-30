@@ -20,71 +20,149 @@
         <%
             int id = Integer.parseInt(request.getParameter("id"));
             ConsultaClientes con = new ConsultaClientes();
-           
+
             ResultSet rs = con.realizarConsulta("select * from clientes where Cc=" + id);
             String est = request.getParameter("estado");
         %>
+    <center>
         <form method="post" action="">
-            <table width="100%" border="1">
-                <tr>
-                    <th>CC</th>
-                    <th>NOMBRE</th>
-                    <th>APELLIDO</th>
-                    <th>EMAIL</th>
-                    <th>CELULAR</th>
-                    <th>PAIS</th>
-                    <th>DEPARTAMENTO</th>
-                    <th>CIUDAD</th>
-                    <th>DIRECCIÓN</th>
-                    <th>ID</th>
-                    <th>ESTADO</th>
-                    <th>N_EMAIL</th>
-                    <th>N_SMS</th>
-                    
-                </tr>
+            <table width="80%" border="1">
                 <% while (rs.next()) {%>
                 <tr>
+                    <th>CC</th>
                     <td><a><%=id%></a></td>
+                </tr>
+                <tr>
+                    <th>NOMBRE</th>
                     <td><input <%= est%> type="text" name="nombre"  value="<%=rs.getString("Nombre")%>" ></td>
-                <h4></h4>
-                <td><input <%= est%> type="text" name="apellido" value= "<%=rs.getString("Apellido")%>"></td>
-                <td><input <%= est%> type="email" name="email" value= "<%=rs.getString("Email")%>"></td>
-                
-                <td><input <%= est%> type="text" name="cel" value= "<%=rs.getString("Cel")%>"></td>
-                <td><input <%= est%> type="text" name="pais" value= "<%=rs.getString("Pais")%>"></td>
-                <td><input <%= est%> type="text" name="departamento" value= "<%=rs.getString("Departamento")%>"></td>
-                <td><input <%= est%> type="text" name="ciudad" value= "<%=rs.getString("Ciudad")%>"></td>
-                <td><input <%= est%> type="text" name="direccion" value= "<%=rs.getString("Direccion")%>"></td>
-                <td><input <%= est%> type="text" name="id" value= "<%=rs.getString("Id")%>"></td>
-                <td><input <%= est%> type="text" name="estado" value= "<%=rs.getString("Estado")%>"></td>
-                <td><input <%= est%> type="text" name="notificar_e" value= "<%=rs.getString("Notificar_email")%>"></td>
-                <td><input <%= est%> type="text" name="notificar_s" value= "<%=rs.getString("Notificar_sms")%>"></td>
+
+                </tr>
+                <tr>
+                    <th>APELLIDO</th>
+                    <td><input <%= est%> type="text" name="apellido" value= "<%=rs.getString("Apellido")%>"></td>
+
+
+                </tr>
+                <tr>
+                    <th>EMAIL</th>
+                    <td><input <%= est%> type="email" name="email" value= "<%=rs.getString("Email")%>"></td>
+
+                </tr>
+                <tr>
+                    <th>CELULAR</th>
+                    <td><input <%= est%> type="text" name="cel" value= "<%=rs.getString("Cel")%>"></td>
+
+                </tr>
+                <tr>
+                    <th>PAIS</th>
+                    <td><input <%= est%> type="text" name="pais" value= "<%=rs.getString("Pais")%>"></td>
+
+
+                </tr>
+                <tr>
+                    <th>DEPARTAMENTO</th>
+                    <td><input <%= est%> type="text" name="departamento" value= "<%=rs.getString("Departamento")%>"></td>
+
+                </tr>
+                <tr>
+                    <th>CIUDAD</th>
+                    <td><input <%= est%> type="text" name="ciudad" value= "<%=rs.getString("Ciudad")%>"></td>
 
                 </tr>
 
+                <tr>
+                    <th>DIRECCIÓN</th>
+                    <td><input <%= est%> type="text" name="direccion" value= "<%=rs.getString("Direccion")%>"></td>
+
+                </tr>
+                <tr>
+                    <th>ID</th>
+                    <td><input <%= est%> type="text" name="id" value= "<%=rs.getString("Id")%>"></td>
+
+                </tr>
+                <tr>
+                    <th>ESTADO</th>
+                     <td><input <%= est%> type="text" name="estado" value= "<%=rs.getString("Estado")%>"></td>
+                  
+                    
+                </tr>
+                <tr>
+                    <th>N_EMAIL</th>
+                     <td><input <%= est%> type="text" name="notificar_e" value= "<%=rs.getString("Notificar_email")%>"></td>
+                  
+                </tr>
+                <tr>
+                    <th>N_SMS</th>
+                    <td><input <%= est%> type="text" name="notificar_s" value= "<%=rs.getString("Notificar_sms")%>"></td>
+                </tr>
+
+                
+                <br><br>
+                <h3>REGISTRAR PRODUCTO CON EL CLIENTE</h3>
+
+
                 <% }
-                    %> 
+                %> 
 
 
             </table>
-                    <br><br>
-            <input type="submit" name="Accion" value=<%=titulo%>>
-        </form>
+            <br><br>
+            <input type="submit" name="Accion" value="<%= request.getParameter("accion") %>">
+        
         <a href="RegistroClientes.jsp">Atras</a>
-        <br>
+        <br><br><hr>
+        <h3>Registrar productos al cliente</h3>
+        
+        <%  rs=con.realizarConsulta("select nombre_producto from producto"); %>
+        
+        <div >
+        <select name="product" id="product">
 
-        <%
-           
+            <%while (rs.next()) {%>
+            <option name="produ" value="<%=rs.getString("nombre_producto")%>"><%=rs.getString("nombre_producto")%></option>
+            <%}%>
+        </select>
+        <input type="submit" name="registro" value="Registrar Producto">
+        
+    </div>
+        </form>
+        <br>
+        <br>
+        <hr>
+        
+        
+        
+</center>
+        <%  
             String accion = "";
+            String registro="";
+            if(request.getParameter("registro")!=null){
+                registro=request.getParameter("registro");
+                if(registro.equals("Registrar Producto")){
+                    
+                    int codigo=con.consultaCodigoProducto(request.getParameter("product"));
+                    int iddd=Integer.parseInt(request.getParameter("id"));
+                    
+                    con.ingresarProducto(iddd, codigo);
+                %>   
+        
+  
+    
+    <%
+            }
+                
+            }
+            else{
             if (request.getParameter("Accion") != null) {
                 accion = request.getParameter("accion");
             }
+            
             if (accion.equals("EDITAR")) {
                 int ide = Integer.parseInt(request.getParameter("id"));
                 String nombre = request.getParameter("nombre");
                 String apellido = request.getParameter("apellido");
                 String email = request.getParameter("email");
-                
+
                 String cel = request.getParameter("cel");
                 String pais = request.getParameter("pais");
                 String departamento = request.getParameter("departamento");
@@ -103,10 +181,29 @@
                 out.print("Se ELIMINÓ--" + con.eliminarCliente(ide));
                 response.sendRedirect("RegistroClientes.jsp");
 
-            }
-            con.cierraConexion();
+            }}
+            
 
         %>
-
+        <center>
+        <% rs=con.realizarConsulta("Select cliente_producto.id_cliente_producto,producto.nombre_producto from producto,clientes,cliente_producto where clientes.id = cliente_producto.id_cliente and producto.id_producto=cliente_producto.id_producto and cliente_producto.id_cliente="+ id ); %>
+        <table width="60%" border="1" >
+            <% while(rs.next()){ %>
+            <tr>
+            <th>
+                #
+            </th>
+            <th>Producto</th>
+            <th>Acción</th>
+            </tr>
+            <tr>
+                <td><%= rs.getString("cliente_producto.id_cliente_producto") %></td>
+                <td><%= rs.getString("producto.nombre_producto") %></td>
+                <td><a onclick="" href="eliminarProducto.jsp?id=<%= rs.getInt("cliente_producto.id_cliente_producto") %>&acci=<%= request.getParameter("accion") %>&idd=<%= request.getParameter("id") %>">ELIMINAR</a></td>
+            </tr>
+            <% } %>
+        </table>
+        </center>
+        <% con.cierraConexion(); %>
     </body>
 </html>

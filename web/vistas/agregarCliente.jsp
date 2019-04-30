@@ -48,7 +48,7 @@
             <input type="text" name="txt_id"><br><br>
             Estado:
             <select name="txt_estado">
-                <option>Selecctione</option>
+                <option>Seleccione</option>
                 <option>Activo</option>
                 <option>Inactivo</option>
             </select>
@@ -61,20 +61,18 @@
 
 
             <br>
-            <h3>REGISTRAR PRODUCTO CON EL CLIENTE</h3>
-            <div id="addd">
-                <select name="product" id="product">
-
-                    <%while (rs.next()) {%>
-                    <option name="produ" value="<%=rs.getString("nombre_producto")%>"><%=rs.getString("nombre_producto")%></option>
-                    <%}%>
-                </select>
-            </div>
-            <br><br>
+            
+           
 
             
 
 
+     <hr>
+            <a href="RegistroClientes.jsp">Regresar</a>
+
+            <input type="submit"  name="accion" value="Registrar">
+        </form>
+    </center>
 
             
 <%! int cont=0; %>
@@ -83,42 +81,14 @@
         String accion = "";
         if (request.getParameter("accion") != null) {
             accion = request.getParameter("accion");
-        }
+        
        
-        
-        if (accion.equals("adicionar")) { 
+         %>
     
-    
-    cont+=1;
-    out.print("+ "+cont);
-    accion="";
-    for(int i=1;i<=cont;i++){
-    rs = con1.realizarConsulta("select nombre_producto from producto");    
-    
-    %>
-    <div>
-        <select name="product" id="product">
-
-            <%while (rs.next()) {%>
-            <option name="produ" value="<%=rs.getString("nombre_producto")%>"><%=rs.getString("nombre_producto")%></option>
-            <%}%>
-        </select>
-        
-    </div>
-       <br><br>
-    <%}}%>
-    <input  type="submit" name="accion"  value="adicionar">
-    <br><br>
     
    
    
-            <br><br>
-     <hr>
-            <a href="RegistroClientes.jsp">Regresar</a>
-
-            <input type="submit"  name="accion" value="Registrar">
-        </form>
-    </center>
+           
     
     
     
@@ -159,7 +129,7 @@
         response.sendRedirect("RegistroClientes.jsp");
             con.cierraConexion();
         }
-        }
+        }}
 
     %>
     
