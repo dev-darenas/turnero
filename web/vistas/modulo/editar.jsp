@@ -89,11 +89,13 @@
 if(request.getParameter("editar")!=null){
 
     String nombre=request.getParameter("nombre");
-String estado=request.getParameter("estado");
-   String descripcion=request.getParameter("descripcion");
+    String estado=request.getParameter("estado");
+    String descripcion=request.getParameter("descripcion");
    
-st.executeUpdate("update modulo set nombre='"+nombre+"',estado='"+estado+"',descripcion='"+descripcion+"' where cod_modulo="+cod_modulo+"");
-request.getRequestDispatcher("list.jsp").forward(request, response);
+    st.executeUpdate("update modulo set nombre='"+nombre+"',estado='"+estado+"',descripcion='"+descripcion+"' where cod_modulo="+cod_modulo+"");
+    //request.getRequestDispatcher("list.jsp").forward(request, response);
+    //response.
+
 }
     
 %>
