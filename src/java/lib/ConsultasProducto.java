@@ -24,7 +24,7 @@ public class ConsultasProducto extends Conexion {
     ResultSet rs = null;
     
         
-    public ResultSet ObtenerProductos(){
+    public ResultSet obtenerProducto(){
         try{
             String consulta = "SELECT * FROM producto";
             pstm = getConexion().prepareStatement(consulta);
@@ -37,17 +37,19 @@ public class ConsultasProducto extends Conexion {
         return rs;
     }
     
-    public boolean Registrar_Producto(String nombre,
+    
+    public boolean Registrar_Producto(String nombre,String estado,
             String descripcion){
         int resultUpdate=0;
         
         try{
             con = getConexion();
-            String sql = "INSERT INTO `turnero`.`producto` (`nombre`, `descripcion`) VALUES (?, ?)"; 
+            String sql = "INSERT INTO `turnero`.`producto` (`nombre`,`estado`, `descripcion`) VALUES (?, ?, ?)"; 
             pstm= con.prepareStatement(sql);
             
             pstm.setString(1, nombre);
-            pstm.setString(2, descripcion);
+            pstm.setString(2, estado);
+            pstm.setString(3, descripcion);
             
             resultUpdate= pstm.executeUpdate();
         
@@ -67,8 +69,27 @@ public class ConsultasProducto extends Conexion {
         
     }
     
-    public void editar_modulo(){
+    public boolean editar_producto(String id, String nombre, String estado, String descripcion){
+        PreparedStatement pst;
         
+        System.err.println("estado");
+        System.err.println(estado);
+        
+        try{
+            String sql = "update producto set nombre=?,estado=?,descripcion=? where id_producto=?";
+            pst = getConexion().prepareStatement(sql);
+            pst.setString(1, nombre);
+            pst.setString(2, estado);
+            pst.setString(3, descripcion);
+            pst.setString(4, id);
+            
+            pst.executeUpdate();
+            
+            return true;
+        }catch (Exception ex){
+            System.out.println("ERROR EN CONSULTA " + ex);
+        }
+        return false;
     }
     
     public ResultSet obtener_modulo(int id){

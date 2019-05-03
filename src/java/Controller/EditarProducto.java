@@ -13,13 +13,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import lib.ConsultasProducto;
-
 /**
  *
  * @author albor
  */
-@WebServlet(name = "RegistroProducto", urlPatterns = {"/RegistroProducto"})
-public class RegistroProducto extends HttpServlet {
+@WebServlet(name = "EditarProducto", urlPatterns = {"/EditarProducto"})
+public class EditarProducto extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -33,27 +32,25 @@ public class RegistroProducto extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = response.getWriter();
-             
-        try {
-            //CAPTURAR CAMPOS
-             String nombre=request.getParameter("nom");
-             String estado=request.getParameter("es");
-             String descripcion=request.getParameter("des");
-            ConsultasProducto co=new ConsultasProducto();
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
             
-            if(co.Registrar_Producto(nombre,estado,descripcion)){
-                request.getRequestDispatcher("vistas/producto/list.jsp?succes=true")
-                                         .forward(request,response);
+            String id= request.getParameter("id");
+            String nombre= request.getParameter("nombre");
+            String estado= request.getParameter("es");
+            String descripcion= request.getParameter("descripcion");
+            
+            ConsultasProducto cp = new ConsultasProducto();
+            
+            if(cp.editar_producto(id, nombre, estado, descripcion)){
+                response.sendRedirect("vistas/producto/list.jsp?succes=true");
             }else{
-                request.getRequestDispatcher("vistas/producto/crear.jsp?error=true")
-                                            .forward(request,response);
+                response.sendRedirect("vistas/producto/editar.jsp?id_producto="+id+"&error=true");
             }
-        } finally{
-            out.close();
         }
     }
-// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+
+    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *
@@ -93,5 +90,3 @@ public class RegistroProducto extends HttpServlet {
     }// </editor-fold>
 
 }
-   
-    

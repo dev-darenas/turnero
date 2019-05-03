@@ -5,13 +5,13 @@
 --%>
 <%@ page import="java.io.*,java.util.*,java.net.*,java.sql.*" %>
 <%--aqui se importa la clase conexion que se encuentra la carpeta conexion --%>
-<%@page import="lib.ConsultasProducto"%>
+<%@page import="lib.ConsultasModulo"%>
 <%@page import="java.sql.*"%>
 <html>
     
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Producto</title>
+        <title>JSP Page</title>
         <%@include file="/source/styles/styleslib.jsp" %>
     </head>
 
@@ -20,14 +20,14 @@
         <div class="container">
         <div class="container-contact100">
 		<div class="wrap-contact100">
-                     <form class="contact100-form validate-form" action="/turnero6/EditarProducto" method="post">
+                    <form class="contact100-form validate-form"  >
                         <span class="contact100-form-title">
-                            Editar Producto
+                            Editar Modulo
                         </span>
          
-        <%! ConsultasProducto con3 = new ConsultasProducto(); %>
+        <%! ConsultasModulo con3 = new ConsultasModulo(); %>
         <%
-        int id_producto=Integer.parseInt(request.getParameter("id_producto"));
+        int cod_modulo=Integer.parseInt(request.getParameter("cod_modulo"));
         
                  ResultSet rs=null;
                  Statement st=null;
@@ -35,17 +35,15 @@
                try{
                   
                  st=con3.getConexion().createStatement();
-                rs=st.executeQuery("select * from producto where id_producto= "+ id_producto +"");
-                rs.next();
+              rs=st.executeQuery("select * from modulo where cod_modulo= "+ cod_modulo +"");
+              
+              while(rs.next()){
                   
              
         %>
-
-        <input type="hidden" name="id" value="<%= rs.getString("id_producto") %>">
-        
         <div class="wrap-input100 validate-input bg1 rs1-wrap-input100" data-validate="Campo obligatorio">
-                            <span class="label-input100">ID</span>
-                            <input class="input100" type="text" name="id_producto" placeholder="id_producto" value="<%= rs.getInt(1) %>">
+                            <span class="label-input100">cod_modulo</span>
+                            <input class="input100" type="text" name="cod_modulo" placeholder="cod_modulo" value="<%= rs.getInt(1) %>">
                         </div>
          
          <div class="wrap-input100 validate-input bg1 rs1-wrap-input100" data-validate="Campo obligatorio">
@@ -77,29 +75,30 @@
                         
                         
     
-                     </form>
+         
             </div>
                     </div>
                     </div>
          
                     
         </form>
-               
-    
-        <%
-                            
+                        <%
+                            }
 }catch(Exception e){}
+
+if(request.getParameter("editar")!=null){
+
+    String nombre=request.getParameter("nombre");
+String estado=request.getParameter("estado");
+   String descripcion=request.getParameter("descripcion");
+   
+st.executeUpdate("update modulo set nombre='"+nombre+"',estado='"+estado+"',descripcion='"+descripcion+"' where cod_modulo="+cod_modulo+"");
+request.getRequestDispatcher("list.jsp").forward(request, response);
+}
     
 %>
        
-  
-    <% if(request.getParameter("error") != null){ %>
-        <script>
-            $( document ).ready(function() {
-                swal("Turnero", "Producto no actualizado", "error");
-            });
-        </script>
-    <% } %>
+     
                     
                        
         
