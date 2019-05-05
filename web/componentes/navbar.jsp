@@ -19,6 +19,9 @@
           <li class="nav-item active">
             <a class="nav-link" href="/turnero/vistas/modulo/list.jsp">Modulo</a>
           </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="/turnero/vistas/activacionModulo/AbrirModulo.jsp">Activacion Modulo</a>
+          </li>
         </ul>
         <span class="navbar-text">
           <a class="nav-link" href="#">Salir</a>
