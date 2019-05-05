@@ -18,8 +18,8 @@ import lib.ConsultasModulo;
  *
  * @author albor
  */
-@WebServlet(name = "RegistroMod", urlPatterns = {"/RegistroMod"})
-public class RegistroMod extends HttpServlet {
+@WebServlet(name = "ActualizarModulo", urlPatterns = {"/ActualizarModulo"})
+public class ActualizarModulo extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -36,26 +36,22 @@ public class RegistroMod extends HttpServlet {
         PrintWriter out = response.getWriter();
              
         try {
-            //CAPTURAR CAMPOS
-             String nombre=request.getParameter("nom");
-             String estado=request.getParameter("es");
-             String descripcion=request.getParameter("des");
-             
-            ConsultasModulo co=new ConsultasModulo();
             
-            if(co.registrar(nombre,estado,descripcion)){
-                request.getRequestDispatcher("vistas/modulo/list.jsp?succes=true")
-                                         .forward(request,response);
-                
+            int cod_modulo = Integer.parseInt(request.getParameter("cod_modulo"));
+            String nombre = request.getParameter("nombre");
+            String estado = request.getParameter("estado");
+            String descripcion = request.getParameter("descripcion");
+            ConsultasModulo conexion = new ConsultasModulo();
+            
+            if (conexion.modificar(cod_modulo, nombre, estado, descripcion)) {
+                response.sendRedirect("vistas/modulo/editar.jsp?cod_modulo="+cod_modulo+"&success=true");
             }else{
-                request.getRequestDispatcher("vistas/modulo/crear.jsp?error=true")
-                                                                    .forward(request,response);
+                response.sendRedirect("vistas/modulo/editar.jsp?cod_modulo="+cod_modulo+"&error=true");               
             }
-        } finally{
+            } finally{
             out.close();
         }
-    
-}
+    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -97,4 +93,3 @@ public class RegistroMod extends HttpServlet {
     }// </editor-fold>
 
 }
-    

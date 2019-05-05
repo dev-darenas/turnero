@@ -38,14 +38,15 @@ public class RegistroProducto extends HttpServlet {
         try {
             //CAPTURAR CAMPOS
              String nombre=request.getParameter("nom");
+             String estado=request.getParameter("es");
              String descripcion=request.getParameter("des");
             ConsultasProducto co=new ConsultasProducto();
             
-            if(co.Registrar_Producto(nombre,descripcion)){
-                request.getRequestDispatcher("vistas/producto/GuardadoExitoso.jsp")
+            if(co.Registrar_Producto(nombre,estado,descripcion)){
+                request.getRequestDispatcher("vistas/producto/list.jsp?succes=true")
                                          .forward(request,response);
             }else{
-                request.getRequestDispatcher("vistas/producto/crear.jsp")
+                request.getRequestDispatcher("vistas/producto/crear.jsp?error=true")
                                             .forward(request,response);
             }
         } finally{

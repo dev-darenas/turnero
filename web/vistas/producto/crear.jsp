@@ -4,48 +4,61 @@
     Author     : Administrador
 --%>
  
-
+ <%@page import=" Controller.RegistroMod" %>
 <html>
     
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Registrarse</title>
+         <%@include file="/source/styles/styleslib.jsp" %>
     </head>
 
     <body>
-        <%@page import=" Controller.RegistroProducto" %>
-        
-                       
-         <h1 aling=" center">Registro Producto</h1>
-        <form action="/turnero1/RegistroProducto" method="post">
-                    
-    <table border="1" width="250" aling="center">
-                
-        
-                <tr>
-                        <td>Nombre:</td>
-                        <td><input type="text" name="nom"/>  </td>
-                    </tr>
-                    <tr>
-                        <td>Descripcion:</td>
-                        <td><input type="text" name="des"/>  </td>
-                    </tr>
-                    <tr>
+         <%@include file="/componentes/navbar.jsp" %>
+         <div class="container">
+        <div class="container-contact100">
+		<div class="wrap-contact100">
+                    <form class="contact100-form validate-form" action="/turnero6/RegistroProducto" method="post" >
+                        <span class="contact100-form-title">
+                            Registrar Producto
+                        </span>
                         
-                        <th colspan="2"> <input type="submit" value="Registrarme"/> </th>
-                    </tr>
-            </table>
-            
+            <div class="wrap-input100 validate-input bg1 rs1-wrap-input100" data-validate="Campo obligatorio">
+                            <span class="label-input100">Nombre</span>
+                            <input class="input100" type="text" name="nom" placeholder="Nombre">
+                        </div>
+                        <div class="wrap-input100 bg1 rs1-wrap-input100">
+                            <span class="label-input100">Estado</span>
+                            <div class="pretty p-switch">
+                                <input name="es" type="checkbox" value="1"/>
+                                <div class="state">
+                                    <label>Activo?</label>
+                                </div>
+                            </div>
+                        </div>
 
+                        <div class="wrap-input100 validate-input bg1 rs1-wrap-input100" data-validate="Campo obligatorio">
+                            <span class="label-input100">Descripcion</span>
+                            <input class="input100" type="text" name="des" placeholder="Descripcion">
+                        </div>
             
-        </form>
-         
-        
-        
-         
-               <a href="list.jsp">Regresar</a>
+                       
+                    
+    <div class="container-contact100-form-btn">
+                            <button class="contact100-form-btn">
+                                <span>
+                                    Agregar
+                                    <i class="fa fa-long-arrow-right m-l-7" aria-hidden="true"></i>
+                                </span>
+                            </button>
+                        </div>
+                    </form>
+		</div>
+            </div>
+        </div>          
                
-               
+             
     
     </body>
+    
 </html>

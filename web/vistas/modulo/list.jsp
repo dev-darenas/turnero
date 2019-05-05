@@ -21,27 +21,70 @@
         <%! ConsultasModulo con = new ConsultasModulo();%>
         <%  ResultSet modulos = con.obtenerModulos(); %>
         
-        
-                 <table border="1" >
+        <%@include file="/componentes/navbar.jsp" %>
+        <div class="container">
+            <h1> 
+                <a class="btn btn-primary" href="/turnero6/vistas/modulo/crear.jsp">
+                    <i class="fas fa-plus"></i>
+                </a>
+                Modulo
+            </h1>
+            <hr>
+                 <table class="table table-bordered table-hover table-sm" >
             
-
+             <thead class="thead-dark">
+                    <tr>
+                        
+                        <td> Nombre</td>
+                        <td> Estado</td>
+                        <td> descripcion </td>
+                        
+                        <td colspan="2" > <b> Editar </b> </td>
+                    </tr>   
+                </thead>
             <% while (modulos.next()) { %>
             
-                <tr bgcolor="skyblue">
-                    <th><%= modulos.getInt(1) %></th>
-                    <th><%= modulos.getString(2) %></th>
-                    <th><%= modulos.getString(3) %></th>
-                </tr>
-                <right><th><a href="editar.jsp?cod_modulo=<%= modulos.getInt(1)%>">EDITAR MODULO</a></th></right>
+                <tr>
+                    
+                    <th>
+                        <%= modulos.getString(2) %>
+                    </th>
+                    
+                    <th> 
+                    <% if (modulos.getString(3).equals("1") ){ %>
+                        Activo
+                    <% }else{ %>
+                        Inactivo
+                    <% } %>
+                    </th>
+                
+                    <th>
+                        <%= modulos.getString(4) %>
+                    </th>
+                    
+                    <th>
+                   <a href="editar.jsp?cod_modulo=<%= modulos.getInt("cod_modulo")%>" class="btn btn-primary btn-sm">
+                       <i class="fas fa-pencil-alt"></i>
+                   </a>
+                    </th>
     
+                </tr>
+                
+               
             <% } %>
             <% modulos.close(); %>
         </table>
         
-        <a href="crear.jsp" > Registrar Modulo </a>
-        <br> <br>
-        <a href="../../dashboard.jsp">Regresar</a>
         
         
+        </div>
+        <%@include file="/source/javascript/javalib.jsp" %>
     </body>
+     <% if(request.getParameter("succes") != null){ %>
+        <script>
+            $( document ).ready(function() {
+                swal("Turnero", "Modulo creado!!", "success");
+            });
+        </script>
+    <% } %>
 </html>

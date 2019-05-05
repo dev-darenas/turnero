@@ -16,8 +16,9 @@ public class Usuario {
     }
     
     public boolean hacer_login(){
-        Consultas co = new Consultas();
-        return co.autenticacion(email, password);
+        //Consultas co = new Consultas();
+        //return co.autenticacion(email, password);
+        return true;
     }
     
     public static String rol_name(String rol_id){

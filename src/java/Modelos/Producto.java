@@ -4,10 +4,12 @@ package Modelos;
 public class Producto {
     private int id_producto;
 private String nombre;
+private String estado;
 private String descripcion;
 
-public Producto(int id_producto, String nombre, String descripcion) {
+public Producto(int id_producto, String nombre,String estado, String descripcion) {
         this.nombre = nombre;
+        this.estado=estado;
         this.descripcion = descripcion;
         this.id_producto=id_producto;
     }
@@ -34,6 +36,14 @@ public Producto(int id_producto, String nombre, String descripcion) {
 
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
     }
 
 }

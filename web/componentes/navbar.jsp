@@ -11,13 +11,13 @@
             <a class="nav-link" href="#">Clientes</a>
           </li>
           <li class="nav-item active">
-            <a class="nav-link" href="/turnero/vistas/usuarios/Consulta.jsp">Usuarios</a>
+            <a class="nav-link" href="/turnero6/vistas/usuarios/Consulta.jsp">Usuarios</a>
           </li>
           <li class="nav-item active">
-            <a class="nav-link" href="/turnero/vistas/producto/list.jsp">Producto</a>
+            <a class="nav-link" href="/turnero6/vistas/producto/list.jsp">Producto</a>
           </li>
           <li class="nav-item active">
-            <a class="nav-link" href="/turnero/vistas/modulo/list.jsp">Modulo</a>
+            <a class="nav-link" href="/turnero6/vistas/modulo/list.jsp">Modulo</a>
           </li>
           <li class="nav-item active">
             <a class="nav-link" href="/turnero/vistas/activacionModulo/AbrirModulo.jsp">Activacion Modulo</a>

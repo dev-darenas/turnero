@@ -25,7 +25,7 @@
         <div class="container">
             <div class="container-contact100">
 		<div class="wrap-contact100">
-                    <form class="contact100-form validate-form" action="/turnero/RegistrarUsuario" method="post" >
+                    <form class="contact100-form validate-form" action="/turnero6/RegistrarUsuario" method="post" >
                         <input type="hidden" name="id" value="<%= resultado.getString("id") %>">
                         <span class="contact100-form-title">
                             Registrar Asesor

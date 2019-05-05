@@ -12,9 +12,19 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
+        <%@include file="/source/styles/styleslib.jsp" %>
     </head>
 
     <body>
+        <%@include file="/componentes/navbar.jsp" %>
+        <div class="container">
+        <div class="container-contact100">
+		<div class="wrap-contact100">
+                    <form class="contact100-form validate-form"  >
+                        <span class="contact100-form-title">
+                            Editar Modulo
+                        </span>
+         
         <%! ConsultasModulo con3 = new ConsultasModulo(); %>
         <%
         int cod_modulo=Integer.parseInt(request.getParameter("cod_modulo"));
@@ -31,28 +41,46 @@
                   
              
         %>
-        <h1 aling=" center">Editar Producto</h1>
-        <form action="">
-            <table border="1" width="250" aling="center">
-                
-                    <tr>
-                        <td>Id_producto:</td>
-                        <td> <input type="text" name="cod_modulo" value="<%= rs.getString(1) %>" />  </td>
-                    </tr>
-                <tr>
-                        <td>Nombre</td>
-                        <td><input type="text" name="nombre" value="<%= rs.getString(2) %>" />  </td>
-                    </tr>
-                    <tr>
-                        <td>Descripcion:</td>
-                        <td><input type="text" name="descripcion" value="<%= rs.getString(3) %>" />  </td>
-                    </tr>
-                    <tr>
+        <div class="wrap-input100 validate-input bg1 rs1-wrap-input100" data-validate="Campo obligatorio">
+                            <span class="label-input100">cod_modulo</span>
+                            <input class="input100" type="text" name="cod_modulo" placeholder="cod_modulo" value="<%= rs.getInt(1) %>">
+                        </div>
+         
+         <div class="wrap-input100 validate-input bg1 rs1-wrap-input100" data-validate="Campo obligatorio">
+                            <span class="label-input100">Nombre</span>
+                            <input class="input100" type="text" name="nombre" placeholder="Nombre" value="<%= rs.getString(2) %>">
+                        </div>
+                        <div class="wrap-input100 bg1 rs1-wrap-input100">
+                            <span class="label-input100">Estado</span>
+                            <div class="pretty p-switch">
+                                <input name="es" type="checkbox" value="<%= rs.getString(3) %>"/>
+                                <div class="state">
+                                    <label>Activo?</label>
+                                </div>
+                            </div>
+                        </div>
+                                
+                                <div class="wrap-input100 validate-input bg1 rs1-wrap-input100" data-validate="Campo obligatorio">
+                            <span class="label-input100">Descrpcion</span>
+                            <input class="input100" type="text" name="descripcion" placeholder="Descripcion" value="<%= rs.getString(4) %>">
+                        </div>
+         
+              
+                                
+                                <div class="container-contact100-form-btn">
+                            <span class="fa fa-long-arrow-right m-l-7" aria-hidden="true"></span>
+                            <input class="contact100-form-btn" type="submit" name="editar" placeholder="Descripcion" value="EDITAR">
+                        </div>
                         
-                        <th colspan="2"> <input type="submit" value="EDITAR MODULO" name="editar" /> </th>
-                    </tr>
-            </table>
-            
+                        
+                        
+    
+         
+            </div>
+                    </div>
+                    </div>
+         
+                    
         </form>
                         <%
                             }
@@ -61,20 +89,42 @@
 if(request.getParameter("editar")!=null){
 
     String nombre=request.getParameter("nombre");
-   String descripcion=request.getParameter("descripcion");
+    String estado=request.getParameter("estado");
+    String descripcion=request.getParameter("descripcion");
    
-st.executeUpdate("update modulo set nombre='"+nombre+"',descripcion='"+descripcion+"' where cod_modulo="+cod_modulo+"");
-request.getRequestDispatcher("list.jsp").forward(request, response);
+    st.executeUpdate("update modulo set nombre='"+nombre+"',estado='"+estado+"',descripcion='"+descripcion+"' where cod_modulo="+cod_modulo+"");
+    //request.getRequestDispatcher("list.jsp").forward(request, response);
+    //response.
+
 }
     
 %>
        
-<form action="list.jsp" method="POST">
-    <input type="submit" value="REGRESAR" name="list.jsp" />
-</form>        
-         
+     
                     
-            
+                       
         
     </body>
-</html> 
+    <script>
+        $( document ).ready(function() {
+            $(".js-select2").each(function(){
+                $(this).select2({
+                    minimumResultsForSearch: 20,
+                    dropdownParent: $(this).next('.dropDownSelect2')
+                });
+
+                $(".js-select2").each(function(){
+                    $(this).on('select2:close', function (e){
+                        if($(this).val() == "Please chooses") {
+                            $('.js-show-service').slideUp();
+                        }
+                        else {
+                            $('.js-show-service').slideUp();
+                            $('.js-show-service').slideDown();
+                        }
+                    });
+                });
+            })
+        });
+    </script>
+</html>

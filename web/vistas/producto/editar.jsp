@@ -11,10 +11,20 @@
     
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Producto</title>
+        <%@include file="/source/styles/styleslib.jsp" %>
     </head>
 
     <body>
+        <%@include file="/componentes/navbar.jsp" %>
+        <div class="container">
+        <div class="container-contact100">
+		<div class="wrap-contact100">
+                     <form class="contact100-form validate-form" action="/turnero6/EditarProducto" method="post">
+                        <span class="contact100-form-title">
+                            Editar Producto
+                        </span>
+         
         <%! ConsultasProducto con3 = new ConsultasProducto(); %>
         <%
         int id_producto=Integer.parseInt(request.getParameter("id_producto"));
@@ -25,56 +35,95 @@
                try{
                   
                  st=con3.getConexion().createStatement();
-              rs=st.executeQuery("select * from producto where id_producto= "+ id_producto +"");
-              
-              while(rs.next()){
+                rs=st.executeQuery("select * from producto where id_producto= "+ id_producto +"");
+                rs.next();
                   
              
         %>
-        <h1>Editar Producto</h1>
-        <form action="">
-            <table border="1" width="250" >
-                
-                    <tr>
-                        <td>Id_producto:</td>
-                        <td> <input type="text" name="id_producto" value="<%= rs.getString(1) %>" />  </td>
-                    </tr>
-                <tr>
-                        <td>Nombre</td>
-                        <td><input type="text" name="nombre" value="<%= rs.getString(2) %>" />  </td>
-                    </tr>
-                    <tr>
-                        <td>Descripcion:</td>
-                        <td><input type="text" name="descripcion" value="<%= rs.getString(3) %>" />  </td>
-                    </tr>
-                    <tr>
+
+        <input type="hidden" name="id" value="<%= rs.getString("id_producto") %>">
+        
+        <div class="wrap-input100 validate-input bg1 rs1-wrap-input100" data-validate="Campo obligatorio">
+                            <span class="label-input100">ID</span>
+                            <input class="input100" type="text" name="id_producto" placeholder="id_producto" value="<%= rs.getInt(1) %>">
+                        </div>
+         
+         <div class="wrap-input100 validate-input bg1 rs1-wrap-input100" data-validate="Campo obligatorio">
+                            <span class="label-input100">Nombre</span>
+                            <input class="input100" type="text" name="nombre" placeholder="Nombre" value="<%= rs.getString(2) %>">
+                        </div>
+                        <div class="wrap-input100 bg1 rs1-wrap-input100">
+                            <span class="label-input100">Estado</span>
+                            <div class="pretty p-switch">
+                                <input name="es" type="checkbox" value="<%= rs.getString(3) %>"/>
+                                <div class="state">
+                                    <label>Activo?</label>
+                                </div>
+                            </div>
+                        </div>
+                                
+                                <div class="wrap-input100 validate-input bg1 rs1-wrap-input100" data-validate="Campo obligatorio">
+                            <span class="label-input100">Descrpcion</span>
+                            <input class="input100" type="text" name="descripcion" placeholder="Descripcion" value="<%= rs.getString(4) %>">
+                        </div>
+         
+              
+                                
+                                <div class="container-contact100-form-btn">
+                            <span class="fa fa-long-arrow-right m-l-7" aria-hidden="true"></span>
+                            <input class="contact100-form-btn" type="submit" name="editar" placeholder="Descripcion" value="EDITAR">
+                        </div>
                         
-                        <th colspan="2"> <input type="submit" value="EDITAR" name="editar" /> </th>
-                    </tr>
-            </table>
-            
+                        
+                        
+    
+                     </form>
+            </div>
+                    </div>
+                    </div>
+         
+                    
         </form>
-                        <%
-                            }
+               
+    
+        <%
+                            
 }catch(Exception e){}
-
-if(request.getParameter("editar")!=null){
-
-    String nombre=request.getParameter("nombre");
-   String descripcion=request.getParameter("descripcion");
-   
-st.executeUpdate("update producto set nombre='"+nombre+"',descripcion='"+descripcion+"' where id_producto="+id_producto+"");
-request.getRequestDispatcher("list.jsp").forward(request, response);
-}
     
 %>
        
-<form action="list.jsp" method="POST">
-    <input type="submit" value="Volver" name="list.jsp" />
-</form>        
-         
+  
+    <% if(request.getParameter("error") != null){ %>
+        <script>
+            $( document ).ready(function() {
+                swal("Turnero", "Producto no actualizado", "error");
+            });
+        </script>
+    <% } %>
                     
-            
+                       
         
     </body>
+    <script>
+        $( document ).ready(function() {
+            $(".js-select2").each(function(){
+                $(this).select2({
+                    minimumResultsForSearch: 20,
+                    dropdownParent: $(this).next('.dropDownSelect2')
+                });
+
+                $(".js-select2").each(function(){
+                    $(this).on('select2:close', function (e){
+                        if($(this).val() == "Please chooses") {
+                            $('.js-show-service').slideUp();
+                        }
+                        else {
+                            $('.js-show-service').slideUp();
+                            $('.js-show-service').slideDown();
+                        }
+                    });
+                });
+            })
+        });
+    </script>
 </html>

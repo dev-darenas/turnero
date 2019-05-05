@@ -19,6 +19,7 @@ public class ConsultasModulo extends Conexion {
     ResultSet rs = null;
     private ResultSet consulta;
         
+        
     public ResultSet obtenerModulos(){
         try{
             String consulta = "SELECT * FROM modulo";
@@ -32,17 +33,19 @@ public class ConsultasModulo extends Conexion {
         return rs;
     }
     
-    public boolean registrar(String nombre,
+
+    public boolean registrar(String nombre,String estado,
             String descripcion){
         int resultUpdate=0;
         
         try{
             con = getConexion();
-            String sql = "INSERT INTO `turnero`.`modulo` (`nombre`, `descripcion`) VALUES (?, ?)"; 
+            String sql = "INSERT INTO `turnero`.`modulo` (`nombre`,`estado`, `descripcion`) VALUES (?, ?, ?)"; 
             pstm= con.prepareStatement(sql);
             
             pstm.setString(1, nombre);
-            pstm.setString(2, descripcion);
+            pstm.setString(2, estado);
+            pstm.setString(3, descripcion);
             
             resultUpdate= pstm.executeUpdate();
         
@@ -61,13 +64,13 @@ public class ConsultasModulo extends Conexion {
     }
         
     }
-    public ResultSet buscar(int cod_modulo) {   
+    public ResultSet buscar(String cod_modulo) {   
         try {
 
              String sql = "select * from modulo where cod_modulo= ?";
 
              pstm = getConexion().prepareStatement(sql);
-            pstm.setInt(1, cod_modulo);
+            pstm.setString(1, cod_modulo);
             consulta = pstm.executeQuery();
 
          } catch (SQLException e) {
@@ -77,16 +80,19 @@ public class ConsultasModulo extends Conexion {
          return consulta;
     }
 
-    
-    public boolean editar_modulo (String nombre, String descripcion,int cod_modulo) {   
+                
+                          
+                 
+    public boolean modificar (int cod_modulo,String nombre,String estado,String descripcion) {   
         try {
 
-             String sql = "update modulo set nombre = ?, descripcion = ? where cod_modulo = ?";
+             String sql = "update modulo set nombre = ?, estado= ?, descripcion = ? where cod_modulo = ?";
 
              pstm = getConexion().prepareStatement(sql);
             pstm.setString(1, nombre);
-            pstm.setString(2, descripcion);
-            pstm.setInt(3, cod_modulo);
+            pstm.setString(2, estado);
+            pstm.setString(3, descripcion);
+            
             pstm.executeUpdate();
 
              return true;
@@ -98,9 +104,9 @@ public class ConsultasModulo extends Conexion {
          return false;
     }
 
-    public ResultSet obtener_modulo(int id){
-        return null;
-    }
+//    public ResultSet obtener_modulo(int id){
+//        return null;
+//    }
     
     public void close(){
         try {
@@ -116,7 +122,7 @@ public class ConsultasModulo extends Conexion {
     public static void main(String args[]){
         System.out.println("lib.ConsultasModulo.main()");
         ConsultasModulo co=new ConsultasModulo();
-        co.registrar("TEst1","DEscrip");
+        co.registrar("TEst1","DEscrip","ee");
     }
 }  
 

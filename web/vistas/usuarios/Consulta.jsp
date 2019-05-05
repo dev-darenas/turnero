@@ -19,7 +19,7 @@
         <%@include file="/componentes/navbar.jsp" %>
         <div class="container">
             <h1> 
-                <a class="btn btn-primary" href="/turnero/vistas/usuarios/Registro.jsp">
+                <a class="btn btn-primary" href="/turnero6/vistas/usuarios/Registro.jsp">
                     <i class="fas fa-plus"></i>
                 </a>
                 Usuarios
