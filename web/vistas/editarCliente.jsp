@@ -1,7 +1,7 @@
 <%-- 
     Document   : editarCliente
     Created on : 14/03/2019, 04:35:44 PM
-    Author     : usuario
+    Author     : MICHAEL MARTINEZ
 --%>
 
 <%@page import="java.sql.ResultSet"%>
