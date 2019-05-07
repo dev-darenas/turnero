@@ -15,19 +15,23 @@
     </head>
     <body>
         <h1>Eliminando Producto</h1>
-        
+
         <%
-            if(request.getParameter("id")!=null){
-                  int id=Integer.parseInt(request.getParameter("id"));
-                  int idc=Integer.parseInt(request.getParameter("idd"));
-                  String acci=(request.getParameter("acci"));
-         ConsultaClientes con = new ConsultaClientes();
-         con.eliminarProducto(id);
-         response.sendRedirect("editarCliente.jsp?id="+idc+"&accion="+acci);
-         
+            if (request.getParameter("id_producto") != null) {
+                int id = Integer.parseInt(request.getParameter("id_producto"));
+                int cedula = Integer.parseInt(request.getParameter("cedula"));
+                int idd = Integer.parseInt(request.getParameter("idd"));
+                String acci = (request.getParameter("acci"));
+                
+                out.print("Producto id: "+id+"   cedula="+cedula+"  ide");
+                ConsultaClientes con = new ConsultaClientes();
+                con.eliminarProducto(id);
+                
+                response.sendRedirect("editarCliente.jsp?id="+cedula+"&accion="+acci+"&dd="+idd);
+
             }
-      
-         
+
+
         %>
     </body>
 </html>
