@@ -15,7 +15,7 @@ import java.util.logging.Logger;
  *
  * @author jhoan
  */
-public class ConsultasCliente extends Conexion {
+public class ConsultaTurno extends Conexion {
 
     String turno;
 

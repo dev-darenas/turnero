@@ -7,7 +7,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import lib.ConsultasCliente;
+import lib.ConsultaTurno;
 
 /**
  *
@@ -31,7 +31,7 @@ public class GenerarTurno extends HttpServlet {
             String notemail = request.getParameter("notificacion_email");
             String notsms = request.getParameter("notificacion_sms");
 
-            ConsultasCliente co = new ConsultasCliente();
+            ConsultaTurno co = new ConsultaTurno();
 
             String turno = co.crearTurno(cedula, celular, correo, tipoServicio, Integer.parseInt(prioridad), Integer.parseInt(notwhatsapp), Integer.parseInt(notemail), Integer.parseInt(notsms));
             if (!turno.equals("")) {
