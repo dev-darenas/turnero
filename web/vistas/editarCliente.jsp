@@ -1,7 +1,7 @@
 <%-- 
     Document   : editarCliente
     Created on : 14/03/2019, 04:35:44 PM
-    Author     : usuario
+    Author     : MICHAEL MARTINEZ
 --%>
 
 <%@page import="java.sql.ResultSet"%>
@@ -77,7 +77,7 @@
                 </tr>
                 <tr>
                     <th>ID</th>
-                    <td><input <%= est%> type="text" name="id" value= "<%=rs.getString("Id")%>"></td>
+                    <td><input <%= est%> type="text" name="iddd" value= "<%=rs.getString("Id")%>"></td>
 
                 </tr>
                 <tr>
@@ -136,12 +136,13 @@
         <%  
             String accion = "";
             String registro="";
+            int iddd=Integer.parseInt(request.getParameter("dd"));
             if(request.getParameter("registro")!=null){
                 registro=request.getParameter("registro");
                 if(registro.equals("Registrar Producto")){
                     
                     int codigo=con.consultaCodigoProducto(request.getParameter("product"));
-                    int iddd=Integer.parseInt(request.getParameter("id"));
+                      iddd=Integer.parseInt(request.getParameter("dd"));
                     
                     con.ingresarProducto(iddd, codigo);
                 %>   
@@ -186,7 +187,7 @@
 
         %>
         <center>
-        <% rs=con.realizarConsulta("Select cliente_producto.id_cliente_producto,producto.nombre_producto from producto,clientes,cliente_producto where clientes.id = cliente_producto.id_cliente and producto.id_producto=cliente_producto.id_producto and cliente_producto.id_cliente="+ id ); %>
+        <% rs=con.realizarConsulta("Select cliente_producto.id_cliente_producto,producto.nombre_producto from producto,clientes,cliente_producto where clientes.id = cliente_producto.id_cliente and producto.id_producto=cliente_producto.id_producto and cliente_producto.id_cliente="+ iddd ); %>
         <table width="60%" border="1" >
             <% while(rs.next()){ %>
             <tr>
@@ -199,7 +200,7 @@
             <tr>
                 <td><%= rs.getString("cliente_producto.id_cliente_producto") %></td>
                 <td><%= rs.getString("producto.nombre_producto") %></td>
-                <td><a onclick="" href="eliminarProducto.jsp?id=<%= rs.getInt("cliente_producto.id_cliente_producto") %>&acci=<%= request.getParameter("accion") %>&idd=<%= request.getParameter("id") %>">ELIMINAR</a></td>
+                <td><a onclick="" href="eliminarProducto.jsp?id_producto=<%= rs.getInt("cliente_producto.id_cliente_producto") %>&acci=<%= request.getParameter("accion") %>&idd=<%= request.getParameter("dd") %>&cedula=<%= request.getParameter("id") %>">ELIMINAR</a></td>
             </tr>
             <% } %>
         </table>

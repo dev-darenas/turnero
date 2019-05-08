@@ -70,7 +70,7 @@
                 <td><%=rs.getString("Notificar_email")%></td>
                 <td><%=rs.getString("Notificar_sms")%></td>
        
-                <td> <a href="editarCliente.jsp?id=<%=rs.getInt("Cc")%>&accion=EDITAR&estado=">Editar</a>  <a href="editarCliente.jsp?id=<%=rs.getInt("Cc")%>&accion=ELIMINAR&estado=readonly">Eliminar</a> </td>
+                <td> <a href="editarCliente.jsp?id=<%=rs.getInt("Cc")%>&accion=EDITAR&dd=<%=rs.getInt("Id") %>">Editar</a>  <a href="editarCliente.jsp?id=<%=rs.getInt("Cc")%>&accion=ELIMINAR&estado=readonly">Eliminar</a> </td>
 
             </tr>
             <%} con1.cierraConexion(); %>
