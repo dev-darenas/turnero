@@ -1,7 +1,7 @@
 <%-- 
     Document   : Registro clientes
     Created on : 10/03/2019, 12:45:20 PM
-    Author     : usuario
+    Author     : martinez cuellar michael martinez
 --%>
 
 <%@page import="java.sql.ResultSet"%>
