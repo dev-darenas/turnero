@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Queue Master State</string>
-    <string name="login">Inicio de sesión</string>
+    <string name="request">Solicitud de turno</string>
     <string name="description">Por favor escribir su número de cédula</string>
-    <string name="sign_in">Iniciar sesión</string>
+    <string name="submit">Enviar</string>
     <string name="cc">CC =</string>
 </resources>

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".RequestLastActivity">
+
+    <LinearLayout
+            android:layout_width="match_parent" android:layout_height="match_parent"
+            android:paddingHorizontal="100dp"
+            android:orientation="vertical"
+            android:gravity="center">
+        <TextView
+                android:gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tipo de servicio que requiere"
+                android:textSize="25dp"/>
+
+
+        <RadioGroup
+                android:id="@+id/rg_type"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="8dp"
+                android:gravity="center">
+            <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="Caja"
+                    android:layout_marginRight="15dp"
+                    android:textSize="18dp"
+                    android:id="@+id/rb_cash"/>
+            <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="Asesor"
+                    android:textSize="18dp"
+                    android:id="@+id/rb_adviser"/>
+        </RadioGroup>
+
+        <CheckBox
+                android:gravity="fill"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Soy usuario prioritario"
+                android:textSize="18dp"
+                android:id="@+id/cb_priority"/>
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Texto explicativo"/>
+
+        <Button
+                android:layout_marginTop="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="SIGUIENTE"
+                android:id="@+id/bt_next_02"/>
+
+
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>

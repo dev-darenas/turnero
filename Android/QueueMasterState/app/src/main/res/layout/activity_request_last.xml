@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".RequestPriActivity">
+
+    <LinearLayout
+            android:layout_width="match_parent" android:layout_height="match_parent"
+            android:paddingHorizontal="100dp"
+            android:orientation="vertical"
+            android:gravity="center">
+        <TextView
+                android:gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Metodo(s) por el cual quiero ser comunicado acerca de mi turno"
+                android:textSize="25sp"/>
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="8dp"
+                android:gravity="center">
+
+
+            <CheckBox
+                    android:id="@+id/cb_imp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="Impresión"
+                    android:layout_marginEnd="15dp"
+                    android:textSize="18sp"/>
+            <CheckBox
+                    android:id="@+id/cb_email"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="Email"
+                    android:layout_marginEnd="15dp"
+                    android:textSize="18sp"/>
+            <CheckBox
+                    android:id="@+id/cb_sms"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="SMS"
+                    android:layout_marginEnd="15dp"
+                    android:textSize="18sp"/>
+
+        </LinearLayout>
+
+        <ListView
+                android:id="@+id/lv_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        <!--PONER EL VIEW PERSONALIZADO-->
+
+        <Button
+                android:layout_marginTop="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="GENERAR"/>
+
+
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>
