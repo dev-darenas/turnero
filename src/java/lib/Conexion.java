@@ -16,9 +16,9 @@ import java.sql.*;
  * @author Dahian
  */
 public class Conexion {
-    private Connection con;
+    Connection con;
     private String username = "root";
-    private String password = "ingry2804";
+    private String password = "";
     private String HOST = "localhost";
     private String PORT = "3306";
     private String DB = "turnero";
@@ -47,4 +47,8 @@ public class Conexion {
     public Connection getConexion(){
         return con;
     }
+    
+//////////////////////////    
+    
+    
 }
