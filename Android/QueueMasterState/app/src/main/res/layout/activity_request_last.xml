@@ -54,9 +54,9 @@
                 android:id="@+id/lv_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
-        <!--PONER EL VIEW PERSONALIZADO-->
 
         <Button
+                android:id="@+id/bt_generate"
                 android:layout_marginTop="20dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

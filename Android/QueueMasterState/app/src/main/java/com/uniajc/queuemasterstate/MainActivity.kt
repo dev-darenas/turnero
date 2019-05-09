@@ -17,10 +17,8 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         val etCc = findViewById<TextView>(R.id.tv_cc)
 
-        //stringCc = intent.getStringExtra("t_cc")
-        //stringTurn = intent.getStringExtra("t_turn")
-
-        //stringTurn = findViewById<TextView>(R.id.tv_turn).toString()
+        stringCc = intent.getStringExtra("t_cc")
+        stringTurn = intent.getStringExtra("t_turn")
 
         btMoreOptions = findViewById(R.id.bt_more_options)
 
@@ -29,7 +27,7 @@ class MainActivity : AppCompatActivity() {
             //inet.putExtra("turn",stringTurn)
             //startActivity(inet)
         }
-        //etCc.text = "CC: $stringCc"
-        //tv_turn.text = stringTurn
+        etCc.text = "CC: $stringCc"
+        tv_turn.text = stringTurn
     }
 }

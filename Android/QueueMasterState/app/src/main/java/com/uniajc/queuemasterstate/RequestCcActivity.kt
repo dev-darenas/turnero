@@ -112,8 +112,7 @@ class RequestCcActivity : AppCompatActivity() {
                 dialog.setCancelable(false)
                 dialog.setPositiveButton(
                     "Sí"
-                ) { _, _ -> /*queue = Volley.newRequestQueue(this); getData()*/
-                    switchActivity(et_cc.text.toString())
+                ) { _, _ -> queue = Volley.newRequestQueue(this); getData()
                 }
                 dialog.setNegativeButton(
                     "No"
@@ -130,24 +129,22 @@ class RequestCcActivity : AppCompatActivity() {
     }
 
     private fun getData() {
-        //var url = "http://thenecromancer.es/Turnero/pong.php/?cedula=${et_cc.text}&comunicacion=${et_media.text}&tipocomunicacion=$sMedia&tiposervicio=$sService&prioridad=$sPriority"
-        var url = "http://thenecromancer.es/Turnero/pong.php/?cedula=${et_cc.text}&comunicacion=315445&tipocomunicacion=phone&tiposervicio=caja&prioridad=0"
+        var url = "http://thenecromancer.es/Turnero/pong.php/?cedula=${et_cc.text}"
             Log.i("URL", url)
-        var turn = ""
+        var client = false
 
         val request = JsonObjectRequest(Request.Method.GET, url, null,
             Response.Listener { response ->
                 try {
-                    val jsonArray = response.getJSONArray("turno")
+                    val jsonArray = response.getJSONArray("cliente")
                     var cont = 0
                     while (cont < jsonArray.length()) {
                         val jsonObject = jsonArray.getJSONObject(cont)
-                        turn = jsonObject.getString("turn")
+                        client = jsonObject.getBoolean("estado")
                         cont++
                     }
-                    switchActivity(
-                        et_cc.text.toString()
-                    ) //Llevar datos al activity para que el los pase por un intent
+                    Log.d("Client",client.toString())
+                    switchActivity(et_cc.text.toString(), client)
                 } catch (e: JSONException) {
                     e.printStackTrace()
                     Toast.makeText(this, e.message, Toast.LENGTH_LONG).show()
@@ -160,9 +157,10 @@ class RequestCcActivity : AppCompatActivity() {
     }
 
 
-    private fun switchActivity(stringCc: String) {
+    private fun switchActivity(stringCc: String, client: Boolean) {
         val it = Intent(this, RequestPriActivity::class.java)
         it.putExtra("t_cc", stringCc)
+        it.putExtra("b_client", client)
         startActivity(it)
     }
 }
