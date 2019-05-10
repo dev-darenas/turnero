@@ -56,27 +56,37 @@ class RequestLastActivity : AppCompatActivity() {
                 email = lvText.getChildAt(0).findViewById<AutoCompleteTextView>(R.id.et_media).text.toString()
             }
             if (count == 1 && !cbEmail.isChecked && cbSms.isChecked) {
-                phoneNumber =
-                    lvText.getChildAt(0).findViewById<AutoCompleteTextView>(R.id.et_media).text.toString().toInt()
+                val stringTemp = lvText.getChildAt(0).findViewById<AutoCompleteTextView>(R.id.et_media).text.toString()
+                phoneNumber = when{stringTemp.isBlank() -> 0 else -> stringTemp.toInt()}
+
             } else if (count == 2 && cbEmail.isChecked && cbSms.isChecked) {
-                phoneNumber =
-                    lvText.getChildAt(1).findViewById<AutoCompleteTextView>(R.id.et_media).text.toString().toInt()
+                val stringTemp = lvText.getChildAt(1).findViewById<AutoCompleteTextView>(R.id.et_media).text.toString()
+                phoneNumber = when{stringTemp.isBlank() -> 0 else -> stringTemp.toInt()}
             }
-
+            fun makeVolleyRequest() {
+                queue = Volley.newRequestQueue(this)
+                getData(
+                    stringCc,
+                    phoneNumber,
+                    email,
+                    stringService,
+                    booleanPriority,
+                    false,
+                    cbEmail.isChecked,
+                    cbSms.isChecked
+                )
+            }
+            if (!client) {
+                if (((cbEmail.isChecked && !email.isNullOrBlank()) || !cbEmail.isChecked) && ((cbSms.isChecked && phoneNumber != 0) || !cbSms.isChecked)) {
+                    makeVolleyRequest()
+                } else {
+                    Toast.makeText(this, "Error, todos los campos de texto deben de ser llenados", Toast.LENGTH_SHORT).show()
+                }
+            } else if (client) {
+                makeVolleyRequest()
+            }
             //Toast.makeText(this, "Correo: $email Numero: $phoneNumber", Toast.LENGTH_LONG).show()
-            queue = Volley.newRequestQueue(this)
-            getData(
-                stringCc,
-                phoneNumber,
-                email,
-                stringService,
-                booleanPriority,
-                false,
-                cbEmail.isChecked,
-                cbSms.isChecked
-            )
         }
-
     }
 
     private class MyCustomAdapter(val context: Context, val cbEmail: Boolean, val cbPhone: Boolean) : BaseAdapter() {
@@ -92,9 +102,9 @@ class RequestLastActivity : AppCompatActivity() {
             val autoCompleteText = item.findViewById<AutoCompleteTextView>(R.id.et_media)
 
             when {
-                cbEmail && position == 0 -> autoCompleteText.inputType = InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS
-                !cbEmail && cbPhone && position == 0 -> autoCompleteText.inputType = InputType.TYPE_CLASS_PHONE
-                cbEmail && cbPhone && position == 1 -> autoCompleteText.inputType = InputType.TYPE_CLASS_PHONE
+                cbEmail && position == 0 -> {autoCompleteText.inputType = InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS; autoCompleteText.hint = "Escriba su dirección de email..."}
+                !cbEmail && cbPhone && position == 0 -> {autoCompleteText.inputType = InputType.TYPE_CLASS_PHONE; autoCompleteText.hint = "Escriba su número telefonico..."}
+                cbEmail && cbPhone && position == 1 -> {autoCompleteText.inputType = InputType.TYPE_CLASS_PHONE; autoCompleteText.hint = "Escriba su número telefonico..."}
             }
             return item
         }
