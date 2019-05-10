@@ -42,12 +42,6 @@
                 <th>NOMBRE</th>
                 <th>APELLIDO</th>
                 <th>EMAIL</th>
-                <th>CELULAR</th>
-                <th>PAIS</th>
-                <th>DEPARTAMENTO</th>
-                <th>CIUDAD</th>
-                <th>DIRECCIÓN</th>
-                <th>ID</th>
                 <th>ESTADO</th>
                 <th>N_EMAIL</th>
                 <th>N_SMS</th>
@@ -59,13 +53,6 @@
                 <td><%=rs.getString("Nombre")%></td>
                 <td><%=rs.getString("Apellido")%></td>
                 <td><%=rs.getString("Email")%></td>
-                
-                <td><%=rs.getString("Cel")%></td>
-                <td><%=rs.getString("Pais")%></td>
-                <td><%=rs.getString("Departamento")%></td>
-                <td><%=rs.getString("Ciudad")%></td>
-                <td><%=rs.getString("Direccion")%></td>
-                <td><%=rs.getString("Id")%></td>
                 <td><%=rs.getString("Estado")%></td>
                 <td><%=rs.getString("Notificar_email")%></td>
                 <td><%=rs.getString("Notificar_sms")%></td>

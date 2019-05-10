@@ -83,15 +83,8 @@
             accion = request.getParameter("accion");
         
        
-         %>
-    
-    
-   
-   
-           
-    
-    
-    
+    %>
+
     
     <%
         
