@@ -18,7 +18,7 @@ import java.sql.*;
 public class Conexion {
     private Connection con;
     private String username = "root";
-    private String password = "ingry2804";
+    private String password = "root";
     private String HOST = "localhost";
     private String PORT = "3306";
     private String DB = "turnero";

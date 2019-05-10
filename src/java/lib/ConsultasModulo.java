@@ -67,7 +67,7 @@ public class ConsultasModulo extends Conexion {
     public ResultSet buscar(String cod_modulo) {   
         try {
 
-             String sql = "select * from modulo where cod_modulo= ?";
+             String sql = "select * from modulo where id= ?";
 
              pstm = getConexion().prepareStatement(sql);
             pstm.setString(1, cod_modulo);
@@ -86,7 +86,7 @@ public class ConsultasModulo extends Conexion {
     public boolean modificar (int cod_modulo,String nombre,String estado,String descripcion) {   
         try {
 
-             String sql = "update modulo set nombre = ?, estado= ?, descripcion = ? where cod_modulo = ?";
+             String sql = "update modulo set nombre = ?, estado= ?, descripcion = ? where id = ?";
 
              pstm = getConexion().prepareStatement(sql);
             pstm.setString(1, nombre);
@@ -122,7 +122,7 @@ public class ConsultasModulo extends Conexion {
     public static void main(String args[]){
         System.out.println("lib.ConsultasModulo.main()");
         ConsultasModulo co=new ConsultasModulo();
-        co.registrar("TEst1","DEscrip","ee");
+        co.registrar("TEst1", "DEscrip", "ee");
     }
 }  
 

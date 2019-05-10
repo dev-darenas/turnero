@@ -15,54 +15,41 @@
     </head>
     <body>
         
-                
+         <%@include file="/componentes/navbar.jsp" %> 
         
         <% 
-        
-        ResultSet resultado;
-        
-        ConexionAbrirModulo conexion = new ConexionAbrirModulo();
-      
-        resultado = conexion.ModuloDisponibles();
-        
+            ResultSet resultado;
+            ConexionAbrirModulo conexion = new ConexionAbrirModulo();
+            resultado = conexion.ModuloDisponibles();
         %>
 
         <h1>Asignacion de Modulo</h1>
         
         <form action="ModeloTurno.jsp" method="post">
-        
-        <label> <b> Ingresar Codigo </b> </label>
-        <br>
-        <input type ="text" name= "id_usuario">
-        <br><br>
+            <label> <b> Ingresar Codigo </b> </label>
+            <br>
+            <input type ="text" name= "id_usuario">
+            <br><br>
 
-        <label> <b> Seleccione el modulo abrir </b> </label>
-        <br>
-        
-  
-        
-        <select name="id_modulo">
-                        
-           <% while (resultado.next())
-           { %>
-    
-           <option> <%= resultado.getString("ID_MODULO")%>  </option>
-          <%
-              }
-               conexion.desconectar();
-            %>
-        </select>
+            <label> <b> Seleccione el modulo abrir </b> </label>
+            <br>
 
-        <br> <br>
-        <input type ="submit" value="Abrir modulo">        
+            <select name="id_modulo">
+               <% while (resultado.next())
+                { 
+               %>
+                <option value="<%= resultado.getString("id")%>" > <%= resultado.getString("nombre")%>  </option>
+                <%
+                  }
+                   conexion.desconectar();
+                %>
+            </select>
 
-
-
+            <br> <br>
+            <input type ="submit" value="Abrir modulo">
         </form>
         
         <a href="Inicio.jsp"> Volver </a>
-
-
     </body>
 </html>
 

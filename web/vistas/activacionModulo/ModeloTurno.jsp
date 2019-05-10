@@ -37,10 +37,6 @@
         nombre = resultado1.getString("nombre");
         conexion.actualizarEstado1(id_modulo);
         
-            
-
-
-
 %>
            
         
@@ -77,7 +73,7 @@
        resultado2 = conexion.codigo(id_modulo, id_usuario);
        resultado2.next();
        
-       codigo = resultado2.getInt("id_historico_modulo");
+       codigo = resultado2.getInt("id");
         
         conexion.desconectar();
 

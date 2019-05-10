@@ -156,7 +156,6 @@ public class ConexionUsuario extends Conexion {
         } catch (SQLException error) {
             System.out.println("ERROR EN DESCONEXION: " + error);
         }
-
     }
 
 

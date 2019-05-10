@@ -21,7 +21,7 @@ public class Consultas extends Conexion {
         ResultSet rs = null;
 
         try{
-            String consulta = "SELECT * FROM usuarios1 WHERE email = ? AND password = ?";
+            String consulta = "SELECT * FROM usuarios WHERE email = ? AND password = ?";
             pstm = getConexion().prepareCall(consulta);
             pstm.setString(1, email);
             pstm.setString(2, contrasena);

@@ -10,7 +10,8 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>TITULO</title>
-        <%@include file="/source/styles/styleslib.jsp" %>
+        <%@include file="/source/styles/util.jsp" %>
+        <%@include file="/source/styles/main_login.jsp" %>
     </head>
     <body>
         <div class="limiter">
@@ -28,7 +29,7 @@
                             </div>
                         <% } %>
                         
-                        <div class="wrap-input100 validate-input" data-validate = " email: example@b.c">
+                        <div class="wrap-input100 " >
                             <input class="input100" type="text" name="email">
                             <span class="focus-input100" data-placeholder="Email"></span>
                         </div>
@@ -54,7 +55,9 @@
             </div>
 	</div>
 	<div id="dropDownSelect1"></div>
-        <%@include file="/source/javascript/javalib.jsp" %>
+
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <%@include file="/source/javascript/main_login.jsp" %>
         
         <% if(request.getParameter("error_login") != null){ %>
             <script>

@@ -16,25 +16,19 @@ public class ConexionAbrirModulo extends Conexion {
     //Metodo para consultar modulos disponibles
  
      public ResultSet ModuloDisponibles() {
-
         try {
-            String sql = "select id_modulo from modulo where estado_modulo = 'Activo' and accion = 'Disponible'";
+            String sql = "select id, nombre from modulo where estado = 1 and accion = 'Disponible'";
 
             pst = getConexion().prepareStatement(sql);
             consulta = pst.executeQuery();
-
         } catch (SQLException e) {
             System.out.println("ERROR EN CONSULTA " + e);
         }
 
         return consulta;
     }
-     
-     
-     
 
      //Metodo para insertar datos a la tabla historico_modulo
-    
      public boolean ActivarModulo (String id_modulo, int id_usuario) {   
         
          try {
@@ -68,7 +62,7 @@ public class ConexionAbrirModulo extends Conexion {
      public ResultSet ObtenerNombre(int id_usuario) {   
         try {
 
-            String sql = "select nombre from usuarios where id_usuario= ?";
+            String sql = "select nombre from usuarios where id= ?";
 
             pst = getConexion().prepareStatement(sql);
             pst.setInt(1, id_usuario);
@@ -87,7 +81,7 @@ public class ConexionAbrirModulo extends Conexion {
  public boolean actualizarEstado1 (String id_modulo) {   
         try {
 
-            String sql = "update modulo set accion = 'Ocupado' where id_modulo = ?";
+            String sql = "update modulo set accion = 'Ocupado' where id = ?";
  
             pst = getConexion().prepareStatement(sql);
             pst.setString(1, id_modulo);
@@ -103,13 +97,12 @@ public class ConexionAbrirModulo extends Conexion {
     }
     
 
-
   //Metodo para actualizar el estado a disponible
  
  public boolean actualizarEstado2 (String id_modulo) {   
         try {
 
-            String sql = "update modulo set accion = 'Disponible' where id_modulo = ?";
+            String sql = "update modulo set accion = 'Disponible' where id = ?";
  
             pst = getConexion().prepareStatement(sql);
             pst.setString(1, id_modulo);
@@ -131,7 +124,7 @@ public class ConexionAbrirModulo extends Conexion {
      public ResultSet codigo (String id_modulo, int id_usuario) {   
         try {
 
-            String sql = "select id_historico_modulo from historico_modulo where id_modulo = ? " 
+            String sql = "select id from historico_modulo where id_modulo = ? " 
                   + "and id_usuario = ? order by fecha_abierto desc limit 1";
             
   
@@ -152,7 +145,7 @@ public class ConexionAbrirModulo extends Conexion {
  public boolean actualizarHora (int codigo) {   
         try {
 
-            String sql = "update historico_modulo set fecha_cerrado = now() where id_historico_modulo = ?";
+            String sql = "update historico_modulo set fecha_cerrado = now() where id = ?";
  
             pst = getConexion().prepareStatement(sql);
             pst.setInt(1, codigo);
@@ -185,9 +178,6 @@ public class ConexionAbrirModulo extends Conexion {
         }
 
     }
-
-
-
 }
    
      

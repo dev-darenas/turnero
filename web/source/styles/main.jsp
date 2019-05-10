@@ -20,12 +20,12 @@
 
     @font-face {
       font-family: Montserrat-SemiBold;
-      src: url('../fonts/montserrat/Montserrat-SemiBold.ttf'); 
+      src: url('/turnero/source/fonts/montserrat/Montserrat-SemiBold.ttf'); 
     }
 
     @font-face {
       font-family: Montserrat-Medium;
-      src: url('../fonts/montserrat/Montserrat-Medium.ttf'); 
+      src: url('/turnero/source/fonts/montserrat/Montserrat-Medium.ttf'); 
     }
 
 

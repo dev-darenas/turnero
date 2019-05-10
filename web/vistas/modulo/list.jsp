@@ -24,7 +24,7 @@
         <%@include file="/componentes/navbar.jsp" %>
         <div class="container">
             <h1> 
-                <a class="btn btn-primary" href="/turnero6/vistas/modulo/crear.jsp">
+                <a class="btn btn-primary" href="/turnero/vistas/modulo/crear.jsp">
                     <i class="fas fa-plus"></i>
                 </a>
                 Modulo
@@ -63,7 +63,7 @@
                     </th>
                     
                     <th>
-                   <a href="editar.jsp?cod_modulo=<%= modulos.getInt("cod_modulo")%>" class="btn btn-primary btn-sm">
+                   <a href="editar.jsp?cod_modulo=<%= modulos.getInt("id")%>" class="btn btn-primary btn-sm">
                        <i class="fas fa-pencil-alt"></i>
                    </a>
                     </th>
