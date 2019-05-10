@@ -50,6 +50,6 @@ public class Consultas extends Conexion {
     public static void main(String[] args) {
         Consultas c = new Consultas();
         System.out.println("lib.Consultas.main()");
-        c.autenticacion("darenas@gmail.com", "123456789");
+        c.autenticacion("darenas@softdreams.co", "123");
     }
 }
