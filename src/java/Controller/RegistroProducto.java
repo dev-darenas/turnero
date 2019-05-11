@@ -43,11 +43,9 @@ public class RegistroProducto extends HttpServlet {
             ConsultasProducto co=new ConsultasProducto();
             
             if(co.Registrar_Producto(nombre,estado,descripcion)){
-                request.getRequestDispatcher("vistas/producto/list.jsp?succes=true")
-                                         .forward(request,response);
+                response.sendRedirect("vistas/producto/list.jsp?succes=true");
             }else{
-                request.getRequestDispatcher("vistas/producto/crear.jsp?error=true")
-                                            .forward(request,response);
+                response.sendRedirect("vistas/producto/crear.jsp?error=true");
             }
         } finally{
             out.close();

@@ -35,17 +35,18 @@ public class ConsultasModulo extends Conexion {
     
 
     public boolean registrar(String nombre,String estado,
-            String descripcion){
+            String descripcion, String tipo_modulo){
         int resultUpdate=0;
         
         try{
             con = getConexion();
-            String sql = "INSERT INTO `turnero`.`modulo` (`nombre`,`estado`, `descripcion`) VALUES (?, ?, ?)"; 
+            String sql = "INSERT INTO `turnero`.`modulo` (`nombre`,`estado`, `descripcion`, `tipo_modulo_id`) VALUES (?, ?, ?, ?)"; 
             pstm= con.prepareStatement(sql);
             
             pstm.setString(1, nombre);
             pstm.setString(2, estado);
             pstm.setString(3, descripcion);
+            pstm.setString(4, tipo_modulo);
             
             resultUpdate= pstm.executeUpdate();
         
@@ -122,7 +123,7 @@ public class ConsultasModulo extends Conexion {
     public static void main(String args[]){
         System.out.println("lib.ConsultasModulo.main()");
         ConsultasModulo co=new ConsultasModulo();
-        co.registrar("TEst1", "DEscrip", "ee");
+        co.registrar("TEst1", "DEscrip", "ee", "1");
     }
 }  
 

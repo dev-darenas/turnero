@@ -37,4 +37,9 @@ public class Usuario {
         }
        return rol; 
     }
+    
+    public String get_iduser(){
+        Consultas co = new Consultas();
+        return co.get_user(email, password);
+    }
 }

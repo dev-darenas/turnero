@@ -15,16 +15,13 @@
         <%@include file="/source/styles/styleslib.jsp" %>
     </head>
     <body>
-        
-        
-        
         <%! ConsultasProducto con = new ConsultasProducto();%>
         <%  ResultSet productos = con.obtenerProducto();%>
         
         <%@include file="/componentes/navbar.jsp" %>
         <div class="container">
             <h1> 
-                <a class="btn btn-primary" href="/turnero6/vistas/producto/crear.jsp">
+                <a class="btn btn-primary" href="/turnero/vistas/producto/crear.jsp">
                     <i class="fas fa-plus"></i>
                 </a>
                 Producto
@@ -63,14 +60,11 @@
                     </th>
                     
                     <th>
-                   <a href="/turnero6/vistas/producto/editar.jsp?id_producto=<%= productos.getInt("id_producto")%>" class="btn btn-primary btn-sm">
+                   <a href="/turnero/vistas/producto/editar.jsp?id_producto=<%= productos.getInt("id")%>" class="btn btn-primary btn-sm">
                        <i class="fas fa-pencil-alt"></i>
                    </a>
                     </th>
-    
                 </tr>
-                
-               
             <% } %>
             <% productos.close(); %>
         

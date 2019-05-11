@@ -76,7 +76,7 @@ public class ConsultasProducto extends Conexion {
         System.err.println(estado);
         
         try{
-            String sql = "update producto set nombre=?,estado=?,descripcion=? where id_producto=?";
+            String sql = "update producto set nombre=?,estado=?,descripcion=? where id=?";
             pst = getConexion().prepareStatement(sql);
             pst.setString(1, nombre);
             pst.setString(2, estado);

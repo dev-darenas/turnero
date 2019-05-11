@@ -37,6 +37,7 @@
                         
                         <td> Nombre</td>
                         <td> Estado</td>
+                        <td> Tipo</td>
                         <td> descripcion </td>
                         
                         <td colspan="2" > <b> Editar </b> </td>
@@ -51,15 +52,23 @@
                     </th>
                     
                     <th> 
-                    <% if (modulos.getString(3).equals("1") ){ %>
+                    <% if (modulos.getString("estado").equals("1") ){ %>
                         Activo
                     <% }else{ %>
                         Inactivo
                     <% } %>
                     </th>
-                
+                    
                     <th>
-                        <%= modulos.getString(4) %>
+                        <% if (modulos.getInt("tipo_modulo_id") == 1 ){ %>
+                            Caja
+                        <% }else{ %>
+                            Asesor
+                        <% } %>
+                    </th>
+
+                    <th>
+                        <%= modulos.getString("descripcion") %>
                     </th>
                     
                     <th>
@@ -69,8 +78,6 @@
                     </th>
     
                 </tr>
-                
-               
             <% } %>
             <% modulos.close(); %>
         </table>

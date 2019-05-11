@@ -9,6 +9,7 @@ import Modelos.Usuario;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -38,7 +39,8 @@ protected void processRequest(HttpServletRequest request, HttpServletResponse re
             System.out.println("Controller.Login.processRequest()");
             
             if(usuario.hacer_login()){
-                response.sendRedirect("dashboard.jsp");        
+                response.sendRedirect("dashboard.jsp");
+                Cookie ck = new Cookie("id_user", usuario.get_iduser());
             }else{
                 response.sendRedirect("index.jsp?error_login=true");
             }

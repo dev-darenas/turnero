@@ -18,7 +18,7 @@
          <div class="container">
         <div class="container-contact100">
 		<div class="wrap-contact100">
-                    <form class="contact100-form validate-form" action="/turnero6/RegistroProducto" method="post" >
+                    <form class="contact100-form validate-form" action="/turnero/RegistroProducto" method="post" >
                         <span class="contact100-form-title">
                             Registrar Producto
                         </span>
@@ -58,7 +58,7 @@
         </div>          
                
              
-    
+    <%@include file="/source/javascript/javalib.jsp" %>
     </body>
     
 </html>

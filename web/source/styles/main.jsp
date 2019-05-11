@@ -5,30 +5,28 @@
 
     @font-face {
       font-family: Montserrat-Regular;
-      src: url('/../fonts/montserrat/Montserrat-Regular.ttf'); 
+      src: url('/turnero/source/fonts//Montserrat-Regular.ttf'); 
     }
 
     @font-face {
       font-family: Montserrat-Bold;
-      src: url('../fonts/montserrat/Montserrat-Bold.ttf'); 
+      src: url('/turnero/source/fonts/Montserrat-Bold.ttf'); 
     }
 
     @font-face {
       font-family: Montserrat-Black;
-      src: url('//github.com/google/fonts/blob/master/ofl/montserrat/Montserrat-Black.ttf'); 
+      src: url('/turnero/source/fonts/Montserrat-Black.ttf'); 
     }
 
     @font-face {
       font-family: Montserrat-SemiBold;
-      src: url('/turnero/source/fonts/montserrat/Montserrat-SemiBold.ttf'); 
+      src: url('/turnero/source/fonts/Montserrat-SemiBold.ttf'); 
     }
 
     @font-face {
       font-family: Montserrat-Medium;
-      src: url('/turnero/source/fonts/montserrat/Montserrat-Medium.ttf'); 
+      src: url('/turnero/source/fonts/Montserrat-Medium.ttf'); 
     }
-
-
 
     /*//////////////////////////////////////////////////////////////////
     [ RESTYLE TAG ]*/

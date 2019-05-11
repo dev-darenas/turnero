@@ -45,7 +45,29 @@ public class Consultas extends Conexion {
         
         return false;
     }
-    
+
+    public String get_user(String email, String contrasena){
+        PreparedStatement pstm = null;
+        ResultSet rs = null;
+
+        try{
+            String consulta = "SELECT id FROM usuarios WHERE email = ? AND password = ?";
+            pstm = getConexion().prepareCall(consulta);
+            pstm.setString(1, email);
+            pstm.setString(2, contrasena);
+            
+            rs = pstm.executeQuery();
+            rs.next();
+            
+            return rs.getString(1);
+        } catch(Exception ex){
+             Logger.getLogger(Consultas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return "";
+    }
+        
+
     // se corre este archivo para probar la conexion a la bd
     public static void main(String[] args) {
         Consultas c = new Consultas();

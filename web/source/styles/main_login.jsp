@@ -6,25 +6,30 @@
 /*//////////////////////////////////////////////////////////////////
 [ FONT ]*/
 
-@font-face {
-  font-family: Poppins-Regular;
-  src: url('../fonts/poppins/Poppins-Regular.ttf'); 
-}
+   @font-face {
+      font-family: Montserrat-Regular;
+      src: url('/turnero/source/fonts//Montserrat-Regular.ttf'); 
+    }
 
-@font-face {
-  font-family: Poppins-Medium;
-  src: url('../fonts/poppins/Poppins-Medium.ttf'); 
-}
+    @font-face {
+      font-family: Montserrat-Bold;
+      src: url('/turnero/source/fonts/Montserrat-Bold.ttf'); 
+    }
 
-@font-face {
-  font-family: Poppins-Bold;
-  src: url('../fonts/poppins/Poppins-Bold.ttf'); 
-}
+    @font-face {
+      font-family: Montserrat-Black;
+      src: url('/turnero/source/fonts/Montserrat-Black.ttf'); 
+    }
 
-@font-face {
-  font-family: Poppins-SemiBold;
-  src: url('../fonts/poppins/Poppins-SemiBold.ttf'); 
-}
+    @font-face {
+      font-family: Montserrat-SemiBold;
+      src: url('/turnero/source/fonts/Montserrat-SemiBold.ttf'); 
+    }
+
+    @font-face {
+      font-family: Montserrat-Medium;
+      src: url('/turnero/source/fonts/Montserrat-Medium.ttf'); 
+    }
 
 
 

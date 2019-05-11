@@ -11,99 +11,91 @@
     
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Editar</title>
         <%@include file="/source/styles/styleslib.jsp" %>
     </head>
-
     <body>
         <%@include file="/componentes/navbar.jsp" %>
         <div class="container">
-        <div class="container-contact100">
-		<div class="wrap-contact100">
+            <div class="container-contact100">
+                <div class="wrap-contact100">
                     <form class="contact100-form validate-form"  >
                         <span class="contact100-form-title">
                             Editar Modulo
                         </span>
-         
-        <%! ConsultasModulo con3 = new ConsultasModulo(); %>
-        <%
-        int cod_modulo=Integer.parseInt(request.getParameter("cod_modulo"));
-        
-                 ResultSet rs=null;
-                 Statement st=null;
-                  
-               try{
-                  
-                 st=con3.getConexion().createStatement();
-              rs=st.executeQuery("select * from modulo where cod_modulo= "+ cod_modulo +"");
-              
-              while(rs.next()){
-                  
-             
-        %>
-        <div class="wrap-input100 validate-input bg1 rs1-wrap-input100" data-validate="Campo obligatorio">
-                            <span class="label-input100">cod_modulo</span>
-                            <input class="input100" type="text" name="cod_modulo" placeholder="cod_modulo" value="<%= rs.getInt(1) %>">
-                        </div>
-         
-         <div class="wrap-input100 validate-input bg1 rs1-wrap-input100" data-validate="Campo obligatorio">
+
+                        <%! ConsultasModulo con3 = new ConsultasModulo(); %>
+                        <%
+                            int cod_modulo=Integer.parseInt(request.getParameter("cod_modulo"));
+
+                            ResultSet rs=null;
+                            Statement st=null;
+
+                            try{ 
+                                st = con3.getConexion().createStatement();
+                                rs = st.executeQuery("SELECT * FROM modulo WHERE id= "+ cod_modulo +"");
+
+                                rs.next();  
+                        %>
+    
+                        <input type="hidden" name="cod_modulo" placeholder="cod_modulo" value="<%= rs.getInt(1) %>">
+     
+
+                        <div class="wrap-input100 validate-input bg1 rs1-wrap-input100" data-validate="Campo obligatorio">
                             <span class="label-input100">Nombre</span>
                             <input class="input100" type="text" name="nombre" placeholder="Nombre" value="<%= rs.getString(2) %>">
                         </div>
+
                         <div class="wrap-input100 bg1 rs1-wrap-input100">
                             <span class="label-input100">Estado</span>
                             <div class="pretty p-switch">
-                                <input name="es" type="checkbox" value="<%= rs.getString(3) %>"/>
+                                <input name="es" type="checkbox" value="1" 
+                                       checked
+                                       />
                                 <div class="state">
                                     <label>Activo?</label>
                                 </div>
                             </div>
                         </div>
-                                
-                                <div class="wrap-input100 validate-input bg1 rs1-wrap-input100" data-validate="Campo obligatorio">
+
+                        <div class="wrap-input100 validate-input bg1 rs1-wrap-input100" data-validate="Campo obligatorio">
                             <span class="label-input100">Descrpcion</span>
-                            <input class="input100" type="text" name="descripcion" placeholder="Descripcion" value="<%= rs.getString(4) %>">
+                            <input class="input100" type="text" name="descripcion" placeholder="Descripcion" value="<%= rs.getString("descripcion") %>">
                         </div>
-         
-              
-                                
-                                <div class="container-contact100-form-btn">
+
+                        <div class="wrap-input100 input100-select bg1 rs1-wrap-input100">
+                            <span class="label-input100">Tipo de Modulo</span>
+                            <div>
+                                <select class="js-select2" name="tipo_modulo_id">
+                                    <option value="1"
+                                            <% if(rs.getInt("tipo_modulo_id") == 1 ){ %>
+                                                selected
+                                            <% } %>
+                                            >Caja</option>
+                                    <option value="2"
+                                            <% if(rs.getInt("tipo_modulo_id") == 2 ){ %>
+                                                selected
+                                            <% } %>
+                                            >Asesor</option>
+                                </select>
+                                <div class="dropDownSelect2"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="container-contact100-form-btn">
                             <span class="fa fa-long-arrow-right m-l-7" aria-hidden="true"></span>
                             <input class="contact100-form-btn" type="submit" name="editar" placeholder="Descripcion" value="EDITAR">
                         </div>
-                        
-                        
-                        
-    
-         
+                    </form>
+                </div>
             </div>
-                    </div>
-                    </div>
-         
-                    
-        </form>
-                        <%
-                            }
-}catch(Exception e){}
+        </div>
 
-if(request.getParameter("editar")!=null){
-
-    String nombre=request.getParameter("nombre");
-    String estado=request.getParameter("estado");
-    String descripcion=request.getParameter("descripcion");
-   
-    st.executeUpdate("update modulo set nombre='"+nombre+"',estado='"+estado+"',descripcion='"+descripcion+"' where cod_modulo="+cod_modulo+"");
-    //request.getRequestDispatcher("list.jsp").forward(request, response);
-    //response.
-
-}
+        <%
+            }catch(Exception e){}
     
 %>
-       
-     
-                    
-                       
-        
+    <%@include file="/source/javascript/javalib.jsp" %>
     </body>
     <script>
         $( document ).ready(function() {
@@ -111,18 +103,6 @@ if(request.getParameter("editar")!=null){
                 $(this).select2({
                     minimumResultsForSearch: 20,
                     dropdownParent: $(this).next('.dropDownSelect2')
-                });
-
-                $(".js-select2").each(function(){
-                    $(this).on('select2:close', function (e){
-                        if($(this).val() == "Please chooses") {
-                            $('.js-show-service').slideUp();
-                        }
-                        else {
-                            $('.js-show-service').slideUp();
-                            $('.js-show-service').slideDown();
-                        }
-                    });
                 });
             })
         });

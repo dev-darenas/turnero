@@ -40,16 +40,15 @@ public class RegistroMod extends HttpServlet {
              String nombre=request.getParameter("nom");
              String estado=request.getParameter("es");
              String descripcion=request.getParameter("des");
+             String tipo_mod=request.getParameter("tipo_modulo_id");
              
             ConsultasModulo co=new ConsultasModulo();
             
-            if(co.registrar(nombre,estado,descripcion)){
-                request.getRequestDispatcher("vistas/modulo/list.jsp?succes=true")
-                                         .forward(request,response);
+            if(co.registrar(nombre,estado,descripcion, tipo_mod)){
+                response.sendRedirect("vistas/modulo/list.jsp?succes=true");
                 
             }else{
-                request.getRequestDispatcher("vistas/modulo/crear.jsp?error=true")
-                                                                    .forward(request,response);
+                response.sendRedirect("vistas/modulo/crear.jsp?error=true");
             }
         } finally{
             out.close();
