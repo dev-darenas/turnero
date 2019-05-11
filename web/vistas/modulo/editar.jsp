@@ -50,7 +50,9 @@
                             <span class="label-input100">Estado</span>
                             <div class="pretty p-switch">
                                 <input name="es" type="checkbox" value="1" 
-                                       checked
+                                       <% if(rs.getInt("estado") == 1 ){ %>
+                                        checked
+                                       <% } %>
                                        />
                                 <div class="state">
                                     <label>Activo?</label>
