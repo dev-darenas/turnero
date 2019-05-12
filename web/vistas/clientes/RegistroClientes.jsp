@@ -15,13 +15,13 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Registro Clientes</title>
+        <%@include file="/source/styles/styleslib.jsp" %>
     </head>
     <body>
-
+        <%@include file="/componentes/navbar.jsp" %>
         <%
             ConsultaClientes con1 = new ConsultaClientes();
 
-            
             ResultSet rs = con1.realizarConsulta("select * from clientes");
 
         //listar los datos
@@ -30,13 +30,15 @@
 
 
 
- 
+
         <h1>REGISTRO DE CLIENTES</h1>
-        
+
         <a href="agregarCliente.jsp">Agregar Cliente</a>
         <br><br><br>
-        <center>
-        <table width="100%" border="1">
+    <center>
+        <div class="container">
+        <table class="table table-bordered table-hover table-sm">
+            <thead class="thead-dark">
             <tr>
                 <th>CC</th>
                 <th>NOMBRE</th>
@@ -47,6 +49,7 @@
                 <th>N_SMS</th>
                 <th>ACCIÓN</th>
             </tr>
+            </thead>
             <% while (rs.next()) {%>
             <tr>
                 <td><%=rs.getInt("Cc")%></td>
@@ -56,13 +59,16 @@
                 <td><%=rs.getString("Estado")%></td>
                 <td><%=rs.getString("Notificar_email")%></td>
                 <td><%=rs.getString("Notificar_sms")%></td>
-       
-                <td> <a href="editarCliente.jsp?id=<%=rs.getInt("Cc")%>&accion=EDITAR&dd=<%=rs.getInt("Id") %>">Editar</a>  <a href="editarCliente.jsp?id=<%=rs.getInt("Cc")%>&accion=ELIMINAR&estado=readonly">Eliminar</a> </td>
+
+                <td> <a href="editarCliente.jsp?id=<%=rs.getInt("Cc")%>&accion=EDITAR&dd=<%=rs.getInt("Id")%>">Editar</a>  <a href="editarCliente.jsp?id=<%=rs.getInt("Cc")%>&accion=ELIMINAR&estado=readonly">Eliminar</a> </td>
 
             </tr>
-            <%} con1.cierraConexion(); %>
+            <%}
+                con1.cierraConexion();%>
         </table>
-        
-        </center>
-    </body>
+        </div>
+
+    </center>
+     <%@include file="/source/javascript/javalib.jsp" %>
+</body>
 </html>
