@@ -1,6 +1,5 @@
 package com.uniajc.queuemasterstate
 
-import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
@@ -9,7 +8,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
     private lateinit var stringCc: String
-    private lateinit var btMoreOptions: Button
+    private lateinit var btNewTurn: Button
     private lateinit var stringTurn: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -20,12 +19,17 @@ class MainActivity : AppCompatActivity() {
         stringCc = intent.getStringExtra("t_cc")
         stringTurn = intent.getStringExtra("t_turn")
 
-        btMoreOptions = findViewById(R.id.bt_more_options)
+        if(!stringCc.isBlank() || !stringTurn.isBlank()){
+            // PRINT
+        }
 
-        btMoreOptions.setOnClickListener {
-            //val inet = Intent(this, PrintActivity::class.java)
-            //inet.putExtra("turn",stringTurn)
-            //startActivity(inet)
+        btNewTurn = findViewById(R.id.bt_new)
+
+        btNewTurn.setOnClickListener {
+
+            finish()
+            finishActivity(2)
+
         }
         etCc.text = "CC: $stringCc"
         tv_turn.text = stringTurn

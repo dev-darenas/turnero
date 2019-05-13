@@ -184,6 +184,13 @@ class RequestLastActivity : AppCompatActivity() {
         val it = Intent(this, MainActivity::class.java)
         it.putExtra("t_cc", stringCc)
         it.putExtra("t_turn", turn)
-        startActivity(it)
+        startActivityForResult(it, 2)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if(requestCode == 2){
+            finish()
+            finishActivity(1)
+        }
     }
 }

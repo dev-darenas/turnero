@@ -41,6 +41,13 @@ class RequestPriActivity : AppCompatActivity() {
         it.putExtra("t_service", service)
         it.putExtra("b_priority", priority)
         it.putExtra("b_client", client)
-        startActivity(it)
+        startActivityForResult(it, 1)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if(requestCode == 1){
+            finish()
+            finishActivity(0)
+        }
     }
 }
