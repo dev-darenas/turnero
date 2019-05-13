@@ -16,23 +16,39 @@
     </head>
     <body>
          <%@include file="/componentes/navbar.jsp" %> 
+        <%
+            //response.sendRedirect("/turnero/vistas/activacionModulo/ModeloTurno.jsp");
+        %>
+        <%  
+            Cookie[] cookieList = request.getCookies();
+            
+            String user_id = "";
+            String id_rol = "";
+            for (int i = 0; i < cookieList.length; i++) { 
+                if(cookieList[i].getName().equals("id_user")){
+                    user_id = cookieList[i].getValue();
+                }
+                
+                if(cookieList[i].getName().equals("id_rol")){
+                    id_rol = cookieList[i].getValue();
+                }
+            } 
+        %>
+        
         <% 
             ResultSet resultado;
             ConexionAbrirModulo conexion = new ConexionAbrirModulo();
-            resultado = conexion.ModuloDisponibles();
+            resultado = conexion.ModuloDisponibles(id_rol);
         %>
+
         <div class="container">
             <div class="container-contact100">
                 <div class="wrap-contact100">
                     <form action="ModeloTurno.jsp" method="post">
                         <span class="contact100-form-title">
-                            Asignacion de Modulo
+                            Abrir de Modulo
                         </span>
-                        <label> <b> Ingresar Codigo </b> </label>
-                        <br>
-                        <input type ="text" name= "id_usuario" value="<%= request.getCookies() %>">
-                        <br><br>
-
+                        <input type ="hidden" name= "id_usuario" value="<%= user_id %>">
                         <div class="wrap-input100 input100-select bg1">
                             <span class="label-input100" Seleccione el modulo abrir</span>
                             <div>

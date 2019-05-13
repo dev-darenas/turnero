@@ -60,7 +60,7 @@
                     </th>
                     
                     <th>
-                        <% if (modulos.getInt("tipo_modulo_id") == 1 ){ %>
+                        <% if (modulos.getInt("tipo_modulo_id") == 3 ){ %>
                             Caja
                         <% }else{ %>
                             Asesor

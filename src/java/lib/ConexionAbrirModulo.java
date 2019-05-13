@@ -15,9 +15,12 @@ public class ConexionAbrirModulo extends Conexion {
 
     //Metodo para consultar modulos disponibles
  
-     public ResultSet ModuloDisponibles() {
+     public ResultSet ModuloDisponibles(String modulo_tipe_id) {
         try {
-            String sql = "select id, nombre from modulo where estado = 1 and accion = 'Disponible'";
+            String sql = "SELECT id, nombre FROM modulo WHERE estado = 1 AND accion = 'Disponible'";
+            if(!modulo_tipe_id.equals("1")){
+                sql += " AND tipo_modulo_id = " + modulo_tipe_id;
+            }
 
             pst = getConexion().prepareStatement(sql);
             consulta = pst.executeQuery();
@@ -52,11 +55,6 @@ public class ConexionAbrirModulo extends Conexion {
         return false;
     }
      
-     
-     
-      
-
-
      //Metodo para consultar el nombre del empleado
  
      public ResultSet ObtenerNombre(int id_usuario) {   

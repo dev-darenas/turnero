@@ -11,36 +11,43 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Banco</title>
+        <title>Llamar turnos</title>
+        <%@include file="/source/styles/styleslib.jsp" %>
     </head>
     <body>
-        
+        <%@include file="/componentes/navbar.jsp" %>
+        <%  
+            Cookie[] cookieList = request.getCookies();
+            
+            String user_id = "";
+            String id_rol = "";
+            for (int i = 0; i < cookieList.length; i++) { 
+                if(cookieList[i].getName().equals("id_user")){
+                    user_id = cookieList[i].getValue();
+                }
+            } 
+        %>
     <%
         ResultSet resultado1;
-        String nombre;
+        String nombre = "";
 
-     ConexionAbrirModulo conexion = new ConexionAbrirModulo();
+        ConexionAbrirModulo conexion = new ConexionAbrirModulo();
+        int id_usuario = Integer.parseInt(user_id);
+        String id_modulo = "";
         
-            int id_usuario = 0; 
-            try {
-                id_usuario = Integer.parseInt(request.getParameter("id_usuario"));
-            } catch(NumberFormatException e) {  
-            } 
+        if(request.getParameter("id_modulo") != null ){
+            id_modulo = request.getParameter("id_modulo");
 
-        String id_modulo = request.getParameter("id_modulo");
-        
-        conexion.ActivarModulo(id_modulo, id_usuario);
-        resultado1= conexion.ObtenerNombre(id_usuario);
-        
-        resultado1.next();
-        
-        nombre = resultado1.getString("nombre");
-        conexion.actualizarEstado1(id_modulo);
-        
+            conexion.ActivarModulo(id_modulo, id_usuario);
+            resultado1= conexion.ObtenerNombre(id_usuario);
+
+            resultado1.next();
+
+            nombre = resultado1.getString("nombre");
+            conexion.actualizarEstado1(id_modulo);       
+        } 
 %>
-           
-        
-        
+
         <h1> Modulo <%= id_modulo %></h1>
         <br> 
         
@@ -93,4 +100,5 @@
     
         
     </body>
+    <%@include file="/source/javascript/javalib.jsp" %>
 </html>

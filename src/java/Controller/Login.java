@@ -8,6 +8,9 @@ package Controller;
 import Modelos.Usuario;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
@@ -30,17 +33,22 @@ public class Login extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
 protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            
             Usuario usuario = new Usuario(request.getParameter("email"), request.getParameter("pass"));
-            System.out.println("Controller.Login.processRequest()");
             
             if(usuario.hacer_login()){
-                response.sendRedirect("dashboard.jsp");
-                Cookie ck = new Cookie("id_user", usuario.get_iduser());
+                javax.servlet.http.Cookie cookie_id_user 
+                    = new javax.servlet.http.Cookie("id_user", usuario.get_iduser().getString("id"));
+                response.addCookie(cookie_id_user);
+                
+                javax.servlet.http.Cookie cookie_id_rol 
+                    = new javax.servlet.http.Cookie("id_rol", usuario.get_iduser().getString("rol_id"));
+                response.addCookie(cookie_id_rol);
+                
+                response.sendRedirect("dashboard.jsp");                
             }else{
                 response.sendRedirect("index.jsp?error_login=true");
             }
@@ -58,7 +66,11 @@ protected void processRequest(HttpServletRequest request, HttpServletResponse re
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+    try {
         processRequest(request, response);
+    } catch (SQLException ex) {
+        Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+    }
     }
 
     /**
@@ -72,7 +84,11 @@ protected void processRequest(HttpServletRequest request, HttpServletResponse re
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+    try {
         processRequest(request, response);
+    } catch (SQLException ex) {
+        Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+    }
     }
 
     /**

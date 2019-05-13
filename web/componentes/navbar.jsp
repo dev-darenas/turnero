@@ -22,9 +22,12 @@
           <li class="nav-item active">
             <a class="nav-link" href="/turnero/vistas/activacionModulo/AbrirModulo.jsp">Activacion Modulo</a>
           </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="/turnero/vistas/turno/generar.jsp">Generar Turno</a>
+          </li>
         </ul>
         <span class="navbar-text">
-          <a class="nav-link" href="#">Salir</a>
+          <a class="nav-link" href="/turnero/destroySession">Salir</a>
         </span>
       </div>
     </nav>

@@ -45,7 +45,7 @@
                             <span class="label-input100">Tipo de Modulo</span>
                             <div>
                                 <select class="js-select2" name="tipo_modulo_id">
-                                    <option value="1">Caja</option>
+                                    <option value="3">Caja</option>
                                     <option value="2">Asesor</option>
                                 </select>
                                 <div class="dropDownSelect2"></div>

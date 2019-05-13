@@ -46,12 +46,12 @@ public class Consultas extends Conexion {
         return false;
     }
 
-    public String get_user(String email, String contrasena){
+    public ResultSet get_user(String email, String contrasena){
         PreparedStatement pstm = null;
         ResultSet rs = null;
 
         try{
-            String consulta = "SELECT id FROM usuarios WHERE email = ? AND password = ?";
+            String consulta = "SELECT * FROM usuarios WHERE email = ? AND password = ?";
             pstm = getConexion().prepareCall(consulta);
             pstm.setString(1, email);
             pstm.setString(2, contrasena);
@@ -59,12 +59,12 @@ public class Consultas extends Conexion {
             rs = pstm.executeQuery();
             rs.next();
             
-            return rs.getString(1);
+            return rs;
         } catch(Exception ex){
              Logger.getLogger(Consultas.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        return "";
+        return null;
     }
         
 

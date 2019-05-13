@@ -17,71 +17,97 @@ import java.util.logging.Logger;
  */
 public class ConsultaTurno extends Conexion {
 
-    String turno;
+    String turno="";
 
-    public String crearTurno(String cedula, String celular, String correo, String tipoServicio, int prioridad, int notwhatsapp, int notemail, int notsms) {
-
+    public String crearTurno(String cedula, String celular, String correo, String tipoServicio, String prioridad, String notwhatsapp, String notemail, String notsms) {
+        
+        System.out.println("lib.ConsultaTurno.crearTurno()");
+        //Estados del turno
+        // e = espera
+        // a = Atendido
+        // c = cancelado
+        
         int numTurno = 0;
 
         PreparedStatement pstm = null;
         ResultSet rs = null;
-
+        int puntaje = 0;
+        
         try {
-            String consulta = "SELECT * FROM Cliente WHERE cedula = ?";
+            String consulta = "SELECT * FROM Clientes WHERE cc = ?";
             pstm = getConexion().prepareCall(consulta);
             pstm.setString(1, cedula);
 
             rs = pstm.executeQuery();
 
             if (rs.absolute(1)) {
-                prioridad = prioridad + 1;
+                //Quiere decir que es cliente
+                puntaje = 1;
             } else {
-
-                String insertar = "Insert into Cliente (cedula,email,celular) values (?,?,?)";
+                // si no es cliente lo inserta
+                String insertar = "Insert into Clientes (cc,email,cel,estado) values (?,?,?,?)";
                 pstm = getConexion().prepareCall(insertar);
                 pstm.setString(1, cedula);
                 pstm.setString(2, correo);
                 pstm.setString(3, celular);
-                if (rs.rowInserted()) {
-                    pstm.close();
-                } else {
-                    pstm.close();
-                }
+                pstm.setString(4, "0");
+                pstm.executeUpdate();
+                pstm.close();
             }
-
-            String consulta2 = "Select * from Turno where tipo_servicio = ? order by id desc";
-            pstm = getConexion().prepareCall(consulta2);
+            
+            //Consulto la cantidad de turnos con ese tipo de servicio
+            String consulta_cantidad_turnos = "SELECT * FROM Turno WHERE tipo_servicio = ? order by id desc";
+            pstm = getConexion().prepareCall(consulta_cantidad_turnos);
             pstm.setString(1, tipoServicio);
 
             rs = pstm.executeQuery();
 
             if (rs.absolute(1)) {
-                numTurno = rs.getInt("num_turno") + 1;
+               numTurno = rs.getInt("num_turno") + 1; 
+            }else{
+               numTurno = 1;
+            }
+            
+            // Sumar un punto a los turnos antiguos
+            String sql = "UPDATE turno set puntaje = puntaje + 1 where estado = 'e'";
+            PreparedStatement pst = getConexion().prepareStatement(sql);
 
-                String insertar = "Insert into Turno (id_cliente,num_turno,tipo_servicio,prioridad,id_historico_modulo,fecha_creacion,fecha_llamado,fecha_terminado,estado) values ((Select id from Cliente where cedula = ?), ? , ? , ? ,0, NOW() , null , null ,1)";
-                pstm = getConexion().prepareCall(insertar);
-                pstm.setString(1, cedula);
-                pstm.setInt(2, numTurno);
-                pstm.setString(3, tipoServicio);
-                pstm.setInt(4, prioridad);
+            pst.executeUpdate();
+            // Fin actualizar los turnos
 
-                if (tipoServicio.equalsIgnoreCase("Caja")) {
-                    turno = "C" + numTurno;
-                } else {
-                    turno = "A" + numTurno;
-                }
-
-                if (rs.rowInserted()) {
-                    pstm.close();
-                    return turno;
-                } else {
-                    pstm.close();
-                    return "turno no generado";
-                }
-
+            if(prioridad != null && prioridad.equals("1")){
+                puntaje = puntaje + 2;
+                turno += "P";
+            }
+            
+            System.out.println("lib.ConsultaTurno.crearTurno() -- 1");
+            String insertar = "Insert into Turno (id_cliente,num_turno,tipo_servicio,prioridad,id_historico_modulo,fecha_creacion,estado,puntaje) values "
+                                             + "((Select id from Clientes where cc = ?), ? , ? , ? ,0, NOW(),'e', ?)";
+            pstm = getConexion().prepareCall(insertar);
+            pstm.setString(1, cedula);
+            pstm.setInt(2, numTurno);
+            pstm.setString(3, tipoServicio);
+            pstm.setString(4, prioridad);
+            pstm.setInt(5, puntaje);
+            
+            System.out.println("lib.ConsultaTurno.crearTurno() -- 2");
+            
+            pstm.executeUpdate();
+            
+            System.out.println("lib.ConsultaTurno.crearTurno() -- 3");
+            
+            if (tipoServicio.equalsIgnoreCase("2")) {
+                turno += "A" + numTurno;
+            } else {
+                turno += "C" + numTurno;
             }
 
+            pstm.close();
+            return turno;
+
         } catch (SQLException ex) {
+            System.out.println(" ** Error ** ");
+            System.out.println(ex);
             Logger.getLogger(Consultas.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             try {
@@ -99,13 +125,6 @@ public class ConsultaTurno extends Conexion {
             }
         }
 
-        return "turno no generado";
-    }
-
-    // se corre este archivo para probar la conexion a la bd
-    public static void main(String[] args) {
-        Consultas c = new Consultas();
-        System.out.println("lib.Consultas.main()");
-        c.autenticacion("darenas@gmail.com", "123456789");
+        return "";
     }
 }

@@ -40,13 +40,14 @@ public class ConsultasModulo extends Conexion {
         
         try{
             con = getConexion();
-            String sql = "INSERT INTO `turnero`.`modulo` (`nombre`,`estado`, `descripcion`, `tipo_modulo_id`) VALUES (?, ?, ?, ?)"; 
+            String sql = "INSERT INTO `turnero`.`modulo` (`nombre`,`estado`, `descripcion`, `tipo_modulo_id`, `accion`) VALUES (?, ?, ?, ?, ?)"; 
             pstm= con.prepareStatement(sql);
             
             pstm.setString(1, nombre);
             pstm.setString(2, estado);
             pstm.setString(3, descripcion);
             pstm.setString(4, tipo_modulo);
+            pstm.setString(5, "Disponible");
             
             resultUpdate= pstm.executeUpdate();
         

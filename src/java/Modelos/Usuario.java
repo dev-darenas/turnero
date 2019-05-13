@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package Modelos;
+import java.sql.ResultSet;
 import lib.Consultas;
         
 public class Usuario {
@@ -38,7 +39,7 @@ public class Usuario {
        return rol; 
     }
     
-    public String get_iduser(){
+    public ResultSet get_iduser(){
         Consultas co = new Consultas();
         return co.get_user(email, password);
     }
