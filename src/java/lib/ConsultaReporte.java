@@ -64,10 +64,6 @@ public class ConsultaReporte extends Conexion {
 
         List<List<String>> datos = new ArrayList<>();
 
-        for (int i = 0; i <= 3; i++) {
-            datos.add(new ArrayList<>());
-        }
-
         SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         java.util.Date datei = sdf1.parse(fechaIni);
         java.sql.Date sqlFechaIni = new java.sql.Date(datei.getTime());
@@ -90,11 +86,26 @@ public class ConsultaReporte extends Conexion {
             //Guardar los datos en un arraylist que usa otro arraylist  (El primero trabaja como Columna y el segundo como Fila)
 
             while (rs.next()) {
+
+                datos.add(new ArrayList<>());
+
                 for (int x = 1; x <= 4; x = x + 1) {
-                    System.out.println(y + "---" + x + "---" + rs.getString(x));
-                    datos.get(y).add(rs.getString(x));                    
+                    datos.get(y).add(rs.getString(x));
                 }
                 y = y + 1;
+            }
+
+//            System.out.println(datos.get(1) + " " + datos.size());
+
+            int tamaño = datos.size();
+  
+            int z = 0;
+            while (z < tamaño) {
+                
+                for (int x = 0; x < 4; x = x + 1) {
+                    System.out.println(datos.get(z).get(x));
+                }
+                z = z + 1;
             }
 
             pstm.close();

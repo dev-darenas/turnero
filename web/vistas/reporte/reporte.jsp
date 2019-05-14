@@ -70,18 +70,18 @@
                     </tr>
 
                     <tr>
-                        <th><%= fechaIni%></th>
-                        <th><%= prioridad%></th>
-                        <th><%= fechaIni%></th>
-                        <th><%= cr.generarReporte(fechaIni, fechaFin, usuario, prioridad, titular, particular)%></th>
+                        <th><%=cr.generarReporte(fechaIni, fechaFin, usuario, prioridad, titular, particular).get(0).get(0)%></th>
+                        <th><%=cr.generarReporte(fechaIni, fechaFin, usuario, prioridad, titular, particular).get(0).get(1)%></th>
+                        <th></th>
+                        <th></th>
                     </tr>
 
                 </table>
-                
+
                 <label>Total:</label> <label name="total" >#</label>
 
             </div>
-
+      
             <div class="" style="width: 20%; position:absolute;top:5%;left:105%">
                 graficos si me animo
                 exportar como excel si no muero
