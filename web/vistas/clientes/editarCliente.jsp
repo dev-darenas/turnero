@@ -12,9 +12,11 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <% String titulo = request.getParameter("accion");%>
+         <%@include file="/source/styles/styleslib.jsp" %>
         <title><%=titulo%></title>
     </head>
     <body>
+          <%@include file="/componentes/navbar.jsp" %>
 
         <h1><%=titulo%> CLIENTE</h1>
         <%
@@ -28,6 +30,7 @@
         <form method="post" action="">
             <table width="80%" border="1">
                 <% while (rs.next()) {%>
+                
                 <tr>
                     <th>CC</th>
                     <td><a><%=id%></a></td>
@@ -96,7 +99,7 @@
                     <td><input <%= est%> type="text" name="notificar_s" value= "<%=rs.getString("Notificar_sms")%>"></td>
                 </tr>
 
-                
+               
                 <br><br>
                 <h3>REGISTRAR PRODUCTO CON EL CLIENTE</h3>
 
@@ -113,13 +116,13 @@
         <br><br><hr>
         <h3>Registrar productos al cliente</h3>
         
-        <%  rs=con.realizarConsulta("select nombre_producto from producto"); %>
+        <%  rs=con.realizarConsulta("select nombre from producto"); %>
         
         <div >
         <select name="product" id="product">
 
             <%while (rs.next()) {%>
-            <option name="produ" value="<%=rs.getString("nombre_producto")%>"><%=rs.getString("nombre_producto")%></option>
+            <option name="produ" value="<%=rs.getString("nombre")%>"><%=rs.getString("nombre")%></option>
             <%}%>
         </select>
         <input type="submit" name="registro" value="Registrar Producto">
@@ -140,7 +143,7 @@
             if(request.getParameter("registro")!=null){
                 registro=request.getParameter("registro");
                 if(registro.equals("Registrar Producto")){
-                    
+                   
                     int codigo=con.consultaCodigoProducto(request.getParameter("product"));
                       iddd=Integer.parseInt(request.getParameter("dd"));
                     
@@ -187,7 +190,7 @@
 
         %>
         <center>
-        <% rs=con.realizarConsulta("Select cliente_producto.id_cliente_producto,producto.nombre_producto from producto,clientes,cliente_producto where clientes.id = cliente_producto.id_cliente and producto.id_producto=cliente_producto.id_producto and cliente_producto.id_cliente="+ iddd ); %>
+        <% rs=con.realizarConsulta("Select cliente_producto.id_cliente_producto,producto.nombre from producto,clientes,cliente_producto where clientes.id = cliente_producto.id_cliente and producto.id_producto=cliente_producto.id_producto and cliente_producto.id_cliente="+ iddd ); %>
         <table width="60%" border="1" >
             <% while(rs.next()){ %>
             <tr>
@@ -199,12 +202,13 @@
             </tr>
             <tr>
                 <td><%= rs.getString("cliente_producto.id_cliente_producto") %></td>
-                <td><%= rs.getString("producto.nombre_producto") %></td>
+                <td><%= rs.getString("producto.nombre") %></td>
                 <td><a onclick="" href="eliminarProducto.jsp?id_producto=<%= rs.getInt("cliente_producto.id_cliente_producto") %>&acci=<%= request.getParameter("accion") %>&idd=<%= request.getParameter("dd") %>&cedula=<%= request.getParameter("id") %>">ELIMINAR</a></td>
             </tr>
             <% } %>
         </table>
         </center>
         <% con.cierraConexion(); %>
+         <%@include file="/source/javascript/javalib.jsp" %>
     </body>
 </html>

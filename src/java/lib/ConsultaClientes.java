@@ -74,10 +74,10 @@ public class ConsultaClientes extends Conexion{
         
     }
     public int consultaCodigoProducto(String nombre) throws SQLException{
-        rs=realizarConsulta("select id from producto where nombre='"+nombre+"'");
+        rs=realizarConsulta("select id_producto from producto where nombre='"+nombre+"'");
         int codigo=0;
         if(rs.next()){
-        codigo=rs.getInt("id");
+        codigo=rs.getInt("id_producto");
         }
         return codigo;
     }
