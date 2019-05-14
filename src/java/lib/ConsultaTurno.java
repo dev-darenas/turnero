@@ -21,9 +21,9 @@ public class ConsultaTurno extends Conexion {
 
     public String crearTurno(String cedula, String celular, String correo, String tipoServicio, String prioridad, String notwhatsapp, String notemail, String notsms) {
         
-        System.out.println("lib.ConsultaTurno.crearTurno()");
         //Estados del turno
         // e = espera
+        // aa = atendiendo
         // a = Atendido
         // c = cancelado
         

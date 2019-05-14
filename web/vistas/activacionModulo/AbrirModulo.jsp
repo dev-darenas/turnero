@@ -44,7 +44,7 @@
         <div class="container">
             <div class="container-contact100">
                 <div class="wrap-contact100">
-                    <form action="ModeloTurno.jsp" method="post">
+                    <form action="/turnero/abrirModulo" method="post">
                         <span class="contact100-form-title">
                             Abrir de Modulo
                         </span>
