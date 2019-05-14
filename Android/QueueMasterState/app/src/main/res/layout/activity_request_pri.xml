@@ -42,16 +42,18 @@
         </RadioGroup>
 
         <CheckBox
-                android:gravity="fill"
-                android:layout_width="match_parent"
+                android:gravity="center"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Soy usuario prioritario"
                 android:textSize="18dp"
                 android:id="@+id/cb_priority"/>
         <TextView
-                android:layout_width="match_parent"
+                android:gravity="center"
+                android:paddingHorizontal="50dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Texto explicativo"/>
+                android:text="@string/descPri"/>
 
         <Button
                 android:layout_marginTop="20dp"

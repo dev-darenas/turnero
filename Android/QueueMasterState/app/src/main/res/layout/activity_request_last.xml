@@ -32,7 +32,8 @@
                     android:layout_height="match_parent"
                     android:text="Impresión"
                     android:layout_marginEnd="15dp"
-                    android:textSize="18sp"/>
+                    android:textSize="18sp"
+                    android:checked="true"/>
             <CheckBox
                     android:id="@+id/cb_email"
                     android:layout_width="wrap_content"
@@ -52,6 +53,7 @@
 
         <ListView
                 android:id="@+id/lv_text"
+                android:divider="@null"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 

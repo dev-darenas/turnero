@@ -53,7 +53,7 @@ class RequestCcActivity : AppCompatActivity() {
             } else {
                 Toast.makeText(
                     baseContext,
-                    "Error, Cedula y correo o número telefonico son obligatorios",
+                    "Error, el ingreso de la cedula es obligatorio",
                     Toast.LENGTH_SHORT
                 ).show()
             }

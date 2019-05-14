@@ -4,4 +4,7 @@
     <string name="description">Por favor escribir su número de cédula</string>
     <string name="submit">Enviar</string>
     <string name="cc">CC =</string>
+    <string name="descPri">Si usted es una persona discapacitada, embarazada o de la tercera edad, por favor escoja esta
+        opción.
+    </string>
 </resources>

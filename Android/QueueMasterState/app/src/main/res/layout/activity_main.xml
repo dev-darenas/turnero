@@ -27,7 +27,7 @@
         <TextView
                 android:textSize="15sp"
                 android:text="Su turno es:"
-                android:textColor="@color/colorPrimary"
+                android:textColor="@color/colorAccent"
                 android:gravity="center"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
@@ -36,24 +36,35 @@
                 android:padding="25sp"
                 android:gravity="center"
                 android:textSize="50sp"
-                android:textColor="@color/colorPrimary"
+                android:textColor="@color/colorAccent"
                 android:id="@+id/tv_turn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@android:string/untitled"
         />
+
         <TextView
-                android:layout_marginBottom="20dp"
-                android:text="Por favor espere a ser llamado, se le notificará por este medio"
+                android:layout_marginTop="-10dp"
+                android:id="@+id/tv_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="yyyy/MM/dd HH:mm:ss"
+                android:layout_marginBottom="5dp"
+                android:textSize="15dp"/>
+
+        <TextView
+                android:text="Por favor espere a ser llamado"
                 android:gravity="center"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="25dp"/>
+
 
         <Button
                 android:id="@+id/bt_new"
                 android:layout_marginBottom="20dp"
                 android:text="Nuevo turno"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
 
 

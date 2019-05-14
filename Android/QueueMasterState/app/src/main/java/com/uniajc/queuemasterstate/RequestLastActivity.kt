@@ -16,6 +16,7 @@ import com.android.volley.RequestQueue
 import com.android.volley.Response
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
+import kotlinx.android.synthetic.main.activity_request_last.*
 import org.json.JSONException
 
 class RequestLastActivity : AppCompatActivity() {
@@ -28,10 +29,10 @@ class RequestLastActivity : AppCompatActivity() {
 
         val stringCc = intent.getStringExtra("t_cc")
         val stringService = intent.getStringExtra("t_service")
-        val booleanPriority = intent.getBooleanExtra("t_priority", false)
+        val booleanPriority = intent.getBooleanExtra("b_priority", false)
         val client = intent.getBooleanExtra("b_client", false)
 
-        val cbImp = findViewById<CheckBox>(R.id.cb_imp) // TO DO !!!!!!!
+        val cbImp = findViewById<CheckBox>(R.id.cb_imp)
         val cbEmail = findViewById<CheckBox>(R.id.cb_email)
         val cbSms = findViewById<CheckBox>(R.id.cb_sms)
         val lvText = findViewById<ListView>(R.id.lv_text)
@@ -140,7 +141,7 @@ class RequestLastActivity : AppCompatActivity() {
     ) {
 
         val priorityGet = when (booleanPriority) {
-            true -> 1; false -> 0
+            true -> 2; false -> 0
         }
         val whatsGet = when (WTPENDIENTE) {
             true -> 1; false -> 0
@@ -168,7 +169,7 @@ class RequestLastActivity : AppCompatActivity() {
                         turn = jsonObject.getString("turn")
                         cont++
                     }
-                    switchActivity(stringCc, turn)
+                    switchActivity(stringCc, turn, cb_imp.isChecked)
                 } catch (e: JSONException) {
                     e.printStackTrace()
                     Toast.makeText(this, e.message, Toast.LENGTH_LONG).show()
@@ -180,10 +181,11 @@ class RequestLastActivity : AppCompatActivity() {
 
     }
 
-    private fun switchActivity(stringCc: String, turn: String) {
+    private fun switchActivity(stringCc: String, turn: String, bImp: Boolean) {
         val it = Intent(this, MainActivity::class.java)
         it.putExtra("t_cc", stringCc)
         it.putExtra("t_turn", turn)
+        it.putExtra("b_imp", bImp)
         startActivityForResult(it, 2)
     }
 

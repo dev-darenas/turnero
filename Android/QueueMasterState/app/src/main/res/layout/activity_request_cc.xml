@@ -22,14 +22,15 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/description"
-                android:textSize="25dp"/>
+                android:textSize="25sp"/>
 
         <AutoCompleteTextView
                 android:id="@+id/et_cc"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textAlignment="center"
-                android:inputType="number"/>
+                android:inputType="number"
+                android:imeOptions="actionDone"/>
 
         <Button
                 android:id="@+id/bt_next_01"
