@@ -77,7 +77,7 @@ public class ConsultaClientes extends Conexion{
         rs=realizarConsulta("select id from producto where nombre='"+nombre+"'");
         int codigo=0;
         if(rs.next()){
-        codigo=rs.getInt("id");
+        codigo=rs.getInt("id_producto");
         }
         return codigo;
     }
