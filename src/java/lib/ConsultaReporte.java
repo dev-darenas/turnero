@@ -22,35 +22,46 @@ import java.util.logging.Logger;
  */
 public class ConsultaReporte extends Conexion {
 
-    public List<List<String>> generarReporte(String fechaIni, String fechaFin, String usuario, String checkPrioridad, String checkTitular, String checkParticular, int total) throws ParseException {
+    public List<List<String>> generarReporte(String fechaIni, String fechaFin, String usuario, String checkPrioridad, String checkTitular, String checkParticular) throws ParseException {
 
         System.out.println("lib.ConsultaReporte.generaReporte()");
 
-//        fechaIni = "2019-05-13 00:00:00";
-//        fechaFin = "2019-05-16 00:00:00";
+        if (checkParticular == null) {
+            checkParticular = "off";
+        }
+        if (checkPrioridad == null) {
+            checkPrioridad = "off";
+        }
+        if (checkTitular == null) {
+            checkTitular = "off";
+        }
+        if (usuario == null) {
+            usuario = null;
+        } else if (usuario.equalsIgnoreCase("Todos")) {
+            usuario = null;
+        }
+
+        if (fechaIni == null) {
+            fechaIni = "2019-01-01 00:00:00";
+        }
+        if (fechaFin == null) {
+            fechaFin = "2020-01-01 00:00:00";
+        }
 
         String prioridad = null;
 
-//check true o false, o eso creo que traen los checks desde el jsp, si es nulo suelta error        
-        if (checkPrioridad.equalsIgnoreCase("true") && checkTitular.equalsIgnoreCase("true")) {
+        if (checkPrioridad.equalsIgnoreCase("on") && checkTitular.equalsIgnoreCase("on")) {
             prioridad = "3";
-        } else if (checkPrioridad.equalsIgnoreCase("true")) {
+        } else if (checkPrioridad.equalsIgnoreCase("on")) {
             prioridad = "2";
-        } else if (checkTitular.equalsIgnoreCase("true")) {
+        } else if (checkTitular.equalsIgnoreCase("on")) {
             prioridad = "1";
-        } else if (checkParticular.equalsIgnoreCase("true")) {
+        } else if (checkParticular.equalsIgnoreCase("on")) {
             prioridad = "0";
         } else {
             prioridad = null;
         }
-// si son Todos se volvera null para que en sql se cumpla If Parameter Is Null Select All
-        if (usuario.equalsIgnoreCase("Todos")) {
-            usuario = null;
-        }
 
-        int x = 1;
-
-        //arraylist de arraylist
         List<List<String>> datos = new ArrayList<>();
 
         for (int i = 0; i <= 3; i++) {
@@ -68,19 +79,22 @@ public class ConsultaReporte extends Conexion {
 
         try {
             //Select que saca todos los datos en 4 columnas fecha cantidad promediollamada promedioatendido
-            String consulta = "SELECT fecha_creacion, Count(num_turno), Cast(AVG(Cast(Datediff(fecha_llamado, fecha_creacion)as decimal(3,2))) as DateTime)as PromLlamado ,Cast(AVG(Cast(Datediff(fecha_terminado, fecha_llamado)as decimal(3,2))) as DateTime)as PromAtendido FROM Turno WHERE fecha_creacion  BETWEEN ? and ? and prioridad = IFNULL(?,prioridad)  and id_historico_modulo = IFNULL ((Select id from Historico_modulo where id_usuario like '" + usuario + "%'),id_historico_modulo) Group by fecha_creacion"; //Cuanto me demore haciendo el sql? no recuerdo... pero fueron muchas
+            String consulta = "SELECT DATE(fecha_creacion), Count(num_turno), Cast(AVG(Cast(Datediff(fecha_llamado, fecha_creacion)as decimal(3,2))) as DateTime)as PromLlamado ,Cast(AVG(Cast(Datediff(fecha_terminado, fecha_llamado)as decimal(3,2))) as DateTime)as PromAtendido FROM Turno WHERE fecha_creacion  BETWEEN ? and ? and prioridad = IFNULL(?,prioridad)  and id_historico_modulo = IFNULL ((Select id from Historico_modulo where id_usuario like '" + usuario + "%'),id_historico_modulo) Group by DATE(fecha_creacion)"; //Cuanto me demore haciendo el sql? no recuerdo... pero fueron muchas
             pstm = getConexion().prepareCall(consulta);
             pstm.setDate(1, sqlFechaIni);
             pstm.setDate(2, sqlFechaFin);
             pstm.setString(3, prioridad);
             rs = pstm.executeQuery();
 
+            int y = 0;
             //Guardar los datos en un arraylist que usa otro arraylist  (El primero trabaja como Columna y el segundo como Fila)
-            for (int y = 0; y <= 4; y = y + 1) {
-                while (rs.next()) {
-                    datos.get(y).add(rs.getString(x));
-                    x = x + 1;
+
+            while (rs.next()) {
+                for (int x = 1; x <= 4; x = x + 1) {
+                    System.out.println(y + "---" + x + "---" + rs.getString(x));
+                    datos.get(y).add(rs.getString(x));                    
                 }
+                y = y + 1;
             }
 
             pstm.close();
@@ -112,7 +126,7 @@ public class ConsultaReporte extends Conexion {
     public static void main(String arg[]) throws ParseException {
 
         ConsultaReporte c = new ConsultaReporte();
-        c.generarReporte(null, null, null, null, null, null, 1);
+        c.generarReporte(null, null, null, null, null, null);
     }
 
 }

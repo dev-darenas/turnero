@@ -6,9 +6,8 @@
 
 <%@page import="java.util.List"%>
 <%@page import="java.util.ArrayList"%>
-<%@page import="javax.swing.JOptionPane"%>
 <%@page import="java.sql.*"%>
-<%@page import="lib.ConsultasModulo"%>
+<%@page import="lib.ConsultaReporte"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -18,12 +17,13 @@
         <title>Reporte</title>
     </head>
     <body>
+        <%ConsultaReporte cr = new ConsultaReporte();%>
         <form action="" method="Post"> 
             <div class="container row" style="width: 70%; position:relative;top:5%;left:2%">
 
                 <div class="col-md-4">
                     <label>Fecha Inicio</label> <input name="fechaIni" type="date" class="" id=""/>  
-                </div>
+                </div> 
                 <div class="col-md-4">
                     <label>Fecha Fin</label> <input name="fechaFin" type="date" class="" id=""/>  
                 </div>
@@ -52,24 +52,32 @@
                     <label>Particular</label> <input name="particular" type="checkbox" class="" id=""/> 
                 </div>
 
+                <%%>
+
+                <%String fechaIni = request.getParameter("fechaIni");%>
+                <%String fechaFin = request.getParameter("fechaFin");%>
+                <%String usuario = request.getParameter("usuario");%>
+                <%String prioridad = request.getParameter("prioridad");%>
+                <%String titular = request.getParameter("titular");%>
+                <%String particular = request.getParameter("particular");%>
+
                 <table name="tabla"class="table table-bordered table-hover table-sm">
                     <tr>
                         <th>Fecha</th>
-                        <th>Turnos Atendidos</th>
-                        <th>Turnos Cancelados</th>
+                        <th>Cantidad</th>
                         <th>Promedio Llamado</th>
                         <th>Promedio Atendido</th>
                     </tr>
 
-                    <%@include file="/source/javascript/javalib.jsp" %>
-
-
-                    <%Llamar aqui el arraylist para generar los tr th%>
-
-                    
+                    <tr>
+                        <th><%= fechaIni%></th>
+                        <th><%= prioridad%></th>
+                        <th><%= fechaIni%></th>
+                        <th><%= cr.generarReporte(fechaIni, fechaFin, usuario, prioridad, titular, particular)%></th>
+                    </tr>
 
                 </table>
-
+                
                 <label>Total:</label> <label name="total" >#</label>
 
             </div>

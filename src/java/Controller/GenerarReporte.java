@@ -37,8 +37,8 @@ public class GenerarReporte extends HttpServlet {
             ConsultaReporte cr = new ConsultaReporte();
             System.out.println("Controller.GenerarTurno.processRequest()");
             //se guarda el arraylist y se envia
-            List<List<String>> datos = cr.generarReporte(fechaIni, fechaFin, usuario, checkPrioridad, checkTitular, checkParticular, total);
-            response.sendRedirect("/turnero/vistas/turno/generar.jsp?turno=" + datos);
+            List<List<String>> datos = cr.generarReporte(fechaIni, fechaFin, usuario, checkPrioridad, checkTitular, checkParticular);
+            response.sendRedirect("/turnero/vistas/turno/generar.jsp?datos=" + datos);
         }
 
     }
