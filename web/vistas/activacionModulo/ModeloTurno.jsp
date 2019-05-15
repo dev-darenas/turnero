@@ -23,7 +23,7 @@
 
             <div class="row">
                 <div class="offset-md-1 col-md-10 card">
-                    <% if(request.getParameter("id_turno") != null ){ %>
+                    <% if(request.getParameter("id_turno") != null && !request.getParameter("id_turno").equals("0") ){ %>
                         <%
                             ConexionAbrirModulo conexion = new ConexionAbrirModulo();
                             ResultSet turno_info = conexion.obtenerTurno(request.getParameter("id_turno"));
@@ -70,9 +70,14 @@
                             <hr>
                             
                             <%
-                                ResultSet productos = conexion.obtenerProdcutos(turno_info.getString("id_cliente"));
-                                productos.next();
+                                ResultSet productos = conexion.obtenerProductos(turno_info.getString("id_cliente"));
                             %>
+                            
+                            <ul class="list-group">
+                                <% while(productos.next()){ %>
+                                    <li class="list-group-item"><%= productos.getString("nombre") %> - <%= productos.getString("descripcion") %> </li>
+                                <% }%>
+                            </ul>
                         </div>
                     <% } else { %>
                         <div class="card-body">

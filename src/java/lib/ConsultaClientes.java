@@ -141,9 +141,8 @@ public class ConsultaClientes extends Conexion{
              pstm = getConexion().prepareStatement("delete from cliente_producto where"
                     + " id_cliente_producto= "+id);
             
-           
-          pstm.executeUpdate();
- 
+            pstm.executeUpdate();
+
         } catch (SQLException e) {
             System.out.println(e);
         }

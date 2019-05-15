@@ -127,15 +127,15 @@ public class ConexionAbrirModulo extends Conexion {
             pst.executeUpdate();
             
 
-            int id_turno;
-            sql = "SELECT MAX(puntaje) as puntaje, id FROM Turno where estado = 'e'";
+            int id_turno = 0;
+            sql = "SELECT puntaje, id FROM Turno where estado = 'e' ORDER BY puntaje DESC LIMIT 1;";
             pst = getConexion().prepareStatement(sql);
             consulta = pst.executeQuery();
             
-            consulta.next();
-            id_turno = consulta.getInt("id");
-            
-            
+            if(consulta.next()){
+                id_turno = consulta.getInt("id");
+            }
+          
             //Actualizar turno
             sql = "UPDATE turno SET estado = 'aa', id_historico_modulo = ?, fecha_llamado = now() where id = ?";
  
@@ -230,10 +230,12 @@ public class ConexionAbrirModulo extends Conexion {
        return null;
    }
    
-   public ResultSet obtenerProdcutos(String cliente_id){
+   public ResultSet obtenerProductos(String cliente_id){
         try {
 
-            String sql = "SELECT * FROM clientes WHERE id = ?";
+            String sql = "SELECT producto.nombre as nombre, producto.descripcion as descripcion FROM cliente_producto "
+                    + " INNER JOIN producto ON producto.id = cliente_producto.id_producto "
+                    + " WHERE cliente_producto.id_cliente = ?";
             pst = getConexion().prepareStatement(sql);
             pst.setString(1, cliente_id);
             consulta = pst.executeQuery();
