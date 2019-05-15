@@ -1,7 +1,8 @@
 package com.uniajc.queuemasterstate
 
-import android.support.v7.app.AppCompatActivity
+import android.annotation.SuppressLint
 import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
@@ -21,6 +22,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var stringTurn: String
     private var bImp: Boolean = false
 
+    @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -37,7 +39,7 @@ class MainActivity : AppCompatActivity() {
         bImp = intent.getBooleanExtra("b_imp",false)
 
         if ((!stringCc.isBlank() || !stringTurn.isBlank()) && bImp) {
-            var printing: Printing?
+            val printing: Printing?
             try {
                 Printooth.setPrinter("BlueTooth Printer", "66:12:7C:0F:54:60")
                 if (Printooth.hasPairedPrinter()) {

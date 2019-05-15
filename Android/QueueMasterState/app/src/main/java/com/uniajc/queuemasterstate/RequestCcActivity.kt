@@ -1,22 +1,20 @@
 package com.uniajc.queuemasterstate
 
 import android.content.Intent
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.*
 import android.support.v7.app.AlertDialog
+import android.support.v7.app.AppCompatActivity
 import android.util.Log
-
+import android.widget.Button
+import android.widget.EditText
+import android.widget.Toast
 import com.android.volley.Request
 import com.android.volley.RequestQueue
 import com.android.volley.Response
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
-
-import org.json.JSONException
-
-import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_request_cc.*
+import org.json.JSONException
 
 
 class RequestCcActivity : AppCompatActivity() {
@@ -28,7 +26,7 @@ class RequestCcActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_request_cc)
 
-        etCC = findViewById<EditText>(R.id.et_cc)
+        etCC = findViewById(R.id.et_cc)
         val button = findViewById<Button>(R.id.bt_next_01)
         var stringCc: String
         stringCc = etCC.text.toString()
@@ -61,7 +59,7 @@ class RequestCcActivity : AppCompatActivity() {
     }
 
     private fun getData() {
-        var url = "http://thenecromancer.es/Turnero/pong.php/?cedula=${et_cc.text}"
+        val url = "http://thenecromancer.es/Turnero/pong.php/?cedula=${et_cc.text}"
         Log.i("URL", url)
         var client = false
 

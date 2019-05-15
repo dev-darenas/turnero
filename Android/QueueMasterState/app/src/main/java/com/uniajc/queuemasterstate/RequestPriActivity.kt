@@ -1,11 +1,13 @@
 package com.uniajc.queuemasterstate
 
 import android.content.Intent
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
 import android.util.Log
-import android.widget.*
-import kotlinx.android.synthetic.main.activity_request_pri.*
+import android.widget.Button
+import android.widget.CheckBox
+import android.widget.RadioButton
+import android.widget.RadioGroup
 
 class RequestPriActivity : AppCompatActivity() {
 
