@@ -12,7 +12,25 @@ public class ConexionAbrirModulo extends Conexion {
     private PreparedStatement pst;
     private ResultSet consulta;
    
+    public ResultSet getTurnoModulos(){
+        
+        try {
+            String sql = "SELECT modulo.id as id, nombre, accion, turno.estado, IF(prioridad, \"P\", \"\") as P,turno.num_turno " +
+                        "  FROM turnero.modulo " +
+                        "  INNER JOIN historico_modulo ON historico_modulo.id_modulo = modulo.id " +
+                        "  INNER JOIN turno ON  historico_modulo.id = turno.id_historico_modulo " +
+                        "  WHERE modulo.accion = 'Ocupado' AND turno.estado = 'aa'";
 
+            pst = getConexion().prepareStatement(sql);
+            consulta = pst.executeQuery();
+            return consulta;
+        } catch (SQLException e) {
+            System.out.println("ERROR EN CONSULTA " + e);
+        }
+
+        return null;
+    }
+    
     //Metodo para consultar modulos disponibles
  
      public ResultSet ModuloDisponibles(String modulo_tipe_id) {

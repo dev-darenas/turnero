@@ -7,11 +7,16 @@ package Controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.resource.cci.ResultSet;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import lib.ConexionAbrirModulo;
 
 /**
  *
@@ -30,13 +35,28 @@ public class VerTurnos extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, SQLException {
         response.setContentType("text/html");
         response.setCharacterEncoding("UTF-8");
         StringBuffer data = null;
-        data = new StringBuffer("{ \"turnos\": [ { \"nombre\": \"modulo 1\", \"turno\": \"CA1\" } ] }");
+        
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
+            ConexionAbrirModulo conexion = new ConexionAbrirModulo();
+            
+            java.sql.ResultSet turno_modulos = conexion.getTurnoModulos();
+            
+            String turnos_json = "{ \"turnos\": [";
+            
+            while(turno_modulos.next()){
+                turnos_json += " { \"id\": \" "+ turno_modulos.getString("id") +" \", \"nombre\": \" "+ turno_modulos.getString("nombre") +" \", \"turno\": \" "+ turno_modulos.getString("p") +" "+ turno_modulos.getString("num_turno") +" \" } ";
+                if (!turno_modulos.isAfterLast()) {
+                   turnos_json += ",";
+                }
+            }
+            
+            turnos_json += "]}";
+            
+            data = new StringBuffer(turnos_json);
             response.getWriter().write(data.toString());
         }
     }
@@ -53,7 +73,11 @@ public class VerTurnos extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(VerTurnos.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -67,7 +91,11 @@ public class VerTurnos extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(VerTurnos.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
