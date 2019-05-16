@@ -190,7 +190,7 @@ class RequestLastActivity : AppCompatActivity() {
             true -> 1; false -> 0
         }
 
-        val url = "http://thenecromancer.es/Turnero/pong.php/?cedula=$stringCc&celular=$phoneNumber" +
+        val url = "http://5.189.167.158/Turnero/pong.php/?cedula=$stringCc&celular=$phoneNumber" +
                 "&correo=$email&tiposervicio=$stringService&prioridad=$priorityGet" +
                 "&notificacion_whatsapp=$whatsGet&notificacion_email=$emailGet&notificacion_sms=$smsGet"
         Log.i("URL", url)

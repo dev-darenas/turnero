@@ -59,7 +59,7 @@ class RequestCcActivity : AppCompatActivity() {
     }
 
     private fun getData() {
-        val url = "http://thenecromancer.es/Turnero/pong.php/?cedula=${et_cc.text}"
+        val url = "http://5.189.167.158/Turnero/pong.php/?cedula=${et_cc.text}"
         Log.i("URL", url)
         var client = false
 
