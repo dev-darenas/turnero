@@ -17,9 +17,9 @@ import java.sql.*;
  */
 public class Conexion {
     private Connection con;
-    private String username = "root";
-    private String password = "root";
-    private String HOST = "localhost";
+    private String username = "Authorit2";
+    private String password = "Authorit2";
+    private String HOST = "5.189.167.158";
     private String PORT = "3306";
     private String DB = "turnero";
     private String CLASSNAME = "com.mysql.jdbc.Driver";
