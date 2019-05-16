@@ -16,8 +16,6 @@
     </head>
     <body>
         
-        
-        
         <%! ConsultasModulo con = new ConsultasModulo();%>
         <%  ResultSet modulos = con.obtenerModulos(); %>
         

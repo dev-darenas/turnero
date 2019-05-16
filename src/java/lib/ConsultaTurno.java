@@ -21,9 +21,9 @@ public class ConsultaTurno extends Conexion {
 
     public String crearTurno(String cedula, String celular, String correo, String tipoServicio, String prioridad, String notwhatsapp, String notemail, String notsms) {
         
-        System.out.println("lib.ConsultaTurno.crearTurno()");
         //Estados del turno
         // e = espera
+        // aa = atendiendo
         // a = Atendido
         // c = cancelado
         
@@ -82,7 +82,8 @@ public class ConsultaTurno extends Conexion {
             
             System.out.println("lib.ConsultaTurno.crearTurno() -- 1");
             String insertar = "Insert into Turno (id_cliente,num_turno,tipo_servicio,prioridad,id_historico_modulo,fecha_creacion,estado,puntaje) values "
-                                             + "((Select id from Clientes where cc = ?), ? , ? , ? ,0, NOW(),'e', ?)";
+                                             + "((Select id from Clientes where cc = ? LIMIT 1), ? , ? , ? ,0, NOW(),'e', ?)";
+            
             pstm = getConexion().prepareCall(insertar);
             pstm.setString(1, cedula);
             pstm.setInt(2, numTurno);

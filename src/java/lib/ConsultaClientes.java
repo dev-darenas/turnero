@@ -77,7 +77,7 @@ public class ConsultaClientes extends Conexion{
         rs=realizarConsulta("select id from producto where nombre='"+nombre+"'");
         int codigo=0;
         if(rs.next()){
-        codigo=rs.getInt("id");
+        codigo=rs.getInt("id_producto");
         }
         return codigo;
     }
@@ -141,9 +141,8 @@ public class ConsultaClientes extends Conexion{
              pstm = getConexion().prepareStatement("delete from cliente_producto where"
                     + " id_cliente_producto= "+id);
             
-           
-          pstm.executeUpdate();
- 
+            pstm.executeUpdate();
+
         } catch (SQLException e) {
             System.out.println(e);
         }

@@ -76,7 +76,7 @@ public class ConexionAbrirModulo extends Conexion {
  
   //Metodo para actualizar el estado a ocupado
  
- public boolean actualizarEstado1 (String id_modulo) {   
+ public boolean OcuparModulo (String id_modulo) {   
         try {
 
             String sql = "update modulo set accion = 'Ocupado' where id = ?";
@@ -97,7 +97,7 @@ public class ConexionAbrirModulo extends Conexion {
 
   //Metodo para actualizar el estado a disponible
  
- public boolean actualizarEstado2 (String id_modulo) {   
+ public boolean abrirModulo (String id_modulo) {   
         try {
 
             String sql = "update modulo set accion = 'Disponible' where id = ?";
@@ -115,15 +115,54 @@ public class ConexionAbrirModulo extends Conexion {
         return false;
     } 
  
+    public Integer llamarTurno(String id_modulo_historico){
+        try{
+            String sql= "";
+            
+            //Actualizar turnos anteriores
+            sql = "UPDATE turno SET estado = 'a', fecha_terminado = now() where id_historico_modulo = ? AND estado='aa'";
  
+            pst = getConexion().prepareStatement(sql);
+            pst.setString(1, id_modulo_historico);
+            pst.executeUpdate();
+            
+
+            int id_turno = 0;
+            sql = "SELECT puntaje, id FROM Turno where estado = 'e' ORDER BY puntaje DESC LIMIT 1;";
+            pst = getConexion().prepareStatement(sql);
+            consulta = pst.executeQuery();
+            
+            if(consulta.next()){
+                id_turno = consulta.getInt("id");
+            }
+          
+            //Actualizar turno
+            sql = "UPDATE turno SET estado = 'aa', id_historico_modulo = ?, fecha_llamado = now() where id = ?";
+ 
+            pst = getConexion().prepareStatement(sql);
+            pst.setString(1, id_modulo_historico);
+            pst.setInt(2, id_turno);
+            pst.executeUpdate();
+            
+            return id_turno;
+        } catch (SQLException e) {
+            System.out.println("ERROR EN CONSULTA " + e);
+        }
+        return null;
+    }
+            
  // metodo para consultar el id_hisotrico_modulo
  
  
      public ResultSet codigo (String id_modulo, int id_usuario) {   
         try {
 
-            String sql = "select id from historico_modulo where id_modulo = ? " 
-                  + "and id_usuario = ? order by fecha_abierto desc limit 1";
+            String sql = "SELECT historico_modulo.id, modulo.nombre as nombre FROM "
+                    + "historico_modulo "
+                    + "INNER JOIN modulo "
+                    + "ON historico_modulo.id_modulo = modulo.id "
+                    + "WHERE id_modulo = ? " 
+                    + "AND historico_modulo.id_usuario = ? order by fecha_abierto desc limit 1";
             
   
             pst = getConexion().prepareStatement(sql);
@@ -159,7 +198,56 @@ public class ConexionAbrirModulo extends Conexion {
     } 
  
  
- 
+   public ResultSet obtenerTurno(String turno_id){
+        try {
+
+            String sql = "SELECT * FROM turno WHERE id = ?";
+            pst = getConexion().prepareStatement(sql);
+            pst.setString(1, turno_id);
+            consulta = pst.executeQuery();
+            
+            return consulta;
+        } catch (SQLException e) {
+            System.out.println("ERROR EN CONSULTA " + e);
+        } 
+       
+       return null;
+   }
+          
+   public ResultSet obtenerCliente(String cliente_id){
+        try {
+
+            String sql = "SELECT * FROM clientes WHERE id = ?";
+            pst = getConexion().prepareStatement(sql);
+            pst.setString(1, cliente_id);
+            consulta = pst.executeQuery();
+            
+            return consulta;
+        } catch (SQLException e) {
+            System.out.println("ERROR EN CONSULTA " + e);
+        } 
+        
+       return null;
+   }
+   
+   public ResultSet obtenerProductos(String cliente_id){
+        try {
+
+            String sql = "SELECT producto.nombre as nombre, producto.descripcion as descripcion FROM cliente_producto "
+                    + " INNER JOIN producto ON producto.id = cliente_producto.id_producto "
+                    + " WHERE cliente_producto.id_cliente = ?";
+            pst = getConexion().prepareStatement(sql);
+            pst.setString(1, cliente_id);
+            consulta = pst.executeQuery();
+            
+            return consulta;
+        } catch (SQLException e) {
+            System.out.println("ERROR EN CONSULTA " + e);
+        }
+        
+        return null;
+   }
+   
   //Metodo para desconectar la base de datos
  
     public void desconectar() {
