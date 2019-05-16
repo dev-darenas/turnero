@@ -43,9 +43,10 @@
             if (checkTitular == null) {
                 checkTitular = "off";
             }
-            if (usuario == null) {
+
+            if (usuario.equalsIgnoreCase("Todos")) {
                 usuario = null;
-            } else if (usuario.equalsIgnoreCase("Todos")) {
+            } else if (usuario == null) {
                 usuario = null;
             }
 
@@ -87,7 +88,6 @@
             PreparedStatement pstm = null;
             ResultSet rs = null;
 
-
             Conexion co = new Conexion();
 
             String consulta = "SELECT DATE(fecha_creacion), Count(num_turno) as cantidad, Cast(AVG(Cast(Datediff(fecha_llamado, fecha_creacion)as decimal(3,2))) as DateTime)as PromLlamado ,Cast(AVG(Cast(Datediff(fecha_terminado, fecha_llamado)as decimal(3,2))) as DateTime)as PromAtendido FROM Turno WHERE fecha_creacion  BETWEEN ? and ? and prioridad = IFNULL(?,prioridad)  and id_historico_modulo = IFNULL ((Select id from Historico_modulo where id_usuario like '" + usuario + "%'),id_historico_modulo) Group by DATE(fecha_creacion)"; //Cuanto me demore haciendo el sql? no recuerdo... pero fueron muchas
@@ -118,7 +118,7 @@
 
                 <div class="col-md-3">
                     <label>Usuario</label> 
-                    <input name="usuario" type="text" value="1"/>
+                    <input name="usuario" type="text" value="Todos"/>
                 </div>
                 <div class="col-md-3">
                     <label>Prioridad</label> <input name="prioridad" type="checkbox" class="" id=""/>
