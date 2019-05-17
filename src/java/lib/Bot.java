@@ -75,6 +75,7 @@ public class Bot {
         try {
             Thread.sleep(8000);
             Thread.sleep(8000);
+            Thread.sleep(8000);
         } catch (InterruptedException e) {
         }
 
