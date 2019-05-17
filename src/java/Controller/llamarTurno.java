@@ -16,7 +16,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import lib.Bot;
 import lib.ConexionAbrirModulo;
+import lib.ConsultaTurno;
 
 /**
  *
@@ -37,14 +39,42 @@ public class llamarTurno extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {         
+        try (PrintWriter out = response.getWriter()) {
+
+            String perfil = request.getParameter("perfil");
+
+            Bot bot = new Bot();
+
+            if (request.getParameter("conectar") != null) {
+
+                bot.setPerfil(perfil);
+                bot.conectarCuenta();
+
+            }
+
+            if (request.getParameter("llamar") != null) {
+
+                bot.setPerfil(perfil);
+
+                ConsultaTurno ct = new ConsultaTurno();
+                String numero = ct.consultarNumero();
+                bot.setNumero(numero);
+
+                bot.setMensaje("Su turno sera el proximo en ser atendido");
+
+                bot.iniciar();
+                bot.mandarAlerta();
+
+            }
+
             String codigo = request.getParameter("codigo");
             String nombre = request.getParameter("nombre");
-            
+
             ConexionAbrirModulo conexion = new ConexionAbrirModulo();
+
             int id_turno = conexion.llamarTurno(codigo);
 
-            response.sendRedirect("/turnero/vistas/activacionModulo/ModeloTurno.jsp?codigo="+codigo+"&nombre="+nombre+"&id_turno="+id_turno);
+            response.sendRedirect("/turnero/vistas/activacionModulo/ModeloTurno.jsp?codigo=" + codigo + "&nombre=" + nombre + "&id_turno=" + id_turno);
         }
     }
 

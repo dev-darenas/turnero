@@ -12,7 +12,7 @@ public class Bot {
     private WebDriver driver;
     private String numero, mensaje, perfil;
 
-    File file = new File("chromedriver.exe"); 
+    File file = new File("chromedriver.exe");
 
     public String getNumero() {
         return numero;
@@ -38,27 +38,22 @@ public class Bot {
         this.perfil = perfil;
     }
 
-       
-    public void iniciar() {       
+    public void iniciar() {
 
-
-
-        System.setProperty("webdriver.chrome.driver", file.getAbsolutePath());
-//        System.setProperty("webdriver.chrome.driver", "c:/" + file.getPath);
+//        System.setProperty("webdriver.chrome.driver", "c:/chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver", "c:/" + file.getPath());
         ChromeOptions options = new ChromeOptions();
-        options.addArguments("user-data-dir=Chrome/" + getPerfil());
+        options.addArguments("user-data-dir=c:/Chrome/" + getPerfil());
         System.out.println(getPerfil());
-        options.setBinary("/Chrome/chrome.exe");
+        options.setBinary("c:/" + "/Chrome/chrome.exe");
     }
 
     public void conectarCuenta() {
 
-
-
-        System.setProperty("webdriver.chrome.driver", file.getAbsolutePath());
-//        System.setProperty("webdriver.chrome.driver", "c:/" + file.getPath());
+//        System.setProperty("webdriver.chrome.driver", "c:/chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver", "c:/" + file.getPath());
         ChromeOptions options = new ChromeOptions();
-        options.addArguments("user-data-dir=Chrome/" + getPerfil());
+        options.addArguments("user-data-dir=c:/Chrome/" + getPerfil());
         driver = new ChromeDriver(options);
 
         driver.navigate().to("https://web.whatsapp.com/");
@@ -68,13 +63,13 @@ public class Bot {
     public void mandarAlerta() {
 
         ChromeOptions options = new ChromeOptions();
-        options.addArguments("user-data-dir=Chrome/" + getPerfil());
+        options.addArguments("user-data-dir=c:/Chrome/" + getPerfil());
         System.out.println("Mandar Alerta");
         options.addArguments("--window-size=780,640"); //tamaño 
         options.addArguments("--window-position=-2000,-2000"); // mandar fuera de pantalla
 
         driver = new ChromeDriver(options);
-        driver.navigate().to("https://wa.me/57" + getNumero() + "?text=" + getMensaje());
+        driver.navigate().to("https://api.whatsapp.com/send?phone=57" + getNumero() + "&text=" + getMensaje());
         driver.findElement(By.id("action-button")).click();
 
         try {
@@ -85,13 +80,19 @@ public class Bot {
 
         driver.findElement(By.xpath("//*[@id=\"main\"]/footer/div[1]/div[3]/button/span")).click();
 
+        try {
+            Thread.sleep(8000);
+            Thread.sleep(8000);
+        } catch (InterruptedException e) {
+        }
+
+        cerrarVentana();
     }
 
     public void cerrarVentana() {
 
         driver.close();
     }
-
 
     public static void main(String[] arg) {
 

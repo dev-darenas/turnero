@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import lib.Bot;
+import lib.ConsultaTurno;
 
 /**
  *
@@ -23,26 +24,33 @@ public class ControlBot extends HttpServlet {
             System.out.println("************************************************************************");
 
             String perfil = request.getParameter("perfil");
-            String numero = request.getParameter("numero");
             String turno = request.getParameter("turno");
-            String accion = request.getParameter("accion");
-            
+
             Bot bot = new Bot();
-            
-            bot.setPerfil(perfil);
-            
-            bot.conectarCuenta();           
 
-            
+            if (request.getParameter("conectar") != null) {
 
-//            bot.setPerfil(perfil);
-//            bot.setNumero(numero);
-//            bot.setMensaje("Su turno " + turno + "sera el proximo en ser atendido");
-//
-//            bot.iniciar();
-//            bot.mandarAlerta();
-            
-            response.sendRedirect("/turnero/vistas/comunicacion/whatsapp/ConectarConModeloTurno.jsp");
+                bot.setPerfil(perfil);
+                bot.conectarCuenta();
+
+            }
+
+            if (request.getParameter("llamar") != null) {
+
+                bot.setPerfil(perfil);
+                               
+                ConsultaTurno ct = new ConsultaTurno();
+                String numero = ct.consultarNumero();
+                bot.setNumero(numero);
+                
+                bot.setMensaje("Su turno " + turno + "sera el proximo en ser atendido");
+
+                bot.iniciar();
+                bot.mandarAlerta();
+
+            }
+
+            response.sendRedirect("/turnero/vistas/activacionModulo/ModeloTurno.jsp");
 
         }
     }
