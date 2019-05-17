@@ -1,0 +1,5 @@
+[12980:12092:0516/062305.736:WARNING:leveldb_database.cc(106)] Unable to open C:\Users\jhoan\Desktop\Proyecto\turnero-master\turnero\Chrome\modulo1\Default\shared_proto_db: Invalid argument: C:\Users\jhoan\Desktop\Proyecto\turnero-master\turnero\Chrome\modulo1\Default\shared_proto_db: does not exist (create_if_missing is false)
+[12980:9988:0516/062332.414:ERROR:browser_process_sub_thread.cc(217)] Waited 919 ms for network service
+[12980:15208:0516/062332.419:WARNING:pref_notifier_impl.cc(23)] Pref observer found at shutdown.
+[12980:15208:0516/062332.419:WARNING:pref_notifier_impl.cc(23)] Pref observer found at shutdown.
+[12980:15208:0516/062332.420:WARNING:pref_notifier_impl.cc(23)] Pref observer found at shutdown.

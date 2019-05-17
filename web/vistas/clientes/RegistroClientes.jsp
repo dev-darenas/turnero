@@ -24,51 +24,62 @@
 
             ResultSet rs = con1.realizarConsulta("select * from clientes");
 
-        //listar los datos
+            //listar los datos
 
         %>
 
-
-
-
-        <h1>REGISTRO DE CLIENTES</h1>
-
-        <a href="agregarCliente.jsp">Agregar Cliente</a>
-        <br><br><br>
-    <center>
         <div class="container">
-        <table class="table table-bordered table-hover table-sm">
-            <thead class="thead-dark">
-            <tr>
-                <th>CC</th>
-                <th>NOMBRE</th>
-                <th>APELLIDO</th>
-                <th>EMAIL</th>
-                <th>ESTADO</th>
-                <th>N_EMAIL</th>
-                <th>N_SMS</th>
-                <th>ACCIÓN</th>
-            </tr>
-            </thead>
-            <% while (rs.next()) {%>
-            <tr>
-                <td><%=rs.getInt("Cc")%></td>
-                <td><%=rs.getString("Nombre")%></td>
-                <td><%=rs.getString("Apellido")%></td>
-                <td><%=rs.getString("Email")%></td>
-                <td><%=rs.getString("Estado")%></td>
-                <td><%=rs.getString("Notificar_email")%></td>
-                <td><%=rs.getString("Notificar_sms")%></td>
+            <div class="container-contact100">
+                <div class="wrap-contact100">
 
-                <td> <a href="editarCliente.jsp?id=<%=rs.getInt("Cc")%>&accion=EDITAR&dd=<%=rs.getInt("Id")%>">Editar</a>  <a href="editarCliente.jsp?id=<%=rs.getInt("Cc")%>&accion=ELIMINAR&estado=readonly">Eliminar</a> </td>
+                    <span class="contact100-form-title">
+                        REGISTRO DE CLIENTES
+                    </span>
 
-            </tr>
-            <%}
-                con1.cierraConexion();%>
-        </table>
+                    <div class="wrap-input100 input100-select bg1 rs1-wrap-input100" data-validate="Campo obligatorio">
+                        <a href="agregarCliente.jsp">
+                            <input type="button" class="input100" id="" value="Agregar Cliente" />  
+                        </a>
+                    </div>
+
+                    <br><br>
+                    <center>
+                        <div class="container">
+                            <table class="table table-bordered table-hover table-sm">
+                                <thead class="thead-dark">
+                                    <tr>
+                                        <th>CC</th>
+                                        <th>NOMBRE</th>
+                                        <th>APELLIDO</th>
+                                        <th>EMAIL</th>
+                                        <th>ESTADO</th>
+                                        <th>N_EMAIL</th>
+                                        <th>N_SMS</th>
+                                        <th>ACCIÓN</th>
+                                    </tr>
+                                </thead>
+                                <% while (rs.next()) {%>
+                                <tr>
+                                    <td><%=rs.getInt("Cc")%></td>
+                                    <td><%=rs.getString("Nombre")%></td>
+                                    <td><%=rs.getString("Apellido")%></td>
+                                    <td><%=rs.getString("Email")%></td>
+                                    <td><%=rs.getString("Estado")%></td>
+                                    <td><%=rs.getString("Notificar_email")%></td>
+                                    <td><%=rs.getString("Notificar_sms")%></td>
+
+                                    <td> <a href="editarCliente.jsp?id=<%=rs.getInt("Cc")%>&accion=EDITAR&dd=<%=rs.getInt("Id")%>">Editar</a>  <a href="editarCliente.jsp?id=<%=rs.getInt("Cc")%>&accion=ELIMINAR&estado=readonly">Eliminar</a> </td>
+
+                                </tr>
+                                <%}
+                                    con1.cierraConexion();%>
+                            </table>
+                        </div>
+
+                    </center>
+                    <%@include file="/source/javascript/javalib.jsp" %>
+                </div>
+            </div>
         </div>
-
-    </center>
-     <%@include file="/source/javascript/javalib.jsp" %>
-</body>
+    </body>
 </html>

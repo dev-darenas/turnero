@@ -1,34 +1,40 @@
 <div class="container">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <a class="navbar-brand h1" href="/turnero/dashboard.jsp">Turnero</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
+        <a class="navbar-brand h1" href="/turnero/dashboard.jsp">Turnero</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="/turnero/vistas/clientes/RegistroClientes.jsp">Clientes</a>
-          </li>
-          <li class="nav-item active">
-            <a class="nav-link" href="/turnero/vistas/usuarios/Consulta.jsp">Usuarios</a>
-          </li>
-          <li class="nav-item active">
-            <a class="nav-link" href="/turnero/vistas/producto/list.jsp">Producto</a>
-          </li>
-          <li class="nav-item active">
-            <a class="nav-link" href="/turnero/vistas/modulo/list.jsp">Modulo</a>
-          </li>
-          <li class="nav-item active">
-            <a class="nav-link" href="/turnero/vistas/activacionModulo/AbrirModulo.jsp">Activacion Modulo</a>
-          </li>
-          <li class="nav-item active">
-            <a class="nav-link" href="/turnero/vistas/turno/generar.jsp">Generar Turno</a>
-          </li>
-        </ul>
-        <span class="navbar-text">
-          <a class="nav-link" href="/turnero/destroySession">Salir</a>
-        </span>
-      </div>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/turnero/vistas/clientes/RegistroClientes.jsp">Clientes</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="/turnero/vistas/usuarios/Consulta.jsp">Usuarios</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="/turnero/vistas/producto/list.jsp">Producto</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="/turnero/vistas/modulo/list.jsp">Modulo</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="/turnero/vistas/activacionModulo/AbrirModulo.jsp">Activacion Modulo</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="/turnero/vistas/turno/generar.jsp">Generar Turno</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="/turnero/vistas/activacionModulo/ModeloTurno.jsp">Atender Turno</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="/turnero/vistas/reporte/reporte.jsp">Reporte de Datos</a>
+                </li>
+            </ul>
+            <span class="navbar-text">
+                <a class="nav-link" href="/turnero/destroySession">Salir</a>
+            </span>
+        </div>
     </nav>
 </div>

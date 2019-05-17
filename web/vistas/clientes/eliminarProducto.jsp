@@ -14,7 +14,9 @@
         <title>Eliminando Producto</title>
     </head>
     <body>
-        <h1>Eliminando Producto</h1>
+        <span class="contact100-form-title">
+            Eliminando Producto
+        </span>
 
         <%
             if (request.getParameter("id_producto") != null) {
@@ -22,12 +24,12 @@
                 int cedula = Integer.parseInt(request.getParameter("cedula"));
                 int idd = Integer.parseInt(request.getParameter("idd"));
                 String acci = (request.getParameter("acci"));
-                
-                out.print("Producto id: "+id+"   cedula="+cedula+"  ide");
+
+                out.print("Producto id: " + id + "   cedula=" + cedula + "  ide");
                 ConsultaClientes con = new ConsultaClientes();
                 con.eliminarProducto(id);
-                
-                response.sendRedirect("editarCliente.jsp?id="+cedula+"&accion="+acci+"&dd="+idd);
+
+                response.sendRedirect("editarCliente.jsp?id=" + cedula + "&accion=" + acci + "&dd=" + idd);
 
             }
 

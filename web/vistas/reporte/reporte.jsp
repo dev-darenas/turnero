@@ -23,7 +23,7 @@
         <title>Reporte</title>
     </head>
     <body>
-
+        <%@include file="/componentes/navbar.jsp" %>
 
         <%String fechaIni = request.getParameter("fechaIni");%>
         <%String fechaFin = request.getParameter("fechaFin");%>
@@ -44,22 +44,20 @@
                 checkTitular = "off";
             }
 
-            if (usuario.equalsIgnoreCase("Todos")) {
-                usuario = null;
-            } else if (usuario == null) {
-                usuario = null;
-            }
-
-            if (fechaIni == null) {
-                fechaIni = "2019-01-01 00:00:00";
+            if (fechaIni == null || fechaIni.equals("")) {
+                fechaIni = "2001-01-01 00:00:00";
             } else {
                 fechaIni = fechaIni + " 00:00:00";
             }
 
-            if (fechaFin == null) {
-                fechaFin = "2020-01-01 23:59:59";
+            if (fechaFin == null || fechaFin.equals("")) {
+                fechaFin = "2050-01-01 23:59:59";
             } else {
                 fechaFin = fechaFin + " 23:59:59";
+            }
+
+            if (usuario == null || usuario.equalsIgnoreCase("Todos")) {
+                usuario = "";
             }
 
             String prioridad = null;
@@ -90,7 +88,7 @@
 
             Conexion co = new Conexion();
 
-            String consulta = "SELECT DATE(fecha_creacion), Count(num_turno) as cantidad, Cast(AVG(Cast(Datediff(fecha_llamado, fecha_creacion)as decimal(3,2))) as DateTime)as PromLlamado ,Cast(AVG(Cast(Datediff(fecha_terminado, fecha_llamado)as decimal(3,2))) as DateTime)as PromAtendido FROM Turno WHERE fecha_creacion  BETWEEN ? and ? and prioridad = IFNULL(?,prioridad)  and id_historico_modulo = IFNULL ((Select id from Historico_modulo where id_usuario like '" + usuario + "%'),id_historico_modulo) Group by DATE(fecha_creacion)"; //Cuanto me demore haciendo el sql? no recuerdo... pero fueron muchas
+            String consulta = "SELECT DATE(fecha_creacion), Count(num_turno) as cantidad, Cast(AVG(Cast(Datediff(fecha_llamado, fecha_creacion)as decimal(3,2))) as Time)as PromLlamado ,Cast(AVG(Cast(Datediff(fecha_terminado, fecha_llamado)as decimal(3,2))) as Time)as PromAtendido FROM turno WHERE fecha_creacion  BETWEEN ? and ? and prioridad = IFNULL(?,prioridad)  and id_historico_modulo = IFNULL ((Select id from historico_modulo where id_usuario  like '" + usuario + "' limit 1),id_historico_modulo) Group by DATE(fecha_creacion)";
             pstm = co.getConexion().prepareCall(consulta);
             pstm.setString(1, sqlFechaIni);
             pstm.setString(2, sqlFechaFin);
@@ -101,62 +99,100 @@
 
         %>
 
-        <form action="" method="Post"> 
-            <div class="container row" style="width: 90%; position:relative;top:5%;left:2%">
 
-                <div class="col-md-4">
-                    <label>Fecha Inicio</label> <input name="fechaIni" type="text" class="" id="" placeholder="YYYY-MM-DD" value="2000-01-01"/>  
-                </div> 
-                <div class="col-md-4">
-                    <label>Fecha Fin</label> <input name="fechaFin" type="text" class="" id="" placeholder="YYYY-MM-DD" value="2020-01-01"/>  
+        <div class="container">
+            <div class="container-contact100">
+                <div class="wrap-contact100">
+                    <form action="" class="contact100-form validate-form" method="Post"> 
+                        <span class="contact100-form-title">
+                            Reporte de Datos
+                        </span>
+                        <div class="wrap-input100 input100-select bg1 rs1-wrap-input100" data-validate="Campo obligatorio">
+                            <span class="label-input100">Fecha de Inicio</span>
+                            <input name="fechaIni" type="text" class="input100" id="" placeholder="YYYY-MM-DD" />  
+
+                        </div>
+
+                        <div class="wrap-input100 input100-select bg1 rs1-wrap-input100" data-validate="Campo obligatorio">
+                            <span class="label-input100">Fecha de Fin</span>
+                            <input name="fechaFin" type="text" class="input100" id="" placeholder="YYYY-MM-DD" /> 
+                        </div>
+
+                        <div class="wrap-input100 bg1 rs1-wrap-input100">
+                            <span class="label-input100">Mostrar Solo Prioritarios</span>
+                            <div class="pretty p-switch">
+                                <input name="prioridad" type="checkbox" class="" id=""/>
+                                <div class="state">
+                                    <label>Activo?</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="wrap-input100 bg1 rs1-wrap-input100">
+                            <span class="label-input100">Mostrar Solo Titulares</span>
+                            <div class="pretty p-switch">
+                                <input name="titular" type="checkbox" class="" id=""/>
+                                <div class="state">
+                                    <label>Activo?</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="wrap-input100 bg1 rs1-wrap-input100">
+                            <span class="label-input100">Mostrar Solo Preferenciales</span>
+                            <div class="pretty p-switch">
+                                <input name="particular" type="checkbox" class="" id=""/>
+                                <div class="state">
+                                    <label>Activo?</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="wrap-input100 bg1 rs1-wrap-input100">
+                            <span class="label-input100">Mostrar un Usuario en especifico</span>
+
+                            <input name="usuario" type="text" placeholder="Todos"/>
+
+                        </div>
+
+                        <div class="container-contact100-form-btn">
+                            <input type="submit" value="Generar" name="boton" class="contact100-form-btn"/>                         
+                        </div>
+                        <div class="container" style="margin-top:40px">
+                            <table name="tabla"class="table table-bordered table-hover table-sm">
+                                <thead class="thead-dark">
+                                    <tr>
+                                        <th>Fecha</th>
+                                        <th>Cantidad</th>
+                                        <th>Promedio Llamado</th>
+                                        <th>Promedio Atendido</th>
+                                    </tr>
+                                </thead>
+                                <%                        int totall = 0;
+                                    while (rs.next()) {
+                                        totall = totall + rs.getInt("cantidad");
+                                        out.print("<tr>");
+                                        for (int x = 1; x <= 4; x = x + 1) {
+                                            out.print("<th>" + rs.getString(x) + "</th>");
+                                        }
+                                        out.print("</tr>");
+                                        y = y + 1;
+                                    }
+                                %>
+
+
+                            </table>
+                        </div>
+                        <div class="wrap-input100 bg1 rs1-wrap-input100">
+                            <span class="label-input100" Style="font-size:20px">Total de Turnos:</span>
+                            <span class="label-input100" Style="font-size:20px"><%out.print(" " + totall);%></span>
+                        </div>
+
+                        <% co.cierraConexion();%>
+                    </form>
                 </div>
-                <div class="col-md-4">
-                    <input type="submit" value="Generar" class="" id=""/> 
-                </div>
-
-
-
-                <div class="col-md-3">
-                    <label>Usuario</label> 
-                    <input name="usuario" type="text" value="Todos"/>
-                </div>
-                <div class="col-md-3">
-                    <label>Prioridad</label> <input name="prioridad" type="checkbox" class="" id=""/>
-                </div>
-                <div class="col-md-3">
-                    <label>Titular</label> <input name="titular" type="checkbox" class="" id=""/> 
-                </div>
-                <div class="col-md-3">
-                    <label>Particular</label> <input name="particular" type="checkbox" class="" id=""/> 
-                </div>
-
-                <table name="tabla"class="table table-bordered table-hover table-sm">
-                    <tr>
-                        <th>Fecha</th>
-                        <th>Cantidad</th>
-                        <th>Promedio Llamado</th>
-                        <th>Promedio Atendido</th>
-                    </tr>
-
-                    <%                        int totall = 0;
-                        while (rs.next()) {
-                            totall = totall + rs.getInt("cantidad");
-                            out.print("<tr>");
-                            for (int x = 1; x <= 4; x = x + 1) {
-                                out.print("<th>" + rs.getString(x) + "</th>");
-                            }
-                            out.print("</tr>");
-                            y = y + 1;
-                        }
-                    %>
-
-
-                </table>
-
-                <label>Total:</label> <label name="total" ><%out.print(totall);%></label>
-
             </div>
+        </div>
 
-        </form>
     </body>
 </html>

@@ -3,27 +3,27 @@
     Created on : 26/03/2019, 10:23:28 PM
     Author     : Administrador
 --%>
- 
- <%@page import=" Controller.RegistroMod" %>
+
+<%@page import=" Controller.RegistroMod" %>
 <html>
-    
+
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Registrarse</title>
-         <%@include file="/source/styles/styleslib.jsp" %>
+        <%@include file="/source/styles/styleslib.jsp" %>
     </head>
 
     <body>
-         <%@include file="/componentes/navbar.jsp" %>
-         <div class="container">
-        <div class="container-contact100">
-		<div class="wrap-contact100">
+        <%@include file="/componentes/navbar.jsp" %>
+        <div class="container">
+            <div class="container-contact100">
+                <div class="wrap-contact100">
                     <form class="contact100-form validate-form" action="/turnero/RegistroProducto" method="post" >
                         <span class="contact100-form-title">
                             Registrar Producto
                         </span>
-                        
-            <div class="wrap-input100 validate-input bg1 rs1-wrap-input100" data-validate="Campo obligatorio">
+
+                        <div class="wrap-input100 validate-input bg1 rs1-wrap-input100" data-validate="Campo obligatorio">
                             <span class="label-input100">Nombre</span>
                             <input class="input100" type="text" name="nom" placeholder="Nombre">
                         </div>
@@ -41,10 +41,10 @@
                             <span class="label-input100">Descripcion</span>
                             <input class="input100" type="text" name="des" placeholder="Descripcion">
                         </div>
-            
-                       
-                    
-    <div class="container-contact100-form-btn">
+
+
+
+                        <div class="container-contact100-form-btn">
                             <button class="contact100-form-btn">
                                 <span>
                                     Agregar
@@ -53,12 +53,12 @@
                             </button>
                         </div>
                     </form>
-		</div>
+                </div>
             </div>
         </div>          
-               
-             
-    <%@include file="/source/javascript/javalib.jsp" %>
+
+
+        <%@include file="/source/javascript/javalib.jsp" %>
     </body>
-    
+
 </html>

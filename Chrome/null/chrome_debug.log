@@ -1,0 +1,22 @@
+[13744:12396:0516/181309.745:WARNING:dns_config_service_win.cc(674)] Failed to read DnsConfig.
+[13744:852:0516/181314.627:INFO:CONSOLE(0)] "The FetchEvent for "https://www.google.com/async/newtab?ei=-TDdXOKcCsm45gKL8b6gAQ&yv=3&async=xid:1,_fmt:json" resulted in a network error response: the promise was rejected.", source:  (0)
+[13744:852:0516/181314.646:INFO:CONSOLE(0)] "Uncaught (in promise) TypeError: Failed to fetch", source: https://www.google.com/_/chrome/newtab-serviceworker.js (0)
+[13744:852:0516/181314.675:INFO:CONSOLE(0)] "The FetchEvent for "https://www.google.com/gen_204?atyp=csi&ei=-TDdXOKcCsm45gKL8b6gAQ&s=newtab&t=all&adh=&conn=onchange&ima=1&ime=1&imeb=0&imeo=0&wh=477&scp=0&net=dl.10000,ect.4g,rtt.0&mem=ujhs.10,tjhs.11,jhsl.2330,dm.8&sto=&sys=hc.4&rt=prt.660,xjses.793,xjsee.981,xjs.981,ol.1972,aft.1602,wsrt.2538,cst.0,dnst.0,rqst.136,rspt.69,rqstt.2471,unt.2471,cstt.2471,dit.3210&zx=1558048394616" resulted in a network error response: the promise was rejected.", source:  (0)
+[13744:852:0516/181314.691:INFO:CONSOLE(0)] "Uncaught (in promise) TypeError: Failed to fetch", source: https://www.google.com/_/chrome/newtab-serviceworker.js (0)
+[13744:852:0516/181314.692:INFO:CONSOLE(0)] "The FetchEvent for "https://www.google.com/gen_204?atyp=csi&ei=-TDdXOKcCsm45gKL8b6gAQ&s=async&astyp=newtab&rt=fr.5,ft.453&zx=1558048394630" resulted in a network error response: the promise was rejected.", source:  (0)
+[13744:852:0516/181314.693:INFO:CONSOLE(0)] "Uncaught (in promise) TypeError: Failed to fetch", source: https://www.google.com/_/chrome/newtab-serviceworker.js (0)
+[13744:852:0516/181314.693:INFO:CONSOLE(0)] "The FetchEvent for "https://www.google.com/gen_204?atyp=csi&ei=-TDdXOKcCsm45gKL8b6gAQ&s=newtab&t=all&action=update&conn=onchange&ima=1&ime=1&imeb=0&imeo=0&wh=477&scp=0&net=dl.10000,ect.4g,rtt.0&mem=ujhs.10,tjhs.11,jhsl.2330,dm.8&sto=&sys=hc.4&rt=xhrf.459,aft.65,cst.0,dnst.0,rqst.136,rspt.69,rqstt.2471,unt.2471,cstt.2471,dit.3210&zx=1558048394638" resulted in a network error response: the promise was rejected.", source:  (0)
+[13744:852:0516/181314.693:INFO:CONSOLE(0)] "Uncaught (in promise) TypeError: Failed to fetch", source: https://www.google.com/_/chrome/newtab-serviceworker.js (0)
+[13744:852:0516/181314.694:INFO:CONSOLE(0)] "The FetchEvent for "https://www.google.com/gen_204?atyp=csi&ei=-TDdXOKcCsm45gKL8b6gAQ&s=newtab&t=all&action=perf&conn=onchange&ima=1&ime=1&imeb=0&imeo=0&wh=477&scp=0&net=dl.10000,ect.4g,rtt.0&mem=ujhs.10,tjhs.11,jhsl.2330,dm.8&sto=&sys=hc.4&rt=nti.1004,fbd.1018,thd.1063,dbi.1401,mvtr.2022,aft.1602,cst.0,dnst.0,rqst.136,rspt.69,rqstt.2471,unt.2471,cstt.2471,dit.3210&zx=1558048394669" resulted in a network error response: the promise was rejected.", source:  (0)
+[13744:852:0516/181314.694:INFO:CONSOLE(0)] "Uncaught (in promise) TypeError: Failed to fetch", source: https://www.google.com/_/chrome/newtab-serviceworker.js (0)
+[13744:12396:0516/181314.774:WARNING:dns_config_service_win.cc(674)] Failed to read DnsConfig.
+[13744:12396:0516/181319.788:WARNING:dns_config_service_win.cc(674)] Failed to read DnsConfig.
+[13744:13692:0516/181321.214:WARNING:leveldb_database.cc(106)] Unable to open C:\Users\jhoan\Desktop\Proyecto\turnero-master\turnero\Chrome\null\Default\shared_proto_db: Invalid argument: C:\Users\jhoan\Desktop\Proyecto\turnero-master\turnero\Chrome\null\Default\shared_proto_db: does not exist (create_if_missing is false)
+[13744:12396:0516/181324.803:WARNING:dns_config_service_win.cc(674)] Failed to read DnsConfig.
+[13744:12396:0516/181329.814:WARNING:dns_config_service_win.cc(674)] Failed to read DnsConfig.
+[13744:12396:0516/181334.829:WARNING:dns_config_service_win.cc(674)] Failed to read DnsConfig.
+[13744:12396:0516/181339.838:WARNING:dns_config_service_win.cc(674)] Failed to read DnsConfig.
+[13744:852:0516/181341.482:ERROR:browser_process_sub_thread.cc(217)] Waited 435 ms for network service
+[13744:14260:0516/181341.488:WARNING:pref_notifier_impl.cc(23)] Pref observer found at shutdown.
+[13744:14260:0516/181341.488:WARNING:pref_notifier_impl.cc(23)] Pref observer found at shutdown.
+[13744:14260:0516/181341.488:WARNING:pref_notifier_impl.cc(23)] Pref observer found at shutdown.
