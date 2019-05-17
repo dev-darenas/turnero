@@ -137,7 +137,7 @@ public class ConsultaTurno extends Conexion {
 
         try {
 
-            String consulta = "SELECT cel FROM clientes WHERE notificar_wp >= 1 and id = (Select id_cliente from turno where estado = 'e' order by puntaje limit 1 offset 1)";
+            String consulta = "SELECT cel FROM clientes WHERE notificar_wp >= 1 and id = (Select id_cliente from turno where estado = 'e' order by puntaje desc limit 1 offset 1)";
             pstm = getConexion().prepareCall(consulta);
 
 
