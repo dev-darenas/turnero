@@ -8,10 +8,11 @@
 
     <LinearLayout
             android:layout_width="match_parent" android:layout_height="match_parent"
-            android:paddingHorizontal="100dp"
+            android:paddingHorizontal="30dp"
             android:orientation="vertical"
             android:gravity="center">
         <TextView
+                android:layout_marginTop="16dp"
                 android:gravity="center"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -22,8 +23,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:padding="8dp"
-                android:gravity="center">
+                android:gravity="center"
+                android:weightSum="4">
 
 
             <CheckBox
@@ -33,28 +34,32 @@
                     android:text="Impresión"
                     android:layout_marginEnd="15dp"
                     android:textSize="18sp"
-                    android:checked="true"/>
+                    android:checked="true"
+                    android:layout_weight="1"/>
             <CheckBox
                     android:id="@+id/cb_email"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:text="Email"
                     android:layout_marginEnd="15dp"
-                    android:textSize="18sp"/>
+                    android:textSize="18sp"
+                    android:layout_weight="1"/>
             <CheckBox
                     android:id="@+id/cb_sms"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:text="SMS"
                     android:layout_marginEnd="15dp"
-                    android:textSize="18sp"/>
+                    android:textSize="18sp"
+                    android:layout_weight="1"/>
             <CheckBox
                     android:id="@+id/cb_whats"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:text="WhatsApp"
                     android:layout_marginEnd="15dp"
-                    android:textSize="18sp"/>
+                    android:textSize="18sp"
+                    android:layout_weight="1"/>
 
         </LinearLayout>
 
