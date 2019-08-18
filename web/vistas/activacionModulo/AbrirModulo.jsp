@@ -20,17 +20,12 @@
             //response.sendRedirect("/turnero/vistas/activacionModulo/ModeloTurno.jsp");
         %>
         <%  
-            Cookie[] cookieList = request.getCookies();
+            Cookie[] cookieListLocal = request.getCookies();
             
             String user_id = "";
-            String id_rol = "";
-            for (int i = 0; i < cookieList.length; i++) { 
+            for (int i = 0; i < cookieListLocal.length; i++) { 
                 if(cookieList[i].getName().equals("id_user")){
                     user_id = cookieList[i].getValue();
-                }
-                
-                if(cookieList[i].getName().equals("id_rol")){
-                    id_rol = cookieList[i].getValue();
                 }
             } 
         %>
@@ -73,6 +68,7 @@
             </div>
 
         </div>
+        <% conexion.desconectar(); %>
         <%@include file="/source/javascript/javalib.jsp" %>
     </body>
     

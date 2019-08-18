@@ -39,12 +39,12 @@
 
     body, html {
             height: 100%;
-            font-family: Poppins-Regular, sans-serif;
+            font-family: Poppins, sans-serif;
     }
 
     /*---------------------------------------------*/
     a {
-            font-family: Poppins-Regular;
+            font-family: Poppins;
             font-size: 14px;
             line-height: 1.7;
             color: #666666;
@@ -69,7 +69,7 @@
     }
 
     p {
-            font-family: Poppins-Regular;
+            font-family: Poppins;
             font-size: 14px;
             line-height: 1.7;
             color: #666666;

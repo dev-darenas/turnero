@@ -30,7 +30,7 @@
     .video{
         position: relative;
         left: 1%;
-        top:-50px;
+        top:0px;
     }
 
     table {

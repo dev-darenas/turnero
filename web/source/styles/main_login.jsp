@@ -1,3 +1,4 @@
+<link href="https://fonts.googleapis.com/css?family=Poppins&display=swap" rel="stylesheet">
 <style type="text/css">
 
 
@@ -45,12 +46,12 @@
 
 body, html {
 	height: 100%;
-	font-family: Poppins-Regular, sans-serif;
+	font-family: 'Poppins', sans-serif;
 }
 
 /*---------------------------------------------*/
 a {
-	font-family: Poppins-Regular;
+	font-family: 'Poppins', sans-serif;
 	font-size: 14px;
 	line-height: 1.7;
 	color: #666666;
@@ -207,7 +208,7 @@ iframe {
 
 .login100-form-title {
   display: block;
-  font-family: Poppins-Bold;
+  font-family: Poppins;
   font-size: 30px;
   color: #333333;
   line-height: 1.2;
@@ -228,7 +229,7 @@ iframe {
 }
 
 .input100 {
-  font-family: Poppins-Regular;
+  font-family: Poppins;
   font-size: 15px;
   color: #555555;
   line-height: 1.2;
@@ -274,7 +275,7 @@ iframe {
 }
 
 .focus-input100::after {
-  font-family: Poppins-Regular;
+  font-family: Poppins;
   font-size: 15px;
   color: #999999;
   line-height: 1.2;
@@ -393,7 +394,7 @@ iframe {
 }
 
 .login100-form-btn {
-  font-family: Poppins-Medium;
+  font-family: Poppins;
   font-size: 15px;
   color: #fff;
   line-height: 1.2;
@@ -451,7 +452,7 @@ iframe {
   right: 0px;
   pointer-events: none;
 
-  font-family: Poppins-Regular;
+  font-family: Poppins;
   color: #c80000;
   font-size: 13px;
   line-height: 1.4;

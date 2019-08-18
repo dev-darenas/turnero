@@ -30,7 +30,7 @@
                             turno_info.next();
                             String cod_turno = "";
 
-                            if(turno_info.getString("prioridad") != null){
+                            if(turno_info.getString("prioridad").equalsIgnoreCase("1")){
                              cod_turno = "P";
                             }
 
@@ -79,6 +79,7 @@
                                 <% }%>
                             </ul>
                         </div>
+                        <% conexion.desconectar(); %>
                     <% } else { %>
                         <div class="card-body">
                             <div class="alert alert-warning" role="alert">
@@ -93,21 +94,23 @@
                 <form action = "/turnero/llamarTurno" method = "post" class="col-md-3">
                     <input name="nombre" type="hidden" value="<%= request.getParameter("nombre") %>">
                     <input name="codigo" type="hidden" value="<%= request.getParameter("codigo") %>">
+                    <input name="estado" type="hidden" value="aa">
                     <input type ="submit" value ="Llamar turno" class="btn btn-primary">
                 </form>
 
-                <form action = "/turnero/CancelarTurno" method = "post" class="col-md-3">
+                <form action = "/turnero/llamarTurno" method = "post" class="col-md-3">
                     <input name="nombre" type="hidden" value="<%= request.getParameter("nombre") %>">
                     <input name="codigo" type="hidden" value="<%= request.getParameter("codigo") %>">
+                    <input name="estado" type="hidden" value="c">
                     <input type ="submit" value ="Cancelar Turno" class="btn btn-warning">
                 </form>
 
-                <form action = "Cerrar.jsp" method = "post" class="col-md-3">       
+                <form action = "/turnero/CerrarModulo" method = "post" class="col-md-3">
+                    <input name="codigo" type="hidden" value="<%= request.getParameter("codigo") %>">
                     <input type ="submit" value ="Cerrar Sesion" class="btn btn-danger">
                 </form> 
             </div>
-        </div>
- 
+        </div>   
     </body>
     <%@include file="/source/javascript/javalib.jsp" %>
 </html>

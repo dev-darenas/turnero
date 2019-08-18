@@ -23,7 +23,7 @@
             int id = Integer.parseInt(request.getParameter("id"));
             ConsultaClientes con = new ConsultaClientes();
 
-            ResultSet rs = con.realizarConsulta("select * from clientes where Cc=" + id);
+            ResultSet rs = con.realizarConsulta("select * from clientes where id=" + id);
             String est = request.getParameter("estado");
         %>
     <center>

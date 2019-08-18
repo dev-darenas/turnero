@@ -20,7 +20,8 @@
         <%  ResultSet modulos = con.obtenerModulos(); %>
         
         <%@include file="/componentes/navbar.jsp" %>
-        <div class="container">
+        <main>
+         <div class="container">
             <h1> 
                 <a class="btn btn-primary" href="/turnero/vistas/modulo/crear.jsp">
                     <i class="fas fa-plus"></i>
@@ -50,11 +51,11 @@
                     </th>
                     
                     <th> 
-                    <% if (modulos.getString("estado").equals("1") ){ %>
-                        Activo
-                    <% }else{ %>
-                        Inactivo
-                    <% } %>
+                        <% if (modulos.getString("estado").equals("1") ){ %>
+                            Activo
+                        <% }else{ %>
+                            Inactivo
+                        <% } %>
                     </th>
                     
                     <th>
@@ -70,9 +71,9 @@
                     </th>
                     
                     <th>
-                   <a href="editar.jsp?cod_modulo=<%= modulos.getInt("id")%>" class="btn btn-primary btn-sm">
-                       <i class="fas fa-pencil-alt"></i>
-                   </a>
+                        <a href="editar.jsp?cod_modulo=<%= modulos.getInt("id")%>" class="btn btn-primary btn-sm">
+                            <i class="fas fa-pencil-alt"></i>
+                        </a>
                     </th>
     
                 </tr>
@@ -83,6 +84,7 @@
         
         
         </div>
+        </main>
         <%@include file="/source/javascript/javalib.jsp" %>
     </body>
      <% if(request.getParameter("succes") != null){ %>

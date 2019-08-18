@@ -8,9 +8,6 @@ package Controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.Cookie;
@@ -23,8 +20,8 @@ import lib.ConexionAbrirModulo;
  *
  * @author Dahian
  */
-@WebServlet(name = "llamarTurno", urlPatterns = {"/llamarTurno"})
-public class llamarTurno extends HttpServlet {
+@WebServlet(name = "CerrarModulo", urlPatterns = {"/CerrarModulo"})
+public class CerrarModulo extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -36,29 +33,28 @@ public class llamarTurno extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, SQLException {
+            throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            String id_rol = "";
             Cookie[] cookieList = request.getCookies();
+            
+            String user_id = "";
             for (int i = 0; i < cookieList.length; i++) { 
-                if(cookieList[i].getName().equals("id_rol")){
-                    id_rol = cookieList[i].getValue();
+                if(cookieList[i].getName().equals("id_user")){
+                    user_id = cookieList[i].getValue();
                 }
-            }
+            } 
             
-            System.out.println("Controller.llamarTurno.processRequest()");
-            System.out.println(id_rol);
-            
+            ResultSet resultado1;
             String codigo = request.getParameter("codigo");
-            String nombre = request.getParameter("nombre");
-            String estado = request.getParameter("estado");
-            
             ConexionAbrirModulo conexion = new ConexionAbrirModulo();
-            int id_turno = conexion.llamarTurno(codigo, id_rol, estado);
+            
+            System.out.println("Controller.CerrarModulo.processRequest()");
+            
+            conexion.cerrarModulo(codigo, user_id);
             conexion.desconectar();
             
-            response.sendRedirect("/turnero/vistas/activacionModulo/ModeloTurno.jsp?codigo="+codigo+"&nombre="+nombre+"&id_turno="+id_turno);
+            response.sendRedirect("/turnero/vistas/activacionModulo/AbrirModulo.jsp"); 
         }
     }
 
@@ -74,11 +70,7 @@ public class llamarTurno extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            processRequest(request, response);
-        } catch (SQLException ex) {
-            Logger.getLogger(llamarTurno.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        processRequest(request, response);
     }
 
     /**
@@ -92,11 +84,7 @@ public class llamarTurno extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            processRequest(request, response);
-        } catch (SQLException ex) {
-            Logger.getLogger(llamarTurno.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        processRequest(request, response);
     }
 
     /**

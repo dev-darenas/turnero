@@ -22,7 +22,7 @@
                         <span class="login100-form-title p-b-26">
                             Bienvenido
                         </span>
-                        <p align="center"><img src="logo.png" width="80" height="95">
+                        <p align="center"><img src="/turnero/source/img/logo.png" height="120">
                         
                         <% if(request.getParameter("error_login") != null){ %>
                             <div class="alert alert-danger" role="alert">

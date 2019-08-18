@@ -21,54 +21,53 @@
         <%@include file="/componentes/navbar.jsp" %>
         <%
             ConsultaClientes con1 = new ConsultaClientes();
-
             ResultSet rs = con1.realizarConsulta("select * from clientes");
-
-        //listar los datos
-
         %>
 
-
-
-
-        <h1>REGISTRO DE CLIENTES</h1>
-
-        <a href="agregarCliente.jsp">Agregar Cliente</a>
-        <br><br><br>
-    <center>
+        <main>
         <div class="container">
-        <table class="table table-bordered table-hover table-sm">
-            <thead class="thead-dark">
-            <tr>
-                <th>CC</th>
-                <th>NOMBRE</th>
-                <th>APELLIDO</th>
-                <th>EMAIL</th>
-                <th>ESTADO</th>
-                <th>N_EMAIL</th>
-                <th>N_SMS</th>
-                <th>ACCIÓN</th>
-            </tr>
-            </thead>
-            <% while (rs.next()) {%>
-            <tr>
-                <td><%=rs.getInt("Cc")%></td>
-                <td><%=rs.getString("Nombre")%></td>
-                <td><%=rs.getString("Apellido")%></td>
-                <td><%=rs.getString("Email")%></td>
-                <td><%=rs.getString("Estado")%></td>
-                <td><%=rs.getString("Notificar_email")%></td>
-                <td><%=rs.getString("Notificar_sms")%></td>
-
-                <td> <a href="editarCliente.jsp?id=<%=rs.getInt("Cc")%>&accion=EDITAR&dd=<%=rs.getInt("Id")%>">Editar</a>  <a href="editarCliente.jsp?id=<%=rs.getInt("Cc")%>&accion=ELIMINAR&estado=readonly">Eliminar</a> </td>
-
-            </tr>
-            <%}
+            <h1> 
+                <a class="btn btn-primary" href="/turnero/vistas/clientes/agregarCliente.jsp">
+                    <i class="fas fa-plus"></i>
+                </a>
+                Clientes
+            </h1>
+            <hr>
+            <table class="table table-bordered table-hover table-sm">
+                <thead class="">
+                    <tr>
+                        <th>CC</th>
+                        <th>NOMBRE</th>
+                        <th>APELLIDO</th>
+                        <th>EMAIL</th>
+                        <th>ESTADO</th>
+                        <th>ACCIÓN</th>
+                    </tr>
+                </thead>
+                <% while (rs.next()) {%>
+                <tr>
+                    <td><%=rs.getInt("Cc")%></td>
+                    <td><%=rs.getString("Nombre")%></td>
+                    <td><%=rs.getString("Apellido")%></td>
+                    <td><%=rs.getString("Email")%></td>
+                    <td>
+                        <% if(rs.getInt("estado") == 1 ){ %>
+                            Activado
+                        <% }else{ %>
+                            Desactivado
+                        <% } %>
+                    </td>
+                    <td>
+                        <a href="editarCliente.jsp?id=<%=rs.getInt("id")%>&accion=EDITAR&dd=<%=rs.getInt("id")%>" class="btn btn-primary btn-sm">
+                            <i class="fas fa-pencil-alt"></i>
+                        </a>
+                    </td>
+                </tr>
+                <%}
                 con1.cierraConexion();%>
-        </table>
+            </table>
         </div>
-
-    </center>
+        </main>
      <%@include file="/source/javascript/javalib.jsp" %>
 </body>
 </html>

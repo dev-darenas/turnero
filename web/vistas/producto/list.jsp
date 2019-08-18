@@ -19,7 +19,8 @@
         <%  ResultSet productos = con.obtenerProducto();%>
         
         <%@include file="/componentes/navbar.jsp" %>
-        <div class="container">
+        <main>
+            <div class="container">
             <h1> 
                 <a class="btn btn-primary" href="/turnero/vistas/producto/crear.jsp">
                     <i class="fas fa-plus"></i>
@@ -71,7 +72,7 @@
         </table>
         
         </div>
-        
+        </main>
         <%@include file="/source/javascript/javalib.jsp" %>
     </body>
      <% if(request.getParameter("succes") != null){ %>

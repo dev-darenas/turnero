@@ -1,34 +1,33 @@
-<div class="container">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <a class="navbar-brand h1" href="/turnero/dashboard.jsp">Turnero</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
+<%
+    Cookie[] cookieList = request.getCookies();
+    String id_rol = "";
+    for (int i = 0; i < cookieList.length; i++) { 
+        if(cookieList[i].getName().equals("id_rol")){
+            id_rol = cookieList[i].getValue();
+        }
+    } 
+%>
 
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="/turnero/vistas/clientes/RegistroClientes.jsp">Clientes</a>
-          </li>
-          <li class="nav-item active">
-            <a class="nav-link" href="/turnero/vistas/usuarios/Consulta.jsp">Usuarios</a>
-          </li>
-          <li class="nav-item active">
-            <a class="nav-link" href="/turnero/vistas/producto/list.jsp">Producto</a>
-          </li>
-          <li class="nav-item active">
-            <a class="nav-link" href="/turnero/vistas/modulo/list.jsp">Modulo</a>
-          </li>
-          <li class="nav-item active">
-            <a class="nav-link" href="/turnero/vistas/activacionModulo/AbrirModulo.jsp">Activacion Modulo</a>
-          </li>
-          <li class="nav-item active">
-            <a class="nav-link" href="/turnero/vistas/turno/generar.jsp">Generar Turno</a>
-          </li>
-        </ul>
-        <span class="navbar-text">
-          <a class="nav-link" href="/turnero/destroySession">Salir</a>
-        </span>
-      </div>
+<header id="header">
+    <nav class="menu">
+        <div class="logo">
+            <a href="/turnero/dashboard.jsp"><img src="/turnero/source/img/LogoCompletoFinalReducido.png"></a>
+            <a href="" class="btn-menu" id="btn-menu">
+            <i class="fas fa-bars"></i></a>
+        </div>
+        <div class="enlaces">
+            <% if(id_rol.equalsIgnoreCase("1")){ %>
+              <a href="/turnero/vistas/clientes/RegistroClientes.jsp">Clientes</a>
+              <a href="/turnero/vistas/usuarios/Consulta.jsp">Usuarios</a>
+              <a href="/turnero/vistas/producto/list.jsp">Producto</a>
+              <a href="/turnero/vistas/modulo/list.jsp">Modulo</a>
+            <% }else if(id_rol.equalsIgnoreCase("2")){ %>
+                <a href="/turnero/vistas/clientes/RegistroClientes.jsp">Clientes</a>
+            <% } %>
+            <a href="/turnero/vistas/activacionModulo/AbrirModulo.jsp">Atender</a>
+            <a href="/turnero/vistas/turno/generar.jsp">Generar Turno</a>
+            <a href="/turnero/vistas/turno/index.jsp" target="_black">TV</a>
+            <a href="/turnero/destroySession">Salir</a>
+        </div>
     </nav>
-</div>
+</header>

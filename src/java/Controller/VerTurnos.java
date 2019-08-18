@@ -48,14 +48,14 @@ public class VerTurnos extends HttpServlet {
             String turnos_json = "{ \"turnos\": [";
             
             while(turno_modulos.next()){
-                turnos_json += " { \"id\": \" "+ turno_modulos.getString("id") +" \", \"nombre\": \" "+ turno_modulos.getString("nombre") +" \", \"turno\": \" "+ turno_modulos.getString("p") +" "+ turno_modulos.getString("num_turno") +" \" } ";
+                turnos_json += " { \"id\": \" "+ turno_modulos.getString("id") +" \", \"nombre\": \" "+ turno_modulos.getString("nombre") +" \", \"turno\": \" "+ turno_modulos.getString("p") + "" + turno_modulos.getString("tp") + "" + turno_modulos.getString("num_turno") +" \" } ";
                 if (!turno_modulos.isAfterLast()) {
                    turnos_json += ",";
                 }
             }
             
             turnos_json += "]}";
-            
+            conexion.desconectar();
             data = new StringBuffer(turnos_json);
             response.getWriter().write(data.toString());
         }

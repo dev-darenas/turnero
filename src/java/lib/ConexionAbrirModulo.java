@@ -1,5 +1,6 @@
 package lib;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -7,7 +8,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class ConexionAbrirModulo extends Conexion {
-    
 
     private PreparedStatement pst;
     private ResultSet consulta;
@@ -15,7 +15,7 @@ public class ConexionAbrirModulo extends Conexion {
     public ResultSet getTurnoModulos(){
         
         try {
-            String sql = "SELECT modulo.id as id, nombre, accion, turno.estado, IF(prioridad, \"P\", \"\") as P,turno.num_turno " +
+            String sql = "SELECT modulo.id as id, nombre, accion, turno.estado, IF(turno.tipo_servicio = 3, \"C\", \"A\") as TP, IF(prioridad, \"P\", \"\") as P,turno.num_turno " +
                         "  FROM turnero.modulo " +
                         "  INNER JOIN historico_modulo ON historico_modulo.id_modulo = modulo.id " +
                         "  INNER JOIN turno ON  historico_modulo.id = turno.id_historico_modulo " +
@@ -133,27 +133,56 @@ public class ConexionAbrirModulo extends Conexion {
         return false;
     } 
  
-    public Integer llamarTurno(String id_modulo_historico){
+    public Integer llamarTurno(String id_modulo_historico, String rol_id, String stado) throws IOException{
         try{
             String sql= "";
             
             //Actualizar turnos anteriores
-            sql = "UPDATE turno SET estado = 'a', fecha_terminado = now() where id_historico_modulo = ? AND estado='aa'";
- 
+            sql = "UPDATE turno SET estado = 'a', fecha_terminado = now() where id_historico_modulo = ?";
             pst = getConexion().prepareStatement(sql);
             pst.setString(1, id_modulo_historico);
             pst.executeUpdate();
             
-
             int id_turno = 0;
-            sql = "SELECT puntaje, id FROM Turno where estado = 'e' ORDER BY puntaje DESC LIMIT 1;";
+            int id_cliente = 0;
+            sql = "SELECT puntaje, id, id_cliente FROM turno where estado = 'e' AND tipo_servicio = ? ORDER BY puntaje DESC LIMIT 1;";
             pst = getConexion().prepareStatement(sql);
+            pst.setInt(1, Integer.parseInt(rol_id));
             consulta = pst.executeQuery();
             
             if(consulta.next()){
                 id_turno = consulta.getInt("id");
+                id_cliente = consulta.getInt("id_cliente");
+            }else{
+                // este tipo de usuario no tiene turnos
+                sql = "SELECT puntaje, id, id_cliente FROM turno where estado = 'e' ORDER BY puntaje DESC LIMIT 1;";
+                pst = getConexion().prepareStatement(sql);
+                consulta = pst.executeQuery();
+                
+                if(consulta.next()){
+                    id_turno = consulta.getInt("id");
+                    id_cliente = consulta.getInt("id_cliente");
+                }
             }
           
+            
+            // verificamos si el usuario tiene metodos de envio
+            if(id_cliente != 0){
+                sql = "SELECT notificar_email, email  FROM clientes where id = ?;";
+                pst = getConexion().prepareStatement(sql);
+                pst.setInt(1, id_cliente);
+                consulta = pst.executeQuery();
+                
+                if(consulta.next()){
+                    if(consulta.getInt("notificar_email") == 1){
+                        
+                        
+                        System.out.println("lib.ConexionAbrirModulo.llamarTurno() send email");
+                        //SendNotification.sendEmail(consulta.getString("email"));
+                    }
+                }
+            }
+            
             //Actualizar turno
             sql = "UPDATE turno SET estado = 'aa', id_historico_modulo = ?, fecha_llamado = now() where id = ?";
  
@@ -264,6 +293,24 @@ public class ConexionAbrirModulo extends Conexion {
         }
         
         return null;
+   }
+   
+   public void cerrarModulo(String id_historico_modulo, String cliente_id){
+        try{
+            String sql = "update historico_modulo set fecha_cerrado = now() where id = ?";
+
+            pst = getConexion().prepareStatement(sql);
+            pst.setString(1, id_historico_modulo);
+            pst.executeUpdate();
+
+            sql = "update modulo set accion = 'Disponible'";
+
+            pst = getConexion().prepareStatement(sql);
+            pst.executeUpdate();
+            
+        } catch (SQLException e) {
+            System.out.println("ERROR EN CONSULTA " + e);
+        }
    }
    
   //Metodo para desconectar la base de datos

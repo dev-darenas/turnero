@@ -20,6 +20,10 @@ public class Conexion {
     private String username = "Authorit2";
     private String password = "Authorit2";
     private String HOST = "5.189.167.158";
+    
+    //private String username = "root";
+    //private String password = "root";
+    //private String HOST = "localhost";
     private String PORT = "3306";
     private String DB = "turnero";
     private String CLASSNAME = "com.mysql.jdbc.Driver";
