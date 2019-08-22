@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import com.android.volley.Request
 import com.android.volley.RequestQueue
@@ -21,15 +22,25 @@ class RequestCcActivity : AppCompatActivity() {
 
     private lateinit var queue: RequestQueue
     private lateinit var etCC: EditText
+    private lateinit var txtStatus: TextView
+    private var status = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_request_cc)
 
+        status = 0
+        txtStatus = findViewById(R.id.txtStatus)
         etCC = findViewById(R.id.et_cc)
         val button = findViewById<Button>(R.id.bt_next_01)
         var stringCc: String
         stringCc = etCC.text.toString()
+        val hideButton = findViewById<Button>(R.id.hideAll)
+
+        hideButton.setOnClickListener {
+            status = 1
+            findViewById<TextView>(R.id.txtStatus).text = "1"
+        }
 
         button.setOnClickListener {
             stringCc = etCC.text.toString()
@@ -74,7 +85,7 @@ class RequestCcActivity : AppCompatActivity() {
                         cont++
                     }
                     Log.d("Client", client.toString())
-                    switchActivity(et_cc.text.toString(), client)
+                    switchActivity(et_cc.text.toString(), client, status == 1)
                 } catch (e: JSONException) {
                     e.printStackTrace()
                     Toast.makeText(this, e.message, Toast.LENGTH_LONG).show()
@@ -87,10 +98,11 @@ class RequestCcActivity : AppCompatActivity() {
     }
 
 
-    private fun switchActivity(stringCc: String, client: Boolean) {
+    private fun switchActivity(stringCc: String, client: Boolean, status: Boolean) {
         val it = Intent(this, RequestPriActivity::class.java)
         it.putExtra("t_cc", stringCc)
         it.putExtra("b_client", client)
+        it.putExtra("status", status)
         startActivityForResult(it, 0)
     }
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

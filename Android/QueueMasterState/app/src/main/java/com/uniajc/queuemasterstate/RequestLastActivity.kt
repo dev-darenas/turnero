@@ -32,6 +32,7 @@ class RequestLastActivity : AppCompatActivity() {
         val stringService = intent.getStringExtra("t_service")
         val booleanPriority = intent.getBooleanExtra("b_priority", false)
         val client = intent.getBooleanExtra("b_client", false)
+        val status = intent.getBooleanExtra("status", false)
 
         val cbImp = findViewById<CheckBox>(R.id.cb_imp)
         val cbEmail = findViewById<CheckBox>(R.id.cb_email)
@@ -39,6 +40,12 @@ class RequestLastActivity : AppCompatActivity() {
         val cbWhats = findViewById<CheckBox>(R.id.cb_whats)
         val lvText = findViewById<ListView>(R.id.lv_text)
         val generate = findViewById<Button>(R.id.bt_generate)
+
+        if(status){
+            cbEmail.visibility = CheckBox.GONE
+            cbSms.visibility = CheckBox.GONE
+            cbWhats.visibility = CheckBox.GONE
+        }
 
         if (!client) {
             lvText.adapter = MyCustomAdapter(this, cbEmail.isChecked, cbSms.isChecked, cbWhats.isChecked)
