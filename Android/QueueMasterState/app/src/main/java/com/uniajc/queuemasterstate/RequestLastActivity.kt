@@ -32,7 +32,7 @@ class RequestLastActivity : AppCompatActivity() {
         val stringService = intent.getStringExtra("t_service")
         val booleanPriority = intent.getBooleanExtra("b_priority", false)
         val client = intent.getBooleanExtra("b_client", false)
-        val status = intent.getBooleanExtra("status", false)
+        val status = intent.getIntExtra("status", 0)
 
         val cbImp = findViewById<CheckBox>(R.id.cb_imp)
         val cbEmail = findViewById<CheckBox>(R.id.cb_email)
@@ -41,9 +41,11 @@ class RequestLastActivity : AppCompatActivity() {
         val lvText = findViewById<ListView>(R.id.lv_text)
         val generate = findViewById<Button>(R.id.bt_generate)
 
-        if(status){
-            cbEmail.visibility = CheckBox.GONE
+        if(status == 1){
+            //cbEmail.visibility = CheckBox.GONE
             cbSms.visibility = CheckBox.GONE
+            cbWhats.visibility = CheckBox.GONE
+        }else if(status == 2){
             cbWhats.visibility = CheckBox.GONE
         }
 

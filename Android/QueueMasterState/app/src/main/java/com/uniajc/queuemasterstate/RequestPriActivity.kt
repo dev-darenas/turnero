@@ -16,7 +16,7 @@ class RequestPriActivity : AppCompatActivity() {
         setContentView(R.layout.activity_request_pri)
         val stringCc = intent.getStringExtra("t_cc")
         val client = intent.getBooleanExtra("b_client", false)
-        val status = intent.getBooleanExtra("status", false)
+        val status = intent.getIntExtra("status", 0)
         val radioGroup = findViewById<RadioGroup>(R.id.rg_type)
         val button = findViewById<Button>(R.id.bt_next_02)
         val priority = findViewById<CheckBox>(R.id.cb_priority)
@@ -38,7 +38,7 @@ class RequestPriActivity : AppCompatActivity() {
 
     }
 
-    private fun switchActivity(stringCc: String, service: String, priority: Boolean, client: Boolean, status: Boolean) {
+    private fun switchActivity(stringCc: String, service: String, priority: Boolean, client: Boolean, status: Int) {
         val it = Intent(this, RequestLastActivity::class.java)
         it.putExtra("t_cc", stringCc)
         it.putExtra("t_service", service)

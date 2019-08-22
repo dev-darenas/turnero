@@ -37,9 +37,19 @@ class RequestCcActivity : AppCompatActivity() {
         stringCc = etCC.text.toString()
         val hideButton = findViewById<Button>(R.id.hideAll)
 
+        var cont = 0
         hideButton.setOnClickListener {
-            status = 1
-            findViewById<TextView>(R.id.txtStatus).text = "1"
+            if(cont == 0){
+                status = 1
+                findViewById<TextView>(R.id.txtStatus).text = "1"
+                cont++
+            }
+            else{
+                status = 2
+                findViewById<TextView>(R.id.txtStatus).text = "2"
+                cont++
+            }
+
         }
 
         button.setOnClickListener {
@@ -85,7 +95,7 @@ class RequestCcActivity : AppCompatActivity() {
                         cont++
                     }
                     Log.d("Client", client.toString())
-                    switchActivity(et_cc.text.toString(), client, status == 1)
+                    switchActivity(et_cc.text.toString(), client, status)
                 } catch (e: JSONException) {
                     e.printStackTrace()
                     Toast.makeText(this, e.message, Toast.LENGTH_LONG).show()
@@ -98,7 +108,7 @@ class RequestCcActivity : AppCompatActivity() {
     }
 
 
-    private fun switchActivity(stringCc: String, client: Boolean, status: Boolean) {
+    private fun switchActivity(stringCc: String, client: Boolean, status: Int) {
         val it = Intent(this, RequestPriActivity::class.java)
         it.putExtra("t_cc", stringCc)
         it.putExtra("b_client", client)

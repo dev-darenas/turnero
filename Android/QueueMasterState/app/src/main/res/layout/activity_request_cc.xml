@@ -13,8 +13,8 @@
             android:layout_margin="16dp">
         <Button
                 android:id="@+id/hideAll"
-                android:layout_width="10dp"
-                android:layout_height="10dp"
+                android:layout_width="35dp"
+                android:layout_height="12dp"
         />
         <ImageView
                 android:layout_width="wrap_content"
@@ -50,10 +50,12 @@
                 android:layout_height="wrap_content"
                 android:text="@string/next"/>
         <TextView
+                android:textSize="10sp"
                 android:id="@+id/txtStatus"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="0"/>
+                android:text="0"
+                android:textColor="@color/light_gray"/>
 
 
     </LinearLayout>
