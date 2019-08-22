@@ -19,12 +19,14 @@
                 android:text="Metodo(s) por el cual quiero ser comunicado acerca de mi turno"
                 android:textSize="25sp"/>
 
-        <LinearLayout
-                android:layout_width="match_parent"
+        <GridLayout
+                android:id="@+id/gridLayout"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
                 android:gravity="center"
-                android:weightSum="4">
+                android:columnCount="2"
+                android:padding="8dp"
+                android:alignmentMode="alignMargins">
 
 
             <CheckBox
@@ -32,36 +34,31 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:text="Impresión"
-                    android:layout_marginEnd="15dp"
                     android:textSize="18sp"
                     android:checked="true"
-                    android:layout_weight="1"/>
+            />
             <CheckBox
                     android:id="@+id/cb_email"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:text="Email"
-                    android:layout_marginEnd="15dp"
                     android:textSize="18sp"
-                    android:layout_weight="1"/>
+            />
             <CheckBox
                     android:id="@+id/cb_sms"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:text="SMS"
-                    android:layout_marginEnd="15dp"
                     android:textSize="18sp"
-                    android:layout_weight="1"/>
+            />
             <CheckBox
                     android:id="@+id/cb_whats"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:text="WhatsApp"
-                    android:layout_marginEnd="15dp"
-                    android:textSize="18sp"
-                    android:layout_weight="1"/>
+                    android:textSize="18sp"/>
 
-        </LinearLayout>
+        </GridLayout>
 
         <ListView
                 android:id="@+id/lv_text"

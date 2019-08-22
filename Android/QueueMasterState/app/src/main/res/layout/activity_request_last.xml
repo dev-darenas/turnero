@@ -18,12 +18,15 @@
                 android:text="Metodo(s) por el cual quiero ser comunicado acerca de mi turno"
                 android:textSize="25sp"/>
 
-        <LinearLayout
-                android:layout_width="match_parent"
+        <GridLayout
+                android:id="@+id/gridLayout"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:padding="8dp"
-                android:gravity="center">
+                android:gravity="center"
+                android:columnCount="2"
+                android:alignmentMode="alignMargins">
 
 
             <CheckBox
@@ -56,7 +59,7 @@
                     android:layout_marginEnd="15dp"
                     android:textSize="18sp"/>
 
-        </LinearLayout>
+        </GridLayout>
 
         <ListView
                 android:id="@+id/lv_text"

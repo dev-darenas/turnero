@@ -93,7 +93,7 @@ class RequestLastActivity : AppCompatActivity() {
                 if (((cbEmail.isChecked && !email.isBlank()) || !cbEmail.isChecked) && (((cbSms.isChecked || cbWhats.isChecked) && phoneNumber != "0") || (!cbSms.isChecked && !cbWhats.isChecked))) {
                     if (isCorrectEmail(email) && cbEmail.isChecked)
                         makeVolleyRequest()
-                    else if(cbEmail.isChecked)
+                    else if (cbEmail.isChecked)
                         Toast.makeText(this, "Correo no valido, por favor verificar", Toast.LENGTH_LONG).show()
                     else
                         makeVolleyRequest()
@@ -190,7 +190,7 @@ class RequestLastActivity : AppCompatActivity() {
             true -> 1; false -> 0
         }
 
-        val url = "http://5.189.167.158/Turnero/pong.php/?cedula=$stringCc&celular=$phoneNumber" +
+        val url = "http://167.71.252.200/pong/pong.php/?cedula=$stringCc&celular=$phoneNumber" +
                 "&correo=$email&tiposervicio=$stringService&prioridad=$priorityGet" +
                 "&notificacion_whatsapp=$whatsGet&notificacion_email=$emailGet&notificacion_sms=$smsGet"
         Log.i("URL", url)

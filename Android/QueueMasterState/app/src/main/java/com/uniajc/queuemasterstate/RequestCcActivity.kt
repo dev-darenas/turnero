@@ -59,7 +59,7 @@ class RequestCcActivity : AppCompatActivity() {
     }
 
     private fun getData() {
-        val url = "http://5.189.167.158/Turnero/pong.php/?cedula=${et_cc.text}"
+        val url = "http://167.71.252.200/pong/pong.php/?cedula=${et_cc.text}"
         Log.i("URL", url)
         var client = false
 
@@ -80,7 +80,7 @@ class RequestCcActivity : AppCompatActivity() {
                     Toast.makeText(this, e.message, Toast.LENGTH_LONG).show()
                 }
             }, Response.ErrorListener {
-                Toast.makeText(this, "ERROR: $it", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "ERROR: $it", Toast.LENGTH_LONG).show()
             })
         queue.add(request)
 
