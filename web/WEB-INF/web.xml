@@ -21,6 +21,10 @@
         <servlet-name>uploadPublicidad</servlet-name>
         <servlet-class>Controller.uploadPublicidad</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>cantidadAtenciones</servlet-name>
+        <servlet-class>Controller.CantidadAtenciones</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Faces Servlet</servlet-name>
         <url-pattern>/faces/*</url-pattern>
@@ -40,8 +44,8 @@
     </servlet-mapping>
     <session-config>
         <session-timeout>
-            30
-        </session-timeout>
+      30
+    </session-timeout>
     </session-config>
     <welcome-file-list>
         <welcome-file>faces/index.jsp</welcome-file>

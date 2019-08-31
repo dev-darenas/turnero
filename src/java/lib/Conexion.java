@@ -17,9 +17,9 @@ import java.sql.*;
  */
 public class Conexion {
     private Connection con;
-    private String username = "Authorit2";
-    private String password = "Authorit2";
-    private String HOST = "5.189.167.158";
+    private String username = "authorit";
+    private String password = "authorit";
+    private String HOST = "167.71.252.200";
     
     //private String username = "root";
     //private String password = "root";

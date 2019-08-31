@@ -128,6 +128,22 @@ public class ConsultaTurno extends Conexion {
         return turnos;
     }
     
+        public ResultSet obtenerTurnosAtendidos(){
+        ResultSet turnos = null;
+        try {
+            PreparedStatement pstm = null;
+
+            String consulta = "Select count(estado) as cantidad, hour(fecha_terminado) as hora from turnero.turno where estado = 'a' and current_date() group by fecha_terminado;";
+            pstm = getConexion().prepareCall(consulta);
+            
+            turnos = pstm.executeQuery();
+        } catch (SQLException ex) {
+            Logger.getLogger(Consultas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return turnos;
+    }
+    
     public String crearTurno(String cedula, String celular, String correo, String tipoServicio, String prioridad, String notwhatsapp, String notemail, String notsms) {
         
         //Estados del turno
