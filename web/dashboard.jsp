@@ -106,7 +106,6 @@
       $.ajax(
               'CantidadAtenciones'
               ).done((data) => {
-        console.log(data);
         data = data.replace(",]", "]");
         data = JSON.parse(data);
         let value = data.total_atentions_list;

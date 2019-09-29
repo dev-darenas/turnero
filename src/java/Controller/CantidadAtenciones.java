@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.ParseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -41,7 +40,6 @@ public class CantidadAtenciones extends HttpServlet {
         }
       }
       lista_json += "]}";
-      System.out.println(lista_json);
       data = new StringBuffer(lista_json);
       response.getWriter().write(data.toString());
     } catch (SQLException ex) {
