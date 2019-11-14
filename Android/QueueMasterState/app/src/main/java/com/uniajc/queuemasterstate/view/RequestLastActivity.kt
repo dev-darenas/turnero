@@ -1,4 +1,4 @@
-package com.uniajc.queuemasterstate
+package com.uniajc.queuemasterstate.view
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -17,6 +17,7 @@ import com.android.volley.RequestQueue
 import com.android.volley.Response
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
+import com.uniajc.queuemasterstate.R
 import org.json.JSONException
 
 
@@ -50,16 +51,39 @@ class RequestLastActivity : AppCompatActivity() {
         }
 
         if (!client) {
-            lvText.adapter = MyCustomAdapter(this, cbEmail.isChecked, cbSms.isChecked, cbWhats.isChecked)
+            lvText.adapter = MyCustomAdapter(
+                this,
+                cbEmail.isChecked,
+                cbSms.isChecked,
+                cbWhats.isChecked
+            )
 
             cbEmail.setOnCheckedChangeListener { _, _ ->
-                lvText.adapter = MyCustomAdapter(this, cbEmail.isChecked, cbSms.isChecked, cbWhats.isChecked)
+                lvText.adapter =
+                    MyCustomAdapter(
+                        this,
+                        cbEmail.isChecked,
+                        cbSms.isChecked,
+                        cbWhats.isChecked
+                    )
             }
             cbSms.setOnCheckedChangeListener { _, _ ->
-                lvText.adapter = MyCustomAdapter(this, cbEmail.isChecked, cbSms.isChecked, cbWhats.isChecked)
+                lvText.adapter =
+                    MyCustomAdapter(
+                        this,
+                        cbEmail.isChecked,
+                        cbSms.isChecked,
+                        cbWhats.isChecked
+                    )
             }
             cbWhats.setOnCheckedChangeListener { _, _ ->
-                lvText.adapter = MyCustomAdapter(this, cbEmail.isChecked, cbSms.isChecked, cbWhats.isChecked)
+                lvText.adapter =
+                    MyCustomAdapter(
+                        this,
+                        cbEmail.isChecked,
+                        cbSms.isChecked,
+                        cbWhats.isChecked
+                    )
             }
         }
 
@@ -128,7 +152,10 @@ class RequestLastActivity : AppCompatActivity() {
         val cbWhats: Boolean
     ) : BaseAdapter() {
 
-        val items = ArrayList(arrayListOf(R.layout.edit_text_media_item, R.layout.edit_text_media_item))
+        val items = ArrayList(arrayListOf(
+            R.layout.edit_text_media_item,
+            R.layout.edit_text_media_item
+        ))
 
         @SuppressLint("ViewHolder")
         override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
@@ -199,7 +226,7 @@ class RequestLastActivity : AppCompatActivity() {
             true -> 1; false -> 0
         }
 
-        val url = "http://167.71.252.200/pong/pong.php/?cedula=$stringCc&celular=$phoneNumber" +
+        val url = "${RequestCcActivity.URL}?cedula=$stringCc&celular=$phoneNumber" +
                 "&correo=$email&tiposervicio=$stringService&prioridad=$priorityGet" +
                 "&notificacion_whatsapp=$whatsGet&notificacion_email=$emailGet&notificacion_sms=$smsGet"
         Log.i("URL", url)

@@ -1,4 +1,4 @@
-package com.uniajc.queuemasterstate
+package com.uniajc.queuemasterstate.view
 
 import android.content.Intent
 import android.os.Bundle
@@ -8,6 +8,7 @@ import android.widget.Button
 import android.widget.CheckBox
 import android.widget.RadioButton
 import android.widget.RadioGroup
+import com.uniajc.queuemasterstate.R
 
 class RequestPriActivity : AppCompatActivity() {
 

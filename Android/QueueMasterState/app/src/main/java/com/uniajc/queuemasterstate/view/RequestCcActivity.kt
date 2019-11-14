@@ -1,5 +1,6 @@
-package com.uniajc.queuemasterstate
+package com.uniajc.queuemasterstate.view
 
+import android.content.ContentValues
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AlertDialog
@@ -14,8 +15,11 @@ import com.android.volley.RequestQueue
 import com.android.volley.Response
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
+import com.andxpar.biblioparcial.data.getDB
 import kotlinx.android.synthetic.main.activity_request_cc.*
 import org.json.JSONException
+import android.view.LayoutInflater
+import com.uniajc.queuemasterstate.R
 
 
 class RequestCcActivity : AppCompatActivity() {
@@ -23,28 +27,39 @@ class RequestCcActivity : AppCompatActivity() {
     private lateinit var queue: RequestQueue
     private lateinit var etCC: EditText
     private lateinit var txtStatus: TextView
+    private lateinit var txtURL: TextView
     private var status = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_request_cc)
 
+        val db = getDB(this)
+        val cursor = db.rawQuery("select * from Local", null)
+        if (cursor.moveToFirst()) {
+            URL = cursor.getString(0)
+        }
+        cursor.close()
+        db.close()
+
         status = 0
         txtStatus = findViewById(R.id.txtStatus)
         etCC = findViewById(R.id.et_cc)
-        val button = findViewById<Button>(R.id.bt_next_01)
+        val bNext = findViewById<Button>(R.id.bt_next_01)
         var stringCc: String
         stringCc = etCC.text.toString()
         val hideButton = findViewById<Button>(R.id.hideAll)
+        val changeButton = findViewById<Button>(R.id.bt_changeURL)
+        txtURL = findViewById(R.id.tv_url)
+        txtURL.text = URL
 
         var cont = 0
         hideButton.setOnClickListener {
-            if(cont == 0){
+            if (cont == 0) {
                 status = 1
                 findViewById<TextView>(R.id.txtStatus).text = "1"
                 cont++
-            }
-            else{
+            } else {
                 status = 2
                 findViewById<TextView>(R.id.txtStatus).text = "2"
                 cont++
@@ -52,7 +67,7 @@ class RequestCcActivity : AppCompatActivity() {
 
         }
 
-        button.setOnClickListener {
+        bNext.setOnClickListener {
             stringCc = etCC.text.toString()
 
             if (!etCC.text.isBlank()) {
@@ -77,10 +92,60 @@ class RequestCcActivity : AppCompatActivity() {
                 ).show()
             }
         }
+
+        changeButton.setOnClickListener {
+            showAlert()
+        }
+
+    }
+
+    private fun showAlert() {
+        var inputText = ""
+        // get prompts.xml view
+        val li = LayoutInflater.from(this)
+        val promptsView = li.inflate(R.layout.prompts, null)
+
+        val alertDialogBuilder = AlertDialog.Builder(
+            this
+        )
+
+        // set prompts.xml to alertdialog builder
+        alertDialogBuilder.setView(promptsView)
+
+        val userInput = promptsView.findViewById(R.id.editTextDialogUserInput) as EditText
+
+        // set dialog message
+        alertDialogBuilder
+            .setCancelable(false)
+            .setPositiveButton(
+                "OK"
+            ) { _, _ ->
+                // get user input and set it to result
+                // edit text
+                URL = userInput.text.toString()
+                val db = getDB(this)
+                db.delete("Local", "",null)
+                val values = ContentValues()
+                values.put("URL", URL)
+                db.insert("Local", null, values)
+                db.close()
+                txtURL.text = URL
+            }
+            .setNegativeButton(
+                "Cancel"
+            ) { dialog, _ ->
+                dialog.cancel()
+            }
+
+        // create alert dialog
+        val alertDialog = alertDialogBuilder.create()
+
+        // show it
+        alertDialog.show()
     }
 
     private fun getData() {
-        val url = "http://167.71.252.200/pong/pong.php/?cedula=${et_cc.text}"
+        val url = "${URL}index.php/?cedula=${et_cc.text}"
         Log.i("URL", url)
         var client = false
 
@@ -115,9 +180,15 @@ class RequestCcActivity : AppCompatActivity() {
         it.putExtra("status", status)
         startActivityForResult(it, 0)
     }
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        if(requestCode == 0){
+        if (requestCode == 0) {
             etCC.text.clear()
         }
     }
+
+    companion object {
+        var URL = "https://declarative-lots.000webhostapp.com/turns_generator/index.php/"
+    }
+
 }

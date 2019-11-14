@@ -16,13 +16,13 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme"
             android:networkSecurityConfig="@xml/network_security_config" tools:targetApi="n">
-        <activity android:name=".RequestLastActivity">
+        <activity android:name=".view.RequestLastActivity">
         </activity>
-        <activity android:name=".RequestPriActivity">
+        <activity android:name=".view.RequestPriActivity">
         </activity>
-        <activity android:name=".MainActivity">
+        <activity android:name=".view.MainActivity">
         </activity>
-        <activity android:name=".RequestCcActivity">
+        <activity android:name=".view.RequestCcActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <action android:name="android.intent.action.VIEW"/>
